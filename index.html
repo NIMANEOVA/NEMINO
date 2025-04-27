@@ -9,13 +9,31 @@
   <script src="https://cdn.jsdelivr.net/npm/@babel/standalone@7.24.0/babel.min.js"></script>
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="css/styles.css"> <!-- لینک به styles.css توی پوشه css -->
+  <link rel="stylesheet" href="css/styles.css">
+  <!-- Firebase SDK (غیرماژولار) -->
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js"></script>
 </head>
 <body class="text-white font-sans">
   <div id="root"></div>
 
   <script type="text/babel">
     const { useState, useEffect } = React;
+
+    // تنظیم Firebase
+    const firebaseConfig = {
+      apiKey: "AIzaSyCP8hIa8_TnFhgHye_RJYfz4JHZx3ox71A",
+      authDomain: "nemino-crm.firebaseapp.com",
+      projectId: "nemino-crm",
+      storageBucket: "nemino-crm.firebasestorage.app",
+      messagingSenderId: "91744780922",
+      appId: "1:91744780922:web:562b757d5021caed0df1c3",
+      measurementId: "G-NLNWVLCQJZ"
+    };
+    firebase.initializeApp(firebaseConfig);
+    const auth = firebase.auth();
+    const db = firebase.firestore();
 
     const products = [
       { id: 1, name: "پک الماس فری فایر", price: "499,000 تومان", image: "https://via.placeholder.com/200x200?text=FreeFire" },
@@ -34,16 +52,26 @@
       const [showPassword, setShowPassword] = useState(false);
       const [isSignup, setIsSignup] = useState(false);
       const [verificationCode, setVerificationCode] = useState("");
-      const [showVerification, setShowVerification] = useState(false);
       const [inputCode, setInputCode] = useState("");
+      const [showVerification, setShowVerification] = useState(false);
       const [showDashboard, setShowDashboard] = useState(false);
       const [notification, setNotification] = useState("");
 
       useEffect(() => {
-        if (!isAuthenticated && !showLogin) {
-          setNotification("خوش اومدی به نمینو!");
-          setTimeout(() => setNotification(""), 4000);
-        }
+        // چک کردن وضعیت لاگین کاربر
+        auth.onAuthStateChanged((user) => {
+          if (user) {
+            setIsAuthenticated(true);
+            db.collection('users').doc(user.uid).get().then((doc) => {
+              if (doc.exists) {
+                setUsername(doc.data().username);
+              }
+            });
+          } else {
+            setIsAuthenticated(false);
+            setUsername("");
+          }
+        });
       }, []);
 
       const isUsernameValid = username.length > 4;
@@ -59,59 +87,66 @@
       };
       const passwordStrength = getPasswordStrength();
 
-      const isFormValid = isSignup ? isUsernameValid && isEmailValid && isPhoneValid && isPasswordValid : true;
+      const isFormValid = isSignup ? isUsernameValid && isEmailValid && isPhoneValid && isPasswordValid : isEmailValid;
 
       const generateCode = () => {
         return Math.floor(100000 + Math.random() * 900000).toString();
       };
 
-      const handleLogin = (e) => {
+      const handleLogin = async (e) => {
         e.preventDefault();
-        if (username && password) {
-          setIsAuthenticated(true);
+        try {
+          await auth.signInWithEmailAndPassword(email, password);
           setShowLogin(false);
           setShowDashboard(false);
           setNotification("ورود با موفقیت انجام شد!");
-          setTimeout(() => setNotification(""), 4000);
-        } else {
-          setNotification("لطفاً نام کاربری و رمز عبور رو وارد کن!");
-          setTimeout(() => setNotification(""), 4000);
+        } catch (error) {
+          setNotification("خطا در ورود: ایمیل یا رمز اشتباهه!");
         }
+        setTimeout(() => setNotification(""), 4000);
       };
 
-      const handleSignup = (e) => {
+      const handleSignup = async (e) => {
         e.preventDefault();
         if (isFormValid) {
-          const code = generateCode();
-          setVerificationCode(code);
-          setShowVerification(true);
-          console.log(
-            `${username} عزیز، شما در سایت نمینو ثبت‌نام کردید. جهت فعال‌سازی حساب خود کد را در سایت وارد کنید: ${code}. با تشکر، تیم پشتیبانی نمینو`
-          );
+          try {
+            const userCredential = await auth.createUserWithEmailAndPassword(email, password);
+            await db.collection('users').doc(userCredential.user.uid).set({
+              username,
+              email,
+              phone: `+98${phone}`,
+              createdAt: firebase.firestore.FieldValue.serverTimestamp()
+            });
+            const code = generateCode();
+            setVerificationCode(code);
+            setShowVerification(true);
+            setNotification("ثبت‌نام موفق! کد تأیید رو وارد کن.");
+            // TODO: بعداً اینجا SMS واقعی با کاوه‌نگار ارسال می‌شه
+            console.log(`کد تأیید: ${code} به شماره +98${phone}`);
+          } catch (error) {
+            setNotification("خطا در ثبت‌نام: " + error.message);
+          }
         } else {
-          alert("لطفاً همه فیلدها رو درست پر کن!");
+          setNotification("لطفاً همه فیلدها رو درست پر کن!");
         }
+        setTimeout(() => setNotification(""), 4000);
       };
 
       const handleVerify = (e) => {
         e.preventDefault();
         if (inputCode === verificationCode) {
-          setIsAuthenticated(true);
-          setShowLogin(false);
           setShowVerification(false);
+          setShowLogin(false);
           setShowDashboard(false);
           setNotification(`خوش اومدی، ${username}!`);
-          setTimeout(() => setNotification(""), 4000);
         } else {
           setNotification("کد تأیید اشتباهه!");
-          setTimeout(() => setNotification(""), 4000);
         }
+        setTimeout(() => setNotification(""), 4000);
       };
 
       const closeLogin = () => {
         setShowLogin(false);
-        setIsAuthenticated(true);
-        setShowDashboard(false);
         setNotification(`خوش اومدی، ${username}!`);
         setTimeout(() => setNotification(""), 4000);
       };
@@ -158,10 +193,9 @@
                     <p className="mb-4">خوش اومدی، {username}!</p>
                     <p className="mb-4">اینجا می‌تونی اطلاعات حساب، خریدها و تنظیماتت رو مدیریت کنی.</p>
                     <button
-                      onClick={() => {
-                        setIsAuthenticated(false);
+                      onClick={async () => {
+                        await auth.signOut();
                         setShowDashboard(false);
-                        setUsername("");
                         setShowLogin(true);
                         setNotification("با موفقیت خارج شدی!");
                         setTimeout(() => setNotification(""), 4000);
@@ -209,71 +243,71 @@
                         {isSignup ? "ساخت حساب کاربری" : "ورود به نمینو"}
                       </h2>
                       <form onSubmit={isSignup ? handleSignup : handleLogin}>
+                        {isSignup && (
+                          <div className="mb-4">
+                            <label className="block text-sm mb-2">نام کاربری</label>
+                            <input
+                              type="text"
+                              value={username}
+                              onChange={(e) => setUsername(e.target.value)}
+                              className={`w-full p-2 bg-gray-700 rounded text-white focus:outline-none focus:ring-2 ${
+                                isUsernameValid ? "focus:ring-green-500" : "focus:ring-red-500"
+                              }`}
+                              placeholder="نام کاربری خودت رو وارد کن"
+                            />
+                            <p className="text-xs text-gray-400 mt-1">مثال: ali_gamer123</p>
+                            {!isUsernameValid && username && (
+                              <p className="text-xs text-red-500 mt-1">باید بیشتر از ۴ حرف باشه</p>
+                            )}
+                          </div>
+                        )}
                         <div className="mb-4">
-                          <label className="block text-sm mb-2">نام کاربری</label>
+                          <label className="block text-sm mb-2">ایمیل</label>
                           <input
-                            type="text"
-                            value={username}
-                            onChange={(e) => setUsername(e.target.value)}
+                            type="email"
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
                             className={`w-full p-2 bg-gray-700 rounded text-white focus:outline-none focus:ring-2 ${
-                              isUsernameValid ? "focus:ring-green-500" : "focus:ring-red-500"
+                              isEmailValid ? "focus:ring-green-500" : "focus:ring-red-500"
                             }`}
-                            placeholder="نام کاربری خودت رو وارد کن"
+                            placeholder="ایمیل خودت رو وارد کن"
                           />
-                          <p className="text-xs text-gray-400 mt-1">مثال: ali_gamer123</p>
-                          {!isUsernameValid && username && (
-                            <p className="text-xs text-red-500 mt-1">باید بیشتر از ۴ حرف باشه</p>
+                          <p className="text-xs text-gray-400 mt-1">مثال: ali@example.com</p>
+                          {!isEmailValid && email && (
+                            <p className="text-xs text-red-500 mt-1">ایمیل معتبر وارد کن</p>
                           )}
                         </div>
                         {isSignup && (
-                          <>
-                            <div className="mb-4">
-                              <label className="block text-sm mb-2">ایمیل</label>
-                              <input
-                                type="email"
-                                value={email}
-                                onChange={(e) => setEmail(e.target.value)}
-                                className={`w-full p-2 bg-gray-700 rounded text-white focus:outline-none focus:ring-2 ${
-                                  isEmailValid ? "focus:ring-green-500" : "focus:ring-red-500"
-                                }`}
-                                placeholder="ایمیل خودت رو وارد کن"
-                              />
-                              <p className="text-xs text-gray-400 mt-1">مثال: ali@example.com</p>
-                              {!isEmailValid && email && (
-                                <p className="text-xs text-red-500 mt-1">ایمیل معتبر وارد کن</p>
-                              )}
-                            </div>
-                            <div className="mb-4">
-                              <label className="block text-sm mb-2">شماره تلفن</label>
-                              <div className="phone-input-container">
-                                <span className="inline-flex items-center px-3 h-10 bg-gray-700 text-white border-r border-gray-500">
-                                  <img
-                                    src="https://flagcdn.com/16x12/ir.png"
-                                    alt="پرچم ایران"
-                                    className="ml-2"
-                                  />
-                                  +98
-                                </span>
-                                <input
-                                  type="tel"
-                                  value={phone}
-                                  onChange={(e) => {
-                                    const value = e.target.value;
-                                    if (value === "" || /^\d*$/.test(value)) {
-                                      setPhone(value);
-                                    }
-                                  }}
-                                  className={`p-2 h-10 text-white focus:outline-none focus:ring-2 ${
-                                    isPhoneValid ? "focus:ring-green-500" : "focus:ring-red-500"
-                                  }`}
-                                  placeholder="912 123 1234"
+                          <div className="mb-4">
+                            <label className="block text-sm mb-2">شماره تلفن</label>
+                            <div className="phone-input-container">
+                              <span className="inline-flex items-center px-3 h-10 bg-gray-700 text-white border-r border-gray-500">
+                                <img
+                                  src="https://flagcdn.com/16x12/ir.png"
+                                  alt="پرچم ایران"
+                                  className="ml-2"
                                 />
-                              </div>
-                              {!isPhoneValid && phone && (
-                                <p className="text-xs text-red-500 mt-1">حداقل ۱۰ رقم</p>
-                              )}
+                                +98
+                              </span>
+                              <input
+                                type="tel"
+                                value={phone}
+                                onChange={(e) => {
+                                  const value = e.target.value;
+                                  if (value === "" || /^\d*$/.test(value)) {
+                                    setPhone(value);
+                                  }
+                                }}
+                                className={`p-2 h-10 text-white focus:outline-none focus:ring-2 ${
+                                  isPhoneValid ? "focus:ring-green-500" : "focus:ring-red-500"
+                                }`}
+                                placeholder="912 123 1234"
+                              />
                             </div>
-                          </>
+                            {!isPhoneValid && phone && (
+                              <p className="text-xs text-red-500 mt-1">حداقل ۱۰ رقم</p>
+                            )}
+                          </div>
                         )}
                         <div className="mb-6 relative">
                           <label className="block text-sm mb-2">رمز عبور</label>
