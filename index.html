@@ -9,58 +9,7 @@
   <script src="https://cdn.jsdelivr.net/npm/@babel/standalone@7.24.0/babel.min.js"></script>
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-  <style>
-    body {
-      background-image: url('https://i.imgur.com/sD2WbZM.webp');
-      background-size: cover;
-      background-position: center;
-      background-attachment: fixed;
-      min-height: 100vh;
-    }
-    @keyframes slideInOut {
-      0% {
-        transform: translateY(100px) translateX(-100%);
-        opacity: 0;
-      }
-      20% {
-        transform: translateY(0) translateX(0);
-        opacity: 0.7;
-      }
-      80% {
-        transform: translateY(0) translateX(100%);
-        opacity: 0.7;
-      }
-      100% {
-        transform: translateY(0) translateX(100%);
-        opacity: 0;
-      }
-    }
-    .notification {
-      position: fixed;
-      bottom: 20px;
-      animation: slideInOut 4s ease-in-out forwards;
-      background-color: rgba(75, 85, 99, 0.8);
-      color: white;
-      padding: 10px 20px;
-      border-radius: 8px;
-      z-index: 100;
-    }
-    .phone-input-container {
-      direction: ltr;
-      display: flex;
-      align-items: center;
-      background-color: #4b5563;
-      border-radius: 0.375rem;
-    }
-    .phone-input-container input {
-      background-color: transparent;
-      flex-grow: 1;
-    }
-    .phone-input-container input::placeholder {
-      color: #9ca3af;
-      opacity: 0.6;
-    }
-  </style>
+  <link rel="stylesheet" href="css/styles.css"> <!-- لینک به styles.css توی پوشه css -->
 </head>
 <body class="text-white font-sans">
   <div id="root"></div>
@@ -90,7 +39,6 @@
       const [showDashboard, setShowDashboard] = useState(false);
       const [notification, setNotification] = useState("");
 
-      // مدیریت اعلان‌ها
       useEffect(() => {
         if (!isAuthenticated && !showLogin) {
           setNotification("خوش اومدی به نمینو!");
@@ -98,13 +46,11 @@
         }
       }, []);
 
-      // اعتبارسنجی فیلدها (فقط برای ثبت‌نام)
       const isUsernameValid = username.length > 4;
       const isEmailValid = email.includes("@") && email.includes(".");
       const isPhoneValid = phone.length >= 10 && /^\d+$/.test(phone) && phone.startsWith("9");
       const isPasswordValid = isSignup ? /^[A-Z]/.test(password) && /\d/.test(password) && password.length >= 8 : true;
 
-      // محاسبه قدرت رمز (فقط برای ثبت‌نام)
       const getPasswordStrength = () => {
         if (!password || !isSignup) return { strength: "", color: "", width: "" };
         if (isPasswordValid) return { strength: "قوی", color: "bg-green-500", width: "w-full" };
@@ -113,7 +59,6 @@
       };
       const passwordStrength = getPasswordStrength();
 
-      // بررسی پر بودن همه فیلدها (فقط برای ثبت‌نام)
       const isFormValid = isSignup ? isUsernameValid && isEmailValid && isPhoneValid && isPasswordValid : true;
 
       const generateCode = () => {
