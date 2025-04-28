@@ -10,10 +10,11 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
   <link rel="stylesheet" href="css/styles.css">
-  <!-- Firebase SDK (غیرماژولار) -->
+  <!-- Firebase SDK -->
   <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-functions.js"></script>
 </head>
 <body class="text-white font-sans">
   <div id="root"></div>
@@ -58,7 +59,6 @@
       const [notification, setNotification] = useState("");
 
       useEffect(() => {
-        // چک کردن وضعیت لاگین کاربر
         auth.onAuthStateChanged((user) => {
           if (user) {
             setIsAuthenticated(true);
@@ -76,7 +76,7 @@
 
       const isUsernameValid = username.length > 4;
       const isEmailValid = email.includes("@") && email.includes(".");
-      const isPhoneValid = phone.length >= 10 && /^\d+$/.test(phone) && phone.startsWith("9");
+      const isPhoneValid = /^09\d{9}$/.test(phone);
       const isPasswordValid = isSignup ? /^[A-Z]/.test(password) && /\d/.test(password) && password.length >= 8 : true;
 
       const getPasswordStrength = () => {
@@ -91,6 +91,25 @@
 
       const generateCode = () => {
         return Math.floor(100000 + Math.random() * 900000).toString();
+      };
+
+      const sendSMS = async (phoneNumber, code) => {
+        try {
+          const response = await fetch('YOUR_FIREBASE_FUNCTION_URL/sendSMS', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ phone: phoneNumber, code })
+          });
+          if (response.ok) {
+            setNotification("کد تأیید ارسال شد!");
+          } else {
+            const errorText = await response.text();
+            setNotification(`خطا در ارسال SMS: ${errorText}`);
+          }
+        } catch (error) {
+          setNotification(`خطا در ارسال SMS: ${error.message}`);
+        }
+        setTimeout(() => setNotification(""), 4000);
       };
 
       const handleLogin = async (e) => {
@@ -120,9 +139,7 @@
             const code = generateCode();
             setVerificationCode(code);
             setShowVerification(true);
-            setNotification("ثبت‌نام موفق! کد تأیید رو وارد کن.");
-            // TODO: بعداً اینجا SMS واقعی با کاوه‌نگار ارسال می‌شه
-            console.log(`کد تأیید: ${code} به شماره +98${phone}`);
+            await sendSMS(phone, code);
           } catch (error) {
             setNotification("خطا در ثبت‌نام: " + error.message);
           }
@@ -305,7 +322,7 @@
                               />
                             </div>
                             {!isPhoneValid && phone && (
-                              <p className="text-xs text-red-500 mt-1">حداقل ۱۰ رقم</p>
+                              <p className="text-xs text-red-500 mt-1">شماره باید با 09 شروع بشه و ۱۱ رقم باشه</p>
                             )}
                           </div>
                         )}
