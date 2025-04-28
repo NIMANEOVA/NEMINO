@@ -14,7 +14,6 @@
   <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-functions.js"></script>
 </head>
 <body class="text-white font-sans">
   <div id="root"></div>
@@ -52,9 +51,6 @@
       const [password, setPassword] = useState("");
       const [showPassword, setShowPassword] = useState(false);
       const [isSignup, setIsSignup] = useState(false);
-      const [verificationCode, setVerificationCode] = useState("");
-      const [inputCode, setInputCode] = useState("");
-      const [showVerification, setShowVerification] = useState(false);
       const [showDashboard, setShowDashboard] = useState(false);
       const [notification, setNotification] = useState("");
 
@@ -76,7 +72,7 @@
 
       const isUsernameValid = username.length > 4;
       const isEmailValid = email.includes("@") && email.includes(".");
-      const isPhoneValid = /^09\d{9}$/.test(phone);
+      const isPhoneValid = phone.length >= 10 && /^\d+$/.test(phone) && phone.startsWith("9");
       const isPasswordValid = isSignup ? /^[A-Z]/.test(password) && /\d/.test(password) && password.length >= 8 : true;
 
       const getPasswordStrength = () => {
@@ -88,29 +84,6 @@
       const passwordStrength = getPasswordStrength();
 
       const isFormValid = isSignup ? isUsernameValid && isEmailValid && isPhoneValid && isPasswordValid : isEmailValid;
-
-      const generateCode = () => {
-        return Math.floor(100000 + Math.random() * 900000).toString();
-      };
-
-      const sendSMS = async (phoneNumber, code) => {
-        try {
-          const response = await fetch('YOUR_FIREBASE_FUNCTION_URL/sendSMS', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ phone: phoneNumber, code })
-          });
-          if (response.ok) {
-            setNotification("کد تأیید ارسال شد!");
-          } else {
-            const errorText = await response.text();
-            setNotification(`خطا در ارسال SMS: ${errorText}`);
-          }
-        } catch (error) {
-          setNotification(`خطا در ارسال SMS: ${error.message}`);
-        }
-        setTimeout(() => setNotification(""), 4000);
-      };
 
       const handleLogin = async (e) => {
         e.preventDefault();
@@ -136,28 +109,14 @@
               phone: `+98${phone}`,
               createdAt: firebase.firestore.FieldValue.serverTimestamp()
             });
-            const code = generateCode();
-            setVerificationCode(code);
-            setShowVerification(true);
-            await sendSMS(phone, code);
+            setShowLogin(false);
+            setShowDashboard(false);
+            setNotification(`خوش اومدی، ${username}!`);
           } catch (error) {
             setNotification("خطا در ثبت‌نام: " + error.message);
           }
         } else {
           setNotification("لطفاً همه فیلدها رو درست پر کن!");
-        }
-        setTimeout(() => setNotification(""), 4000);
-      };
-
-      const handleVerify = (e) => {
-        e.preventDefault();
-        if (inputCode === verificationCode) {
-          setShowVerification(false);
-          setShowLogin(false);
-          setShowDashboard(false);
-          setNotification(`خوش اومدی، ${username}!`);
-        } else {
-          setNotification("کد تأیید اشتباهه!");
         }
         setTimeout(() => setNotification(""), 4000);
       };
@@ -231,157 +190,130 @@
                   >
                     <i className="fas fa-times"></i>
                   </button>
-                  {showVerification ? (
-                    <>
-                      <h2 className="text-2xl font-bold mb-6 text-center">تأیید کد</h2>
-                      <form onSubmit={handleVerify}>
-                        <div className="mb-6">
-                          <label className="block text-sm mb-2">کد تأیید</label>
-                          <input
-                            type="text"
-                            value={inputCode}
-                            onChange={(e) => setInputCode(e.target.value)}
-                            className="w-full p-2 bg-gray-700 rounded text-white focus:outline-none focus:ring-2 focus:ring-purple-500"
-                            placeholder="کد ۶ رقمی رو وارد کن"
-                          />
-                          <p className="text-xs text-gray-400 mt-1">مثال: 123456</p>
-                        </div>
-                        <button
-                          type="submit"
-                          className="w-full bg-purple-600 hover:bg-purple-700 text-white py-2 rounded transition duration-300"
-                        >
-                          تأیید
-                        </button>
-                      </form>
-                    </>
-                  ) : (
-                    <>
-                      <h2 className="text-2xl font-bold mb-6 text-center">
-                        {isSignup ? "ساخت حساب کاربری" : "ورود به نمینو"}
-                      </h2>
-                      <form onSubmit={isSignup ? handleSignup : handleLogin}>
-                        {isSignup && (
-                          <div className="mb-4">
-                            <label className="block text-sm mb-2">نام کاربری</label>
-                            <input
-                              type="text"
-                              value={username}
-                              onChange={(e) => setUsername(e.target.value)}
-                              className={`w-full p-2 bg-gray-700 rounded text-white focus:outline-none focus:ring-2 ${
-                                isUsernameValid ? "focus:ring-green-500" : "focus:ring-red-500"
-                              }`}
-                              placeholder="نام کاربری خودت رو وارد کن"
-                            />
-                            <p className="text-xs text-gray-400 mt-1">مثال: ali_gamer123</p>
-                            {!isUsernameValid && username && (
-                              <p className="text-xs text-red-500 mt-1">باید بیشتر از ۴ حرف باشه</p>
-                            )}
-                          </div>
-                        )}
-                        <div className="mb-4">
-                          <label className="block text-sm mb-2">ایمیل</label>
-                          <input
-                            type="email"
-                            value={email}
-                            onChange={(e) => setEmail(e.target.value)}
-                            className={`w-full p-2 bg-gray-700 rounded text-white focus:outline-none focus:ring-2 ${
-                              isEmailValid ? "focus:ring-green-500" : "focus:ring-red-500"
-                            }`}
-                            placeholder="ایمیل خودت رو وارد کن"
-                          />
-                          <p className="text-xs text-gray-400 mt-1">مثال: ali@example.com</p>
-                          {!isEmailValid && email && (
-                            <p className="text-xs text-red-500 mt-1">ایمیل معتبر وارد کن</p>
-                          )}
-                        </div>
-                        {isSignup && (
-                          <div className="mb-4">
-                            <label className="block text-sm mb-2">شماره تلفن</label>
-                            <div className="phone-input-container">
-                              <span className="inline-flex items-center px-3 h-10 bg-gray-700 text-white border-r border-gray-500">
-                                <img
-                                  src="https://flagcdn.com/16x12/ir.png"
-                                  alt="پرچم ایران"
-                                  className="ml-2"
-                                />
-                                +98
-                              </span>
-                              <input
-                                type="tel"
-                                value={phone}
-                                onChange={(e) => {
-                                  const value = e.target.value;
-                                  if (value === "" || /^\d*$/.test(value)) {
-                                    setPhone(value);
-                                  }
-                                }}
-                                className={`p-2 h-10 text-white focus:outline-none focus:ring-2 ${
-                                  isPhoneValid ? "focus:ring-green-500" : "focus:ring-red-500"
-                                }`}
-                                placeholder="912 123 1234"
-                              />
-                            </div>
-                            {!isPhoneValid && phone && (
-                              <p className="text-xs text-red-500 mt-1">شماره باید با 09 شروع بشه و ۱۱ رقم باشه</p>
-                            )}
-                          </div>
-                        )}
-                        <div className="mb-6 relative">
-                          <label className="block text-sm mb-2">رمز عبور</label>
-                          <input
-                            type={showPassword ? "text" : "password"}
-                            value={password}
-                            onChange={(e) => setPassword(e.target.value)}
-                            className={`w-full p-2 bg-gray-700 rounded text-white focus:outline-none focus:ring-2 ${
-                              isPasswordValid ? "focus:ring-green-500" : "focus:ring-red-500"
-                            }`}
-                            placeholder="رمز عبور خودت رو وارد کن"
-                          />
-                          <button
-                            type="button"
-                            onClick={() => setShowPassword(!showPassword)}
-                            className="absolute left-2 top-9 text-gray-400 hover:text-white"
-                          >
-                            <i className={showPassword ? "fas fa-eye-slash" : "fas fa-eye"}></i>
-                          </button>
-                          <p className="text-xs text-gray-400 mt-1">مثال: Password123</p>
-                          {isSignup && !isPasswordValid && password && (
-                            <p className="text-xs text-red-500 mt-1">اولین حرف بزرگ و حداقل یک عدد (۸+ حرف)</p>
-                          )}
-                          {isSignup && (
-                            <div className="mt-2">
-                              <div className="bg-gray-600 h-2 rounded">
-                                <div
-                                  className={`${passwordStrength.color} ${passwordStrength.width} h-2 rounded transition-all`}
-                                ></div>
-                              </div>
-                              <p className="text-xs text-gray-400 mt-1">قدرت رمز: {passwordStrength.strength}</p>
-                            </div>
-                          )}
-                        </div>
-                        <button
-                          type="submit"
-                          disabled={isSignup && !isFormValid}
-                          className={`w-full py-2 rounded text-white transition duration-300 ${
-                            isSignup && !isFormValid
-                              ? "bg-gray-600 cursor-not-allowed"
-                              : "bg-purple-600 hover:bg-purple-700"
+                  <h2 className="text-2xl font-bold mb-6 text-center">
+                    {isSignup ? "ساخت حساب کاربری" : "ورود به نمینو"}
+                  </h2>
+                  <form onSubmit={isSignup ? handleSignup : handleLogin}>
+                    {isSignup && (
+                      <div className="mb-4">
+                        <label className="block text-sm mb-2">نام کاربری</label>
+                        <input
+                          type="text"
+                          value={username}
+                          onChange={(e) => setUsername(e.target.value)}
+                          className={`w-full p-2 bg-gray-800 rounded text-white focus:outline-none focus:ring-2 ${
+                            isUsernameValid ? "focus:ring-green-500" : "focus:ring-red-500"
                           }`}
-                        >
-                          {isSignup ? "ثبت‌نام" : "ورود"}
-                        </button>
-                      </form>
-                      <p className="mt-4 text-center text-sm">
-                        {isSignup ? "حساب داری؟" : "حساب نداری؟"}
-                        <button
-                          onClick={() => setIsSignup(!isSignup)}
-                          className="text-purple-400 hover:underline mr-1"
-                        >
-                          {isSignup ? "وارد شو" : "ثبت‌نام کن"}
-                        </button>
-                      </p>
-                    </>
-                  )}
+                          placeholder="نام کاربری خودت رو وارد کن"
+                        />
+                        <p className="text-xs text-gray-400 mt-1">مثال: ali_gamer123</p>
+                        {!isUsernameValid && username && (
+                          <p className="text-xs text-red-500 mt-1">باید بیشتر از ۴ حرف باشه</p>
+                        )}
+                      </div>
+                    )}
+                    <div className="mb-4">
+                      <label className="block text-sm mb-2">ایمیل</label>
+                      <input
+                        type="email"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                        className={`w-full p-2 bg-gray-800 rounded text-white focus:outline-none focus:ring-2 ${
+                          isEmailValid ? "focus:ring-green-500" : "focus:ring-red-500"
+                        }`}
+                        placeholder="ایمیل خودت رو وارد کن"
+                      />
+                      <p className="text-xs text-gray-400 mt-1">مثال: ali@example.com</p>
+                      {!isEmailValid && email && (
+                        <p className="text-xs text-red-500 mt-1">ایمیل معتبر وارد کن</p>
+                      )}
+                    </div>
+                    {isSignup && (
+                      <div className="mb-4">
+                        <label className="block text-sm mb-2">شماره تلفن</label>
+                        <div className="phone-input-container">
+                          <span className="inline-flex items-center px-3 h-10 bg-gray-800 text-white border-r border-gray-500">
+                            <img
+                              src="https://flagcdn.com/16x12/ir.png"
+                              alt="پرچم ایران"
+                              className="ml-2"
+                            />
+                            +98
+                          </span>
+                          <input
+                            type="tel"
+                            value={phone}
+                            onChange={(e) => {
+                              const value = e.target.value;
+                              if (value === "" || /^\d*$/.test(value)) {
+                                setPhone(value);
+                              }
+                            }}
+                            className={`p-2 h-10 text-white focus:outline-none focus:ring-2 ${
+                              isPhoneValid ? "focus:ring-green-500" : "focus:ring-red-500"
+                            }`}
+                            placeholder="912 123 1234"
+                          />
+                        </div>
+                        {!isPhoneValid && phone && (
+                          <p className="text-xs text-red-500 mt-1">حداقل ۱۰ رقم</p>
+                        )}
+                      </div>
+                    )}
+                    <div className="mb-6 relative">
+                      <label className="block text-sm mb-2">رمز عبور</label>
+                      <input
+                        type={showPassword ? "text" : "password"}
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                        className={`w-full p-2 bg-gray-800 rounded text-white focus:outline-none focus:ring-2 ${
+                          isPasswordValid ? "focus:ring-green-500" : "focus:ring-red-500"
+                        }`}
+                        placeholder="رمز عبور خودت رو وارد کن"
+                      />
+                      <button
+                        type="button"
+                        onClick={() => setShowPassword(!showPassword)}
+                        className="absolute left-2 top-9 text-gray-400 hover:text-white"
+                      >
+                        <i className={showPassword ? "fas fa-eye-slash" : "fas fa-eye"}></i>
+                      </button>
+                      <p className="text-xs text-gray-400 mt-1">مثال: Password123</p>
+                      {isSignup && !isPasswordValid && password && (
+                        <p className="text-xs text-red-500 mt-1">اولین حرف بزرگ و حداقل یک عدد (۸+ حرف)</p>
+                      )}
+                      {isSignup && (
+                        <div className="mt-2">
+                          <div className="bg-gray-600 h-2 rounded">
+                            <div
+                              className={`${passwordStrength.color} ${passwordStrength.width} h-2 rounded transition-all`}
+                            ></div>
+                          </div>
+                          <p className="text-xs text-gray-400 mt-1">قدرت رمز: {passwordStrength.strength}</p>
+                        </div>
+                      )}
+                    </div>
+                    <button
+                      type="submit"
+                      disabled={isSignup && !isFormValid}
+                      className={`w-full py-2 rounded text-white transition duration-300 ${
+                        isSignup && !isFormValid
+                          ? "bg-gray-600 cursor-not-allowed"
+                          : "bg-purple-600 hover:bg-purple-700"
+                      }`}
+                    >
+                      {isSignup ? "ثبت‌نام" : "ورود"}
+                    </button>
+                  </form>
+                  <p className="mt-4 text-center text-sm">
+                    {isSignup ? "حساب داری؟" : "حساب نداری؟"}
+                    <button
+                      onClick={() => setIsSignup(!isSignup)}
+                      className="text-purple-400 hover:underline mr-1"
+                    >
+                      {isSignup ? "وارد شو" : "ثبت‌نام کن"}
+                    </button>
+                  </p>
                 </div>
               )}
             </div>
@@ -429,6 +361,9 @@
                     className="w-full h-full object-cover"
                   />
                 </a>
+                <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center">
+                  <h1 className="text-4xl font-bold text-white">به نمینو خوش اومدی!</h1>
+                </div>
               </div>
 
               <div className="container mx-auto py-12">
