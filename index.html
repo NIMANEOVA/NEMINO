@@ -69,6 +69,9 @@
       box-shadow: 0 0 15px #a855f7, 0 0 30px #a855f7, 0 0 50px #a855f7, 0 0 70px #a855f7;
       margin-top: 40px;
     }
+    .product-image-container {
+      background-color: #2d3748; /* رنگ پس‌زمینه برای فضای خالی */
+    }
   </style>
 </head>
 <body class="text-white font-sans">
@@ -78,10 +81,14 @@
     const { useState, useEffect } = React;
 
     const products = [
-      { id: 1, name: "پک الماس فری فایر", price: "499,000 تومان", image: "https://via.placeholder.com/200x200?text=FreeFire" },
-      { id: 2, name: "اکانت پابجی لِوِل 50", price: "1,200,000 تومان", image: "https://via.placeholder.com/200x200?text=PUBG" },
-      { id: 3, name: "اسکین لجندری کالاف دیوتی", price: "799,000 تومان", image: "https://via.placeholder.com/200x200?text=COD" },
-      { id: 4, name: "گیفت کارت استیم 50$", price: "1,500,000 تومان", image: "https://via.placeholder.com/200x200?text=Steam" },
+      { id: 1, name: "پک الماس فری فایر", price: "999,000 تومان", image: "https://i.imgur.com/QA7bUl7_d.webp?maxwidth=760&fidelity=grand" },
+      { id: 2, name: "اکانت پلاس 1 ماهه پلی استیشن", price: "1,400,000 تومان", image: "https://futgameplus.com/wp-content/uploads/2022/04/PlayStation-Plus-Premium-1-Month.png" },
+      { id: 3, name: "اکانت قانونی کالاف دیوتی استیم", price: "799,000 تومان", image: "https://i.imgur.com/ExiwXSi_d.webp?maxwidth=760&fidelity=grand" },
+      { id: 4, name: "گیفت کارت استیم 5$", price: "5,500,000 تومان", image: "https://i.imgur.com/pdRwP8m_d.webp?maxwidth=760&fidelity=grand" },
+      { id: 5, name: "گیفت کارت استیم 10$", price: "5,500,000 تومان", image: "https://i.imgur.com/pdRwP8m_d.webp?maxwidth=760&fidelity=grand" },
+      { id: 6, name: "گیفت کارت استیم 20$", price: "5,500,000 تومان", image: "https://i.imgur.com/pdRwP8m_d.webp?maxwidth=760&fidelity=grand" },
+      { id: 7, name: "گیفت کارت استیم 50$", price: "5,500,000 تومان", image: "https://i.imgur.com/pdRwP8m_d.webp?maxwidth=760&fidelity=grand" },
+      { id: 8, name: "گیفت کارت استیم 100$", price: "5,500,000 تومان", image: "https://i.imgur.com/pdRwP8m_d.webp?maxwidth=760&fidelity=grand" },
     ];
 
     function App() {
@@ -454,7 +461,9 @@
                       key={product.id}
                       className="bg-gray-800 rounded-lg shadow-lg overflow-hidden transform hover:scale-105 transition duration-300"
                     >
-                      <img src={product.image} alt={product.name} className="w-full h-48 object-cover" />
+                      <div className="product-image-container">
+                        <img src={product.image} alt={product.name} className="w-full h-48 object-contain" />
+                      </div>
                       <div className="p-4">
                         <h3 className="text-xl font-semibold mb-2">{product.name}</h3>
                         <p className="text-purple-400 mb-4">{product.price}</p>
