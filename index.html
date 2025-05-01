@@ -22,8 +22,7 @@
       background-position: center;
       background-attachment: fixed;
       min-height: 100vh;
-	  cursor: url('cursor.cur'), auto;
-	  cursor: url('cursor.cur'), auto;
+      cursor: url('cursor.cur'), auto;
     }
     @keyframes slideInOut {
       0% {
@@ -71,6 +70,21 @@
     .neon-border {
       border-radius: 15px;
       box-shadow: 0 0 15px #a855f7, 0 0 30px #a855f7, 0 0 50px #a855f7, 0 0 70px #a855f7;
+      margin-top: 40px;
+    }	
+	.neon-border-cyan {
+      border-radius: 15px;
+      box-shadow: 0 0 15px #00FFFF, 0 0 30px #00FFFF, 0 0 50px #00FFFF, 0 0 70px #00FFFF;
+      margin-top: 40px;
+    }
+    .neon-border-gold {
+      border-radius: 15px;
+      box-shadow: 0 0 15px #ffd700, 0 0 30px #ffd700, 0 0 50px #ffd700, 0 0 70px #ffd700;
+      margin-top: 40px;
+    }
+	.neon-border-orange {
+      border-radius: 15px;
+      box-shadow: 0 0 15px #FF6700, 0 0 30px #FF6700, 0 0 50px #FF6700, 0 0 70px #FF6700;
       margin-top: 40px;
     }
     .product-image-container {
@@ -171,6 +185,9 @@
       border-radius: 4px;
       font-size: 0.75rem;
       white-space: nowrap;
+      display: flex;
+      align-items: center;
+      gap: 4px;
     }
     .PriceBox .TradeCDFori {
       background: #48bb78;
@@ -418,10 +435,8 @@
                         <div
                           className={`TradeCD ${product.isInstant ? "TradeCDFori" : ""}`}
                         >
-                          <span>
-                            <i className={product.isInstant ? "fas fa-check" : "fas fa-lock"}></i>
-                          </span>
-                          {product.isInstant ? "فوری" : "۱ روز"}
+                          <i className={product.isInstant ? "fas fa-check" : "fas fa-lock"}></i>
+                          <span>{product.isInstant ? "فوری" : "۱ روز"}</span>
                         </div>
                       </div>
                     </div>
@@ -681,40 +696,38 @@
           <div className={(showLogin || showDashboard) ? "filter blur-sm" : ""}>
             <nav className="bg-gray-800 p-1 shadow-lg fixed w-full top-0 z-40">
               <div className="container mx-auto flex justify-between items-center">
-			     <center>
-				   <a href="https://www.nemino.ir" className="text-yellow-200 hover:text-red-500 transition">
-                    &nbsp;دریافت بازی نمینو&nbsp;&nbsp; <i className="fas fa-gamepad ml-1"></i>
-                   </a>
-				  </center>
-                <div className="flex items-center space-x-4">
-                  <a href="https://www.nemino.ir" className="text-green-100 hover:text-purple-400 transition">
-                    <i className="fas fa-home ml-1"></i> &nbsp;خانه&nbsp;&nbsp;
+                <center>
+                  <a href="https://www.nemino.ir" className="text-yellow-200 hover:text-red-500 transition">
+                   &nbsp; دریافت بازی نمینو &nbsp;<i className="fas fa-gamepad ml-1"></i>
                   </a>
-				    <a
+                </center>
+                <div className="flex items-center space-x-4">
+                  <a href="https://www.nemino.ir" className="text-red-700 hover:text-purple-400 transition">
+                    <i className="fas fa-home ml-1"></i> خانه &nbsp;&nbsp;&nbsp;&nbsp;
+                  </a>
+                  <a
                     href="#"
                     onClick={handleAccountClick}
                     className="text-gray-100 hover:text-purple-400 transition"
                   >
-                    <i className="fas fa-user ml-1"></i>&nbsp;
-                    {isAuthenticated ? `پنل کاربری (${username})` : "&nbsp;حساب کاربری"}
+                    <i className="fas fa-user ml-1"></i>
+                    {isAuthenticated ? `پنل کاربری (${username})` : "حساب کاربری"}
                   </a>
-				 <div className="flex items-center space-x-1">
-                  <a href="#" className="text-red-200 hover:text-purple-400 transition">
-                    <i className="fab fa-drupal ml-1"></i> محصولات&nbsp;&nbsp;
-                  </a>
-                
-                  <a href="#" className="text-green-500 hover:text-purple-400 transition">
-                    <i className="fas fa-shopping-cart ml-1"></i> سبد خرید&nbsp;&nbsp;
-                  </a>
-				   <a href="search" className="text-pink-600 hover:text-purple-400 transition">
-                    <i className="fab fa-sistrix ml-1">&nbsp;&nbsp;جستجو</i>
-                  </a>
-				 </div>
+                  <div className="flex items-center space-x-1">
+                    <a href="#" className="text-red-200 hover:text-purple-400 transition">
+                      <i className="fab fa-drupal ml-1"></i> محصولات&nbsp;&nbsp;&nbsp;
+                    </a>
+                    <a href="#" className="text-green-500 hover:text-purple-400 transition">
+                      <i className="fas fa-shopping-cart ml-1"></i> سبد خرید&nbsp;&nbsp;&nbsp;
+                    </a>
+                    <a href="search" className="text-pink-600 hover:text-purple-400 transition">
+                      <i className="fab fa-sistrix ml-1"></i> جستجو&nbsp;
+                    </a>
+                  </div>
                 </div>
-                   
-				<a href="https://www.nemino.ir" className="flex items-center space-x-2">
-                 <div className="text-2xl font-bold text-purple-400">NEMINO</div>
-				  <img
+                <a href="https://www.nemino.ir" className="flex items-center space-x-2">
+                  <div className="text-2xl font-bold text-purple-400">NEMINO</div>
+                  <img
                     src="https://i.imgur.com/XTaZBQw.png"
                     alt="NEMINO"
                     className="h-12 w-auto"
@@ -724,7 +737,9 @@
             </nav>
 
             <div className="pt-15">
-              <div className="relative h-120 bg-cover bg-center">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              <div className="relative h-120 bg-cover bg-center">
                 <a href="#">
                   <center>
                     <img
@@ -734,33 +749,61 @@
                     />
                   </center>
                 </a>
-				<div className="pt-10">
-               <div className="relative h-30 bg-cover bg-center">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                <a href="#">
-                  <center>
-                    <img
-                      src="https://i.imgur.com/svlXWrj_d.webp?maxwidth=760&fidelity=grand"
-                      alt="مسابقات دوتا"
-                      className="w-555 h-130 object-cover neon-border"
-                    />
-                  </center>
-                </a>
-               </div>
-              <div className="pt-10">
-               <div className="relative h-30 bg-cover bg-center">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                <a href="#">
-                  <center>
-                    <img
-                      src="https://i.imgur.com/ySMzF0e_d.webp?maxwidth=760&fidelity=grand"
-                      alt="فروش آیتم های دوتا"
-                      className="w-555 h-130 object-cover neon-border"
-                    />
-                  </center>
-                </a>
-				</div>
-               </div>
+                <div className="pt-10">
+                  <div className="flex justify-center gap-4">
+                    <a href="#">
+                      <img
+                        src="https://i.imgur.com/jNabMaS_d.webp?maxwidth=760&fidelity=grand"
+                        alt="فروش آیتم های کانتر استریک"
+                        className="w-[555px] h-[130px] object-cover neon-border-orange"
+                      />
+                    </a>
+                    <a href="#">
+                      <img
+                        src="https://i.imgur.com/ySMzF0e_d.webp?maxwidth=760&fidelity=grand"
+                        alt="فروش آیتم های دوتا"
+                        className="w-[555px] h-[130px] object-cover neon-border-orange"
+                      />
+                    </a>
+                  </div>
+                </div>
               </div>
-			  </div>
+			  <div className="pt-10">
+                  <div className="flex justify-center gap-4">
+                    <a href="#">
+                      <img
+                        src="https://i.imgur.com/IXM1QNZ_d.webp?maxwidth=760&fidelity=grand"
+                        alt="بازی نمینو"
+                        className="w-[555px] h-[130px] object-cover neon-border-gold"
+                      />
+                    </a>
+                    <a href="#">
+                      <img
+                        src="https://i.imgur.com/xU7n8SV_d.webp?maxwidth=760&fidelity=grand"
+                        alt="کسب درآمد"
+                        className="w-[555px] h-[130px] object-cover neon-border-gold"
+                      />
+                    </a>
+                  </div>
+                </div>
+				<div className="pt-10">
+                  <div className="flex justify-center gap-4">
+                    <a href="#">
+                      <img
+                        src="https://i.imgur.com/svlXWrj_d.webp?maxwidth=760&fidelity=grand"
+                        alt="لیگ مسابقات دوتا 2"
+                        className="w-[555px] h-[130px] object-cover neon-border-cyan"
+                      />
+                    </a>
+                    <a href="#">
+                      <img
+                        src="https://i.imgur.com/oXFTH2J_d.webp?maxwidth=760&fidelity=grand"
+                        alt="اینونتوری استیم"
+                        className="w-[555px] h-[130px] object-cover neon-border-cyan"
+                      />
+                    </a>
+                  </div>
+                </div>
 			  
               <div className="container mx-auto py-12">
                 {renderSlider(products, "پیشنهادی", "/products")}
@@ -769,13 +812,13 @@
               </div>
 
               <footer className="bg-gray-800 py-8">
-                <div className="container mx-auto text-center"> 
-                <p className="text-sm">همه حقوق برای سایت نمینو محفوظ است&nbsp;&nbsp;<a>© 1404</a><i className="fas fa-om"></i></p> 
-				   <i className="fab fa-neos ml-1">EMINO</i> - نمینو
+                <div className="container mx-auto text-center">
+                  <p className="text-sm">همه حقوق برای سایت نمینو محفوظ است <a>© 1404</a><i className="fas fa-om"></i></p>
+                  <i className="fab fa-neos ml-1">EMINO</i> - نمینو
                   <div className="flex justify-center space-x-4 mt-4">
-                    <a href="#" className="text-white hover:text-purple-400">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i className="fab fa-instagram"></i></a>
-                    <a href="#" className="text-white hover:text-purple-400">&nbsp;&nbsp;&nbsp;&nbsp;<i className="fab fa-telegram"></i></a>
-                    <a href="#" className="text-white hover:text-purple-400"><i className="fab fa-twitter"></i></a><i className="fab fa-periscope"></i>
+                    <a href="#" className="text-white hover:text-purple-400"><i className="fab fa-instagram"></i></a>
+                    <a href="#" className="text-white hover:text-purple-400"><i className="fab fa-telegram"></i></a>
+                    <a href="#" className="text-white hover:text-purple-400"><i className="fab fa-twitter"></i></a>
                   </div>
                 </div>
               </footer>
