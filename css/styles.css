@@ -9,6 +9,7 @@ body {
   min-height: 100vh;
   color: white;
   font-family: sans-serif;
+  cursor: url('cursor.cur'), auto;
 }
 
 /* انیمیشن نوار اعلان‌ها */
