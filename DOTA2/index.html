@@ -117,14 +117,14 @@
         .hero-box img:hover {
             transform: scale(1.1);
         }
-        .hero-box input[type="radio"] {
+        .hero-box input  {
             position: absolute;
             opacity: 0;
             width: 100%;
             height: 100%;
             cursor: pointer;
         }
-        .hero-box input[type="radio"]:checked + label img {
+        .hero-box input:checked + label img {
             border: 2px solid #ffd700;
             box-shadow: 0 0 8px #ffd700, 0 0 12px #ffd700;
         }
@@ -163,6 +163,12 @@
             overflow: hidden;
             text-overflow: ellipsis;
         }
+        .OriginalPrice {
+            font-size: 0.75rem;
+            color: #a0aec0;
+            margin-bottom: 4px;
+            text-align: right;
+        }
         .PriceBox {
             margin: 6px 0;
             display: flex;
@@ -176,11 +182,6 @@
             font-size: 0.95rem;
             color: #a855f7;
             white-space: nowrap;
-        }
-        .PriceBox .price del {
-            color: #718096;
-            margin-left: 5px;
-            font-size: 0.85rem;
         }
         .PriceBox .TradeCD {
             background: #2d3748;
@@ -224,8 +225,14 @@
             transition: background 0.3s;
             display: flex;
             align-items: center;
-            justify-content: center;
             font-size: 0.85rem;
+        }
+        .addtocart.instant {
+            justify-content: flex-end;
+            flex-direction: row-reverse;
+        }
+        .addtocart:not(.instant) {
+            justify-content: center;
         }
         .addtocart:hover {
             background: #9f4de0;
@@ -563,10 +570,15 @@
                                         </a>
                                         <p>{product.shortName}</p>
                                         <h4>{product.name}</h4>
+                                        {product.oldPrice && (
+                                            <div className="OriginalPrice">
+                                                قیمت اصلی: <del>{product.oldPrice}</del>
+                                            </div>
+                                        )}
                                         <div className="PriceBox">
                                             <div className="flex justify-between items-center w-full">
                                                 <div className="price">
-                                                    {product.oldPrice && <del>{product.oldPrice}</del>} <b>{product.price}</b>
+                                                    <b>{product.price}</b>
                                                 </div>
                                                 <div
                                                     className={`TradeCD ${product.isInstant ? "TradeCDFori" : ""}`}
@@ -577,7 +589,7 @@
                                             </div>
                                         </div>
                                         <button
-                                            className="addtocart"
+                                            className={`addtocart ${product.isInstant ? "instant" : ""}`}
                                             uk-tooltip={product.isInstant ? "title:این آیتم‌ها از دسته آیتم‌های تحویل فوری هستند که پس از خرید، مبلغ از کیف پول کسر شده و تا ۳۰ دقیقه آفر برای شما ارسال می‌شود." : ""}
                                             onClick={() => alert(`اضافه شدن ${product.name} به سبد خرید`)}
                                         >
