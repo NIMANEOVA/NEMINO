@@ -117,7 +117,7 @@
         .hero-box img:hover {
             transform: scale(1.1);
         }
-        .hero-box input  {
+        .hero-box input {
             position: absolute;
             opacity: 0;
             width: 100%;
@@ -263,6 +263,23 @@
             background: #4b5563;
             cursor: not-allowed;
         }
+        .title-box {
+            background: rgba(168, 85, 247, 0.4);
+            backdrop-filter: blur(8px);
+            border-radius: 12px;
+            padding: 1rem;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            margin: 2rem auto;
+            width: auto;
+            max-width: 950px;
+            text-align: center;
+        }
+        .neon-text {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #00f7ff;
+            text-shadow: 0 0 5px #a855f7, 0 0 10px #a855f7, 0 0 20px #ffffff, 0 0 30px #ffffff;
+        }
         @font-face {
             font-family: 'Vazir';
             src: url('https://cdn.fontcdn.ir/Fonts/Vazir/Vazir.woff') format('woff');
@@ -309,7 +326,6 @@
             { id: 10, name: "Prophecies of Pavo", shortName: "Oracle", price: "25,728 تومان", oldPrice: "30,340 تومان", discount: "-15%", image: "https://community.cloudflare.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttydbPaERSR0Wqmu7LAocGJazz1j_VPnAwvWoIX6a2kV25oLx60zsfhLjn5Xs-B1I6ubgPfw8JaiQVzXHmLl0sbQ5H33nkEwi5GvSno2rJC2QaQAgCsNwRrUJug74zIM8MiyGVg", isInstant: true, link: "https://nemino.ir/?s=38315005&Moreitem=yes" },
             { id: 11, name: "The Devotions of Dragonus - Wings", shortName: "Skywrath Mage", price: "1,739,712 تومان", image: "https://community.cloudflare.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttydbPaERSR0Wqmu7LAocGIyi3kajH-Xf2t2zNG-f2lt084K7-VL-Vg_wip7f_DBY7vyvJ7dmOeeBD3OY_u9ks-BnTha9hR4YtzKRm7DxJDnIAUV7Q9UyFKNS3U3pxYH5NO6x5AfZ2YhFzS3-j3xP7Hs_t7xWWacnrKXQ2wDGNbxs5ZEHIaqiHAPOBks7AayffA", isInstant: false, link: "https://nemino.ir/?s=38316993&Moreitem=yes" },
             { id: 12, name: "Crownfall Treasure II", shortName: "Unknown", price: "56,000 تومان", image: "https://community.cloudflare.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttydbPaERSR0Wqmu7LAocGJG51EejH_XGzN2vM3qb6Wlm95Xx71jySiLljJPh7jdJ6s38JvE_c6PFWDWUwuoi4eRrSirjwh9z6m6Hz42vdC_FO1UkCsd0QLRf4RGm0oqwi9QgBLE", isInstant: false, link: "https://nemino.ir/?s=38317083&Moreitem=yes" },
-            // Repeating items to fill 30 slots (for demo purposes)
             { id: 13, name: "Crownfall - Dire Creeps", shortName: "Unknown", price: "42,864 تومان", image: "https://community.cloudflare.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttydbPaERSR0Wqmu7LAocGIak3k6gQ7nYwsSkCniF4FNl58j3-FziUSKjzsS0wiFJ4OWgbqVhLM-XB3WVju1kteR5cHvjx0kYsC-KjYH_ICfLAVJ5SMcfBr5f5UWmk9TmZurq7gyPiIsQnHj6h35Oui0-5-wKVvIs8qHX2wvCOeY56JBXLeHnE0pPiqQljA", isInstant: true, link: "https://nemino.ir/?s=38314948&Moreitem=yes" },
             { id: 14, name: "The Devotions of Dragonus - Wings", shortName: "Skywrath Mage", price: "1,238,990 تومان", oldPrice: "1,322,660 تومان", discount: "-6%", image: "https://community.cloudflare.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttydbPaERSR0Wqmu7LAocGIyi3kajH-Xf2t2zNG-f2lt084K7-VL-Vg_wip7f_DBY7vyvJ7dmOeeBD3OY_u9ks-BnTha9hR4YtzKRm7DxJDnIAUV7Q9UyFKNS3U3pxYH5NO6x5AfZ2YhFzS3-j3xP7Hs_t7xWWacnrKXQ2wDGNbxs5ZEHIaqiHAPOBks7AayffA", isInstant: true, link: "https://nemino.ir/?s=38314950&Moreitem=yes" },
             { id: 15, name: "Autographed King Kringle Shoulder", shortName: "Wraith King", price: "354,200 تومان", image: "https://community.cloudflare.steamstatic.com/economy/image/-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KW1Zwwo4NUX4oFJZEHLbXK9QlSPcUluxpUWETvTO2j0IDVQVJnMQ1Bo6maPBVh2ufATjZL4tv5kpKEhOP9Ja7CqXxD6cxlgtbK_ILyt0e8pAYwNzyxS9rEMFFrf1DU8gW8lOfvhZK7vs6cnSE2vXUksX_Vn0PmhxEaO7c90fzKS12cBPdXXP7VBedW0gA", isInstant: true, link: "https://nemino.ir/?s=38282439&Moreitem=yes" },
@@ -327,7 +343,25 @@
             { id: 27, name: "Autographed King Kringle Shoulder", shortName: "Wraith King", price: "354,200 تومان", image: "https://community.cloudflare.steamstatic.com/economy/image/-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KW1Zwwo4NUX4oFJZEHLbXK9QlSPcUluxpUWETvTO2j0IDVQVJnMQ1Bo6maPBVh2ufATjZL4tv5kpKEhOP9Ja7CqXxD6cxlgtbK_ILyt0e8pAYwNzyxS9rEMFFrf1DU8gW8lOfvhZK7vs6cnSE2vXUksX_Vn0PmhxEaO7c90fzKS12cBPdXXP7VBedW0gA", isInstant: true, link: "https://nemino.ir/?s=38282439&Moreitem=yes" },
             { id: 28, name: "Crownfall Treasure I", shortName: "Unknown", price: "53,880 تومان", oldPrice: "57,400 تومان", discount: "-6%", image: "https://community.cloudflare.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttydbPaERSR0Wqmu7LAocGJG51EejH_XGzN2vM3qb6Wlm95Xx71jySiLljJPh7jdJ6rz7O6FsePbCCzKRwrpz6edvFi23wk0i6zvTzd76dXrEZgUpCZR0QOILrFDmxRCfiKj7", isInstant: true, link: "https://nemino.ir/?s=38314952&Moreitem=yes" },
             { id: 29, name: "Ravencloak", shortName: "Drow Ranger", price: "1,004,400 تومان", image: "https://community.cloudflare.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttydbPaERSR0Wqmu7LAocGJazz1j_VPnAwvWoIX6a2lVn-5D67FjrTSLinYTl-CNO5M2qeqt6H-OWGliGkKB3sblvGyq3wx4i52WHy9f7I3OTOAIhWZEhEO8DsULpx9a2P-O2tgTYlcsbmoWgC3aK", isInstant: true, link: "https://nemino.ir/?s=38316745&Moreitem=yes" },
-            { id: 30, name: "King Kringle's Tannenkromm", shortName: "Wraith King", price: "260,414 تومان", oldPrice: "278,800 تومان", discount: "-7%", image: "https://community.cloudflare.steamstatic.com/economy/image/-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KW1Zwwo4NUX4oFJZEHLbXK9QlSPcUluxpUWETvTO2j0IDVQVJnMQ1Bo6maPBVh2ufATjZL4tv5kpKEhOP9Ja7CqXxD6cxlgtbK_ILyt0ejpAE4DDWiZtHAbFBqMwrS_lK6lbq605O-78_Pznth6yEnsHbUnRC3hkoabbZqgfzNSFqAR_seoXd_jW4", isInstant: true, link: "https://nemino.ir/?s=38206677&Moreitem=yes" }
+            { id: 30, name: "King Kringle's Tannenkromm", shortName: "Wraith King", price: "260,414 تومان", oldPrice: "278,800 تومان", discount: "-7%", image: "https://community.cloudflare.steamstatic.com/economy/image/-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KW1Zwwo4NUX4oFJZEHLbXK9QlSPcUluxpUWETvTO2j0IDVQVJnMQ1Bo6maPBVh2ufATjZL4tv5kpKEhOP9Ja7CqXxD6cxlgtbK_ILyt0ejpAE4DDWiZtHAbFBqMwrS_lK6lbq605O-78_Pznth6yEnsHbUnRC3hkoabbZqgfzNSFqAR_seoXd_jW4", isInstant: true, link: "https://nemino.ir/?s=38206677&Moreitem=yes" },
+            { id: 31, name: "Flight of the Gryphon Lord", shortName: "Keeper of the Light", price: "25,500 تومان", image: "https://community.cloudflare.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttydbPaERSR0Wqmu7LAocGIm52k-5XvHr0MmzMH6Z9hl--5P41Vj1Qhz_m6nn7ytd6fugV6lsM-SWHFiczu9yue9ucDqwhxgivXPWwo6vdymUP1RyCpckQ-ICsUW6ldHuNLvntQ3cjotBzyr5j3tKuClr_a9cBl4Gh-2e", isInstant: true, link: "https://nemino.ir/?s=38314982&Moreitem=yes" },
+            { id: 32, name: "Whispering Wings", shortName: "Silencer", price: "115,786 تومان", image: "https://community.cloudflare.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttydbPaERSR0Wqmu7LAocGJazz1j_VPnAwvWoIX6a2kV25oLx60zsfhLjn5Xs-B1I6ubgPfw8JaiQVzXHmLl0sbQ5H33nkEwi5GvSno2rJC2QaQAgCsNwRrUJug74zIM8MiyGVg", isInstant: true, link: "https://nemino.ir/?s=38314996&Moreitem=yes" },
+            { id: 33, name: "Twitcher", shortName: "Tinker", price: "15,300 تومان", image: "https://community.cloudflare.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttydbPaERSR0Wqmu7LAocGJazz1j_VPnAwvWoIX6a2kJ8-ozx-Gb0Tgj9oZXh8CdJ7rz2O6E9JvLCCjbBwrZztORrGSjixRhw5jzQzYqrJy6QalQgCcAmFOFbrFDmxZec5HH0", isInstant: true, link: "https://nemino.ir/?s=38314997&Moreitem=yes" },
+            { id: 34, name: "Prophecies of Pavo", shortName: "Oracle", price: "25,728 تومان", oldPrice: "30,340 تومان", discount: "-15%", image: "https://community.cloudflare.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttydbPaERSR0Wqmu7LAocGJazz1j_VPnAwvWoIX6a2kV25oLx60zsfhLjn5Xs-B1I6ubgPfw8JaiQVzXHmLl0sbQ5H33nkEwi5GvSno2rJC2QaQAgCsNwRrUJug74zIM8MiyGVg", isInstant: true, link: "https://nemino.ir/?s=38315005&Moreitem=yes" },
+            { id: 35, name: "The Devotions of Dragonus - Wings", shortName: "Skywrath Mage", price: "1,739,712 تومان", image: "https://community.cloudflare.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttydbPaERSR0Wqmu7LAocGIyi3kajH-Xf2t2zNG-f2lt084K7-VL-Vg_wip7f_DBY7vyvJ7dmOeeBD3OY_u9ks-BnTha9hR4YtzKRm7DxJDnIAUV7Q9UyFKNS3U3pxYH5NO6x5AfZ2YhFzS3-j3xP7Hs_t7xWWacnrKXQ2wDGNbxs5ZEHIaqiHAPOBks7AayffA", isInstant: false, link: "https://nemino.ir/?s=38316993&Moreitem=yes" },
+            { id: 36, name: "Crownfall Treasure II", shortName: "Unknown", price: "56,000 تومان", image: "https://community.cloudflare.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttydbPaERSR0Wqmu7LAocGJG51EejH_XGzN2vM3qb6Wlm95Xx71jySiLljJPh7jdJ6s38JvE_c6PFWDWUwuoi4eRrSirjwh9z6m6Hz42vdC_FO1UkCsd0QLRf4RGm0oqwi9QgBLE", isInstant: false, link: "https://nemino.ir/?s=38317083&Moreitem=yes" },
+            { id: 37, name: "Crownfall - Dire Creeps", shortName: "Unknown", price: "42,864 تومان", image: "https://community.cloudflare.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttydbPaERSR0Wqmu7LAocGIak3k6gQ7nYwsSkCniF4FNl58j3-FziUSKjzsS0wiFJ4OWgbqVhLM-XB3WVju1kteR5cHvjx0kYsC-KjYH_ICfLAVJ5SMcfBr5f5UWmk9TmZurq7gyPiIsQnHj6h35Oui0-5-wKVvIs8qHX2wvCOeY56JBXLeHnE0pPiqQljA", isInstant: true, link: "https://nemino.ir/?s=38314948&Moreitem=yes" },
+            { id: 38, name: "The Devotions of Dragonus - Wings", shortName: "Skywrath Mage", price: "1,238,990 تومان", oldPrice: "1,322,660 تومان", discount: "-6%", image: "https://community.cloudflare.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttydbPaERSR0Wqmu7LAocGIyi3kajH-Xf2t2zNG-f2lt084K7-VL-Vg_wip7f_DBY7vyvJ7dmOeeBD3OY_u9ks-BnTha9hR4YtzKRm7DxJDnIAUV7Q9UyFKNS3U3pxYH5NO6x5AfZ2YhFzS3-j3xP7Hs_t7xWWacnrKXQ2wDGNbxs5ZEHIaqiHAPOBks7AayffA", isInstant: true, link: "https://nemino.ir/?s=38314950&Moreitem=yes" },
+            { id: 39, name: "Autographed King Kringle Shoulder", shortName: "Wraith King", price: "354,200 تومان", image: "https://community.cloudflare.steamstatic.com/economy/image/-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KW1Zwwo4NUX4oFJZEHLbXK9QlSPcUluxpUWETvTO2j0IDVQVJnMQ1Bo6maPBVh2ufATjZL4tv5kpKEhOP9Ja7CqXxD6cxlgtbK_ILyt0e8pAYwNzyxS9rEMFFrf1DU8gW8lOfvhZK7vs6cnSE2vXUksX_Vn0PmhxEaO7c90fzKS12cBPdXXP7VBedW0gA", isInstant: true, link: "https://nemino.ir/?s=38282439&Moreitem=yes" },
+            { id: 40, name: "Crownfall Treasure I", shortName: "Unknown", price: "53,880 تومان", oldPrice: "57,400 تومان", discount: "-6%", image: "https://community.cloudflare.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttydbPaERSR0Wqmu7LAocGJG51EejH_XGzN2vM3qb6Wlm95Xx71jySiLljJPh7jdJ6rz7O6FsePbCCzKRwrpz6edvFi23wk0i6zvTzd76dXrEZgUpCZR0QOILrFDmxRCfiKj7", isInstant: true, link: "https://nemino.ir/?s=38314952&Moreitem=yes" },
+            { id: 41, name: "Ravencloak", shortName: "Drow Ranger", price: "1,004,400 تومان", image: "https://community.cloudflare.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttydbPaERSR0Wqmu7LAocGJazz1j_VPnAwvWoIX6a2lVn-5D67FjrTSLinYTl-CNO5M2qeqt6H-OWGliGkKB3sblvGyq3wx4i52WHy9f7I3OTOAIhWZEhEO8DsULpx9a2P-O2tgTYlcsbmoWgC3aK", isInstant: true, link: "https://nemino.ir/?s=38316745&Moreitem=yes" },
+            { id: 42, name: "King Kringle's Tannenkromm", shortName: "Wraith King", price: "260,414 تومان", oldPrice: "278,800 تومان", discount: "-7%", image: "https://community.cloudflare.steamstatic.com/economy/image/-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KW1Zwwo4NUX4oFJZEHLbXK9QlSPcUluxpUWETvTO2j0IDVQVJnMQ1Bo6maPBVh2ufATjZL4tv5kpKEhOP9Ja7CqXxD6cxlgtbK_ILyt0ejpAE4DDWiZtHAbFBqMwrS_lK6lbq605O-78_Pznth6yEnsHbUnRC3hkoabbZqgfzNSFqAR_seoXd_jW4", isInstant: true, link: "https://nemino.ir/?s=38206677&Moreitem=yes" },
+            { id: 43, name: "Flight of the Gryphon Lord", shortName: "Keeper of the Light", price: "25,500 تومان", image: "https://community.cloudflare.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttydbPaERSR0Wqmu7LAocGIm52k-5XvHr0MmzMH6Z9hl--5P41Vj1Qhz_m6nn7ytd6fugV6lsM-SWHFiczu9yue9ucDqwhxgivXPWwo6vdymUP1RyCpckQ-ICsUW6ldHuNLvntQ3cjotBzyr5j3tKuClr_a9cBl4Gh-2e", isInstant: true, link: "https://nemino.ir/?s=38314982&Moreitem=yes" },
+            { id: 44, name: "Whispering Wings", shortName: "Silencer", price: "115,786 تومان", image: "https://community.cloudflare.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttydbPaERSR0Wqmu7LAocGJazz1j_VPnAwvWoIX6a2kV25oLx60zsfhLjn5Xs-B1I6ubgPfw8JaiQVzXHmLl0sbQ5H33nkEwi5GvSno2rJC2QaQAgCsNwRrUJug74zIM8MiyGVg", isInstant: true, link: "https://nemino.ir/?s=38314996&Moreitem=yes" },
+            { id: 45, name: "Twitcher", shortName: "Tinker", price: "15,300 تومان", image: "https://community.cloudflare.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttydbPaERSR0Wqmu7LAocGJazz1j_VPnAwvWoIX6a2kJ8-ozx-Gb0Tgj9oZXh8CdJ7rz2O6E9JvLCCjbBwrZztORrGSjixRhw5jzQzYqrJy6QalQgCcAmFOFbrFDmxZec5HH0", isInstant: true, link: "https://nemino.ir/?s=38314997&Moreitem=yes" },
+            { id: 46, name: "Prophecies of Pavo", shortName: "Oracle", price: "25,728 تومان", oldPrice: "30,340 تومان", discount: "-15%", image: "https://community.cloudflare.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttydbPaERSR0Wqmu7LAocGJazz1j_VPnAwvWoIX6a2kV25oLx60zsfhLjn5Xs-B1I6ubgPfw8JaiQVzXHmLl0sbQ5H33nkEwi5GvSno2rJC2QaQAgCsNwRrUJug74zIM8MiyGVg", isInstant: true, link: "https://nemino.ir/?s=38315005&Moreitem=yes" },
+            { id: 47, name: "The Devotions of Dragonus - Wings", shortName: "Skywrath Mage", price: "1,739,712 تومان", image: "https://community.cloudflare.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttydbPaERSR0Wqmu7LAocGIyi3kajH-Xf2t2zNG-f2lt084K7-VL-Vg_wip7f_DBY7vyvJ7dmOeeBD3OY_u9ks-BnTha9hR4YtzKRm7DxJDnIAUV7Q9UyFKNS3U3pxYH5NO6x5AfZ2YhFzS3-j3xP7Hs_t7xWWacnrKXQ2wDGNbxs5ZEHIaqiHAPOBks7AayffA", isInstant: false, link: "https://nemino.ir/?s=38316993&Moreitem=yes" },
+            { id: 48, name: "Crownfall Treasure II", shortName: "Unknown", price: "56,000 تومان", image: "https://community.cloudflare.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttydbPaERSR0Wqmu7LAocGJG51EejH_XGzN2vM3qb6Wlm95Xx71jySiLljJPh7jdJ6s38JvE_c6PFWDWUwuoi4eRrSirjwh9z6m6Hz42vdC_FO1UkCsd0QLRf4RGm0oqwi9QgBLE", isInstant: false, link: "https://nemino.ir/?s=38317083&Moreitem=yes" }
         ];
 
         function App() {
@@ -340,7 +374,7 @@
             const [searchItem, setSearchItem] = useState("");
             const [searchHero, setSearchHero] = useState("");
             const [currentPage, setCurrentPage] = useState(1);
-            const itemsPerPage = 30;
+            const itemsPerPage = 24;
 
             const handleAccountClick = (e) => {
                 e.preventDefault();
@@ -485,47 +519,47 @@
                     )}
 
                     <div className={(showLogin || showDashboard) ? "filter blur-sm" : ""}>
-                        <nav className="bg-gray-800 p-1 shadow-lg fixed w-full top-0 z-40">
-                          <div className="container mx-auto flex justify-between items-center">
-                            <center>
-                              <a href="NEMINO-APP" className="text-yellow-200 hover:text-red-500 transition">
-                                دریافت بازی نمینو <i className="fas fa-gamepad ml-1"></i>
-                              </a>
-                            </center>
-                            <div className="flex items-center space-x-4">
-                              <a href="https://www.nemino.ir" className="text-red-700 hover:text-purple-400 transition">
-                                <i className="fas fa-home ml-1"></i> خانه
-                              </a>
-                              <a
-                                href="Account"
-                                onClick={handleAccountClick}
-                                className="text-gray-100 hover:text-purple-400 transition"
-                              >
-                                <i className="fas fa-user ml-1"></i>
-                                {isAuthenticated ? `پنل کاربری (${username})` : "حساب کاربری"}
-                              </a>
-                              <div className="flex items-center space-x-1">
-                                <a href="Shop" className="text-red-200 hover:text-purple-400 transition">
-                                  <i className="fab fa-drupal ml-1"></i> محصولات
-                                </a>
-                                <a href="Order" className="text-green-500 hover:text-purple-400 transition">
-                                  <i className="fas fa-shopping-cart ml-1"></i> سبد خرید
-                                </a>
-                                <a href="search" className="text-pink-600 hover:text-purple-400 transition">
-                                  <i className="fab fa-sistrix ml-1"></i> جستجو
-                                </a>
-                              </div>
-                            </div>
-                            <a href="https://www.nemino.ir" className="flex items-center space-x-2">
-                              <div className="text-2xl font-bold text-purple-400">NEMINO</div>
-                              <img
-                                src="https://i.imgur.com/XTaZBQw.png"
-                                alt="NEMINO"
-                                className="h-12 w-auto"
-                              />
-                            </a>
-                          </div>
-                        </nav>
+            <nav className="bg-gray-800 p-1 shadow-lg fixed w-full top-0 z-40">
+              <div className="container mx-auto flex justify-between items-center">
+                <center>
+                  <a href="NEMINO-APP" className="text-yellow-200 hover:text-red-500 transition">
+                   &nbsp; دریافت بازی نمینو &nbsp;<i className="fas fa-gamepad ml-1"></i>
+                  </a>
+                </center>
+                <div className="flex items-center space-x-4">
+                  <a href="https://www.nemino.ir" className="text-red-700 hover:text-purple-400 transition">
+                    <i className="fas fa-home ml-1"></i> خانه &nbsp;&nbsp;&nbsp;&nbsp;
+                  </a>
+                  <a
+                    href="Account"
+                    onClick={handleAccountClick}
+                    className="text-gray-100 hover:text-purple-400 transition"
+                  >
+                    <i className="fas fa-user ml-1"></i>
+                    {isAuthenticated ? `پنل کاربری (${username})` : "حساب کاربری"}
+                  </a>
+                  <div className="flex items-center space-x-1">
+                    <a href="Shop" className="text-red-200 hover:text-purple-400 transition">
+                      <i className="fab fa-drupal ml-1"></i> محصولات&nbsp;&nbsp;&nbsp;
+                    </a>
+                    <a href="Order" className="text-green-500 hover:text-purple-400 transition">
+                      <i className="fas fa-shopping-cart ml-1"></i> سبد خرید&nbsp;&nbsp;&nbsp;
+                    </a>
+                    <a href="search" className="text-pink-600 hover:text-purple-400 transition">
+                      <i className="fab fa-sistrix ml-1"></i> جستجو&nbsp;
+                    </a>
+                  </div>
+                </div>
+                <a href="https://www.nemino.ir" className="flex items-center space-x-2">
+                  <div className="text-2xl font-bold text-purple-400">NEMINO</div>
+                  <img
+                    src="https://i.imgur.com/XTaZBQw.png"
+                    alt="NEMINO"
+                    className="h-12 w-auto"
+                  />
+                </a>
+              </div>
+            </nav>
 
                         <div className="pt-20 container mx-auto py-12">
                             <div className="search-box">
@@ -566,11 +600,10 @@
                                 </ul>
                             </div>
 
-                            <div className="titrbakhat">
-                                <hr />
-                                <p>آیتم‌های دوتا ۲ <a href="/dota2">نمایش همه</a></p>
+                            <div className="title-box">
+                                <h2 className="neon-text">DOTA 2 ITEM</h2>
                             </div>
-                            <div className="grid grid-cols-5 gap-4">
+                            <div className="grid grid-cols-4 gap-4">
                                 {paginatedProducts.map((product) => (
                                     <div key={product.id} className="BoxItem">
                                         <div className="product-image-container">
