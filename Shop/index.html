@@ -7,7 +7,7 @@
 <link rel="manifest" href="/site.webmanifest">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>NEMINO - خرید و فروش بازی‌های دیجیتال</title>
+  <title>NEMINO - فروشگاه بازی‌های دیجیتال</title>
   <script src="https://cdn.jsdelivr.net/npm/react@18.2.0/umd/react.production.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/react-dom@18.2.0/umd/react-dom.production.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@babel/standalone@7.24.0/babel.min.js"></script>
@@ -23,6 +23,32 @@
       background-attachment: fixed;
       min-height: 100vh;
       cursor: url('cursor.cur'), auto;
+    }
+    /* استایل اختصاصی برای صفحه فروشگاه */
+    .shop-page .BoxItem {
+      background: #2d3748; /* رنگ پس‌زمینه آیتم‌ها برای هماهنگی با فروشگاه */
+      border: 1px solid #a855f7;
+      transition: transform 0.3s;
+    }
+    .shop-page .BoxItem:hover {
+      transform: scale(1.05); /* افکت هاور برای جذابیت */
+    }
+    .shop-page .titrbakhat {
+      background: rgba(31, 41, 55, 0.8); /* پس‌زمینه تیره‌تر برای هدر اسلایدرها */
+      border: 1px solid #a855f7;
+    }
+    .shop-page .addtocart {
+      background: #7c3aed; /* رنگ دکمه سبد خرید */
+    }
+    .shop-page .addtocart:hover {
+      background: #6d28d9;
+    }
+    /* اصلاح بلور */
+    .shop-content {
+      transition: filter 0.3s;
+    }
+    .shop-content.blur {
+      filter: blur(4px);
     }
     @keyframes slideInOut {
       0% {
@@ -239,7 +265,7 @@
     }
   </style>
 </head>
-<body class="text-white font-sans">
+<body class="text-white font-sans shop-page">
   <div id="root"></div>
 
   <!-- UIkit JS -->
@@ -295,7 +321,7 @@
 
     function App() {
       const [isAuthenticated, setIsAuthenticated] = useState(false);
-      const [showLogin, setShowLogin] = useState(true);
+      const [showLogin, setShowLogin] = useState(false);
       const [username, setUsername] = useState("");
       const [email, setEmail] = useState("");
       const [phone, setPhone] = useState("");
@@ -310,7 +336,7 @@
 
       useEffect(() => {
         if (!isAuthenticated && !showLogin) {
-          setNotification("خوش اومدی به شاپ نمینو!");
+          setNotification("به فروشگاه نمینو خوش اومدی!");
           setTimeout(() => setNotification(""), 4000);
         }
       }, []);
@@ -428,7 +454,7 @@
                     <p>{product.shortName || product.name.split(" ")[0]}</p>
                     <h4>{product.name}</h4>
                     <div className="PriceBox">
-                      <div className="flex justify-between items-center w-full">
+                      <div className="flex justify-between items-center ASSISTANT: w-full">
                         <div className="price">
                           {product.oldPrice && <del>{product.oldPrice}</del>} <b>{product.price}</b>
                         </div>
@@ -486,219 +512,137 @@
 
       return (
         <div>
-          {notification && (
-            <div className="notification">
-              {notification}
-            </div>
-          )}
+          {notification && <div className="notification">{notification}</div>}
 
-          {(showLogin || showDashboard) && (
-            <div
-              className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50"
-              style={{
-                backgroundImage: "url('https://i.imgur.com/sD2WbZM.webp')",
-                backgroundSize: "cover",
-                backgroundPosition: "center",
-                minHeight: "100vh",
-              }}
-            >
-              {showDashboard ? (
-                <div className="bg-gray-800 p-8 rounded-lg shadow-lg w-full max-w-md relative">
-                  <button
-                    onClick={() => setShowDashboard(false)}
-                    className="absolute top-2 left-2 text-gray-400 hover:text-white"
-                  >
-                    <i className="fas fa-times"></i>
-                  </button>
-                  <h2 className="text-2xl font-bold mb-6 text-center">پنل کاربری {username}</h2>
-                  <div className="text-center">
-                    <p className="mb-4">خوش اومدی، {username}!</p>
-                    <p className="mb-4">اینجا می‌تونی اطلاعات حساب، خریدها و تنظیماتت رو مدیریت کنی.</p>
-                    <button
-                      onClick={() => {
-                        setIsAuthenticated(false);
-                        setShowDashboard(false);
-                        setUsername("");
-                        setShowLogin(true);
-                        setNotification("با موفقیت خارج شدی!");
-                        setTimeout(() => setNotification(""), 4000);
-                      }}
-                      className="w-full bg-red-600 hover:bg-red-700 text-white py-2 rounded transition duration-300"
-                    >
-                      خروج از حساب
-                    </button>
-                  </div>
-                </div>
-              ) : (
-                <div className="bg-gray-800 p-8 rounded-lg shadow-lg w-full max-w-md relative">
-                  <button
-                    onClick={closeLogin}
-                    className="absolute top-2 left-2 text-gray-400 hover:text-white"
-                  >
-                    <i className="fas fa-times"></i>
-                  </button>
-                  {showVerification ? (
+          {showLogin && (
+            <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
+              <div className="bg-gray-800 p-6 rounded-lg w-full max-w-md">
+                <h2 className="text-xl mb-4">{isSignup ? "ثبت‌نام" : "ورود"}</h2>
+                <form onSubmit={isSignup ? handleSignup : handleLogin}>
+                  <input
+                    type="text"
+                    placeholder="نام کاربری"
+                    className="w-full p-2 mb-4 bg-gray-600 rounded"
+                    value={username}
+                    onChange={(e) => setUsername(e.target.value)}
+                  />
+                  {isSignup && (
                     <>
-                      <h2 className="text-2xl font-bold mb-6 text-center">تأیید کد</h2>
-                      <form onSubmit={handleVerify}>
-                        <div className="mb-6">
-                          <label className="block text-sm mb-2">کد تأیید</label>
-                          <input
-                            type="text"
-                            value={inputCode}
-                            onChange={(e) => setInputCode(e.target.value)}
-                            className="w-full p-2 bg-gray-700 rounded text-white focus:outline-none focus:ring-2 focus:ring-purple-500"
-                            placeholder="کد ۶ رقمی رو وارد کن"
-                          />
-                          <p className="text-xs text-gray-400 mt-1">مثال: 123456</p>
-                        </div>
-                        <button
-                          type="submit"
-                          className="w-full bg-purple-600 hover:bg-purple-700 text-white py-2 rounded transition duration-300"
-                        >
-                          تأیید
-                        </button>
-                      </form>
-                    </>
-                  ) : (
-                    <>
-                      <h2 className="text-2xl font-bold mb-6 text-center">
-                        {isSignup ? "ساخت حساب کاربری" : "ورود به نمینو"}
-                      </h2>
-                      <form onSubmit={isSignup ? handleSignup : handleLogin}>
-                        <div className="mb-4">
-                          <label className="block text-sm mb-2">نام کاربری</label>
-                          <input
-                            type="text"
-                            value={username}
-                            onChange={(e) => setUsername(e.target.value)}
-                            className={`w-full p-2 bg-gray-700 rounded text-white focus:outline-none focus:ring-2 ${
-                              isUsernameValid ? "focus:ring-green-500" : "focus:ring-red-500"
-                            }`}
-                            placeholder="نام کاربری خودت رو وارد کن"
-                          />
-                          <p className="text-xs text-gray-400 mt-1">مثال: ali_gamer123</p>
-                          {!isUsernameValid && username && (
-                            <p className="text-xs text-red-500 mt-1">باید بیشتر از ۴ حرف باشه</p>
-                          )}
-                        </div>
-                        {isSignup && (
-                          <>
-                            <div className="mb-4">
-                              <label className="block text-sm mb-2">ایمیل</label>
-                              <input
-                                type="email"
-                                value={email}
-                                onChange={(e) => setEmail(e.target.value)}
-                                className={`w-full p-2 bg-gray-700 rounded text-white focus:outline-none focus:ring-2 ${
-                                  isEmailValid ? "focus:ring-green-500" : "focus:ring-red-500"
-                                }`}
-                                placeholder="ایمیل خودت رو وارد کن"
-                              />
-                              <p className="text-xs text-gray-400 mt-1">مثال: ali@example.com</p>
-                              {!isEmailValid && email && (
-                                <p className="text-xs text-red-500 mt-1">ایمیل معتبر وارد کن</p>
-                              )}
-                            </div>
-                            <div className="mb-4">
-                              <label className="block text-sm mb-2">شماره تلفن</label>
-                              <div className="phone-input-container">
-                                <span className="inline-flex items-center px-3 h-10 bg-gray-700 text-white border-r border-gray-500">
-                                  <img
-                                    src="https://flagcdn.com/16x12/ir.png"
-                                    alt="پرچم ایران"
-                                    className="ml-2"
-                                  />
-                                  +98
-                                </span>
-                                <input
-                                  type="tel"
-                                  value={phone}
-                                  onChange={(e) => {
-                                    const value = e.target.value;
-                                    if (value === "" || /^\d*$/.test(value)) {
-                                      setPhone(value);
-                                    }
-                                  }}
-                                  className={`p-2 h-10 text-white focus:outline-none focus:ring-2 ${
-                                    isPhoneValid ? "focus:ring-green-500" : "focus:ring-red-500"
-                                  }`}
-                                  placeholder="912 123 1234"
-                                />
-                              </div>
-                              {!isPhoneValid && phone && (
-                                <p className="text-xs text-red-500 mt-1">حداقل ۱۰ رقم</p>
-                              )}
-                            </div>
-                          </>
-                        )}
-                        <div className="mb-6 relative">
-                          <label className="block text-sm mb-2">رمز عبور</label>
-                          <input
-                            type={showPassword ? "text" : "password"}
-                            value={password}
-                            onChange={(e) => setPassword(e.target.value)}
-                            className={`w-full p-2 bg-gray-700 rounded text-white focus:outline-none focus:ring-2 ${
-                              isPasswordValid ? "focus:ring-green-500" : "focus:ring-red-500"
-                            }`}
-                            placeholder="رمز عبور خودت رو وارد کن"
-                          />
-                          <button
-                            type="button"
-                            onClick={() => setShowPassword(!showPassword)}
-                            className="absolute left-2 top-9 text-gray-400 hover:text-white"
-                          >
-                            <i className={showPassword ? "fas fa-eye-slash" : "fas fa-eye"}></i>
-                          </button>
-                          <p className="text-xs text-gray-400 mt-1">مثال: Password123</p>
-                          {isSignup && !isPasswordValid && password && (
-                            <p className="text-xs text-red-500 mt-1">اولین حرف بزرگ و حداقل یک عدد (۸+ حرف)</p>
-                          )}
-                          {isSignup && (
-                            <div className="mt-2">
-                              <div className="bg-gray-600 h-2 rounded">
-                                <div
-                                  className={`${passwordStrength.color} ${passwordStrength.width} h-2 rounded transition-all`}
-                                ></div>
-                              </div>
-                              <p className="text-xs text-gray-400 mt-1">قدرت رمز: {passwordStrength.strength}</p>
-                            </div>
-                          )}
-                        </div>
-                        <button
-                          type="submit"
-                          disabled={isSignup && !isFormValid}
-                          className={`w-full py-2 rounded text-white transition duration-300 ${
-                            isSignup && !isFormValid
-                              ? "bg-gray-600 cursor-not-allowed"
-                              : "bg-purple-600 hover:bg-purple-700"
-                          }`}
-                        >
-                          {isSignup ? "ثبت‌نام" : "ورود"}
-                        </button>
-                      </form>
-                      <p className="mt-4 text-center text-sm">
-                        {isSignup ? "حساب داری؟" : "حساب نداری؟"}
-                        <button
-                          onClick={() => setIsSignup(!isSignup)}
-                          className="text-purple-400 hover:underline mr-1"
-                        >
-                          {isSignup ? "وارد شو" : "ثبت‌نام کن"}
-                        </button>
-                      </p>
+                      <input
+                        type="email"
+                        placeholder="ایمیل"
+                        className="w-full p-2 mb-4 bg-gray-600 rounded"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                      />
+                      <div className="phone-input-container mb-4">
+                        <span className="text-gray-400 p-2">+98</span>
+                        <input
+                          type="tel"
+                          placeholder="شماره موبایل"
+                          className="w-full p-2 bg-transparent"
+                          value={phone}
+                          onChange={(e) => setPhone(e.target.value)}
+                        />
+                      </div>
                     </>
                   )}
-                </div>
-              )}
+                  <div className="relative mb-4">
+                    <input
+                      type={showPassword ? "text" : "password"}
+                      placeholder="رمز عبور"
+                      className="w-full p-2 bg-gray-600 rounded"
+                      value={password}
+                      onChange={(e) => setPassword(e.target.value)}
+                    />
+                    <button
+                      type="button"
+                      className="absolute left-2 top-2 text-gray-400"
+                      onClick={() => setShowPassword(!showPassword)}
+                    >
+                      <i className={showPassword ? "fas fa-eye-slash" : "fas fa-eye"}></i>
+                    </button>
+                  </div>
+                  {isSignup && (
+                    <div className="mb-4">
+                      <div className={`h-2 rounded ${passwordStrength.color} ${passwordStrength.width}`}></div>
+                      <p className="text-sm mt-1">قدرت رمز: {passwordStrength.strength}</p>
+                    </div>
+                  )}
+                  <button
+                    type="submit"
+                    className="w-full p-2 bg-purple-600 rounded hover:bg-purple-700"
+                    disabled={isSignup && !isFormValid}
+                  >
+                    {isSignup ? "ثبت‌نام" : "ورود"}
+                  </button>
+                </form>
+                <button
+                  className="mt-4 text-purple-400"
+                  onClick={() => setIsSignup(!isSignup)}
+                >
+                  {isSignup ? "حساب داری؟ وارد شو" : "حساب نداری؟ ثبت‌نام کن"}
+                </button>
+                <button
+                  className="mt-2 text-gray-400"
+                  onClick={closeLogin}
+                >
+                  بستن
+                </button>
+              </div>
             </div>
           )}
 
-          <div className={(showLogin || showDashboard) ? "filter blur-sm" : ""}>
+          {showVerification && (
+            <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
+              <div className="bg-gray-800 p-6 rounded-lg w-full max-w-md">
+                <h2 className="text-xl mb-4">تأیید کد</h2>
+                <form onSubmit={handleVerify}>
+                  <input
+                    type="text"
+                    placeholder="کد تأیید را وارد کنید"
+                    className="w-full p-2 mb-4 bg-gray-600 rounded"
+                    value={inputCode}
+                    onChange={(e) => setInputCode(e.target.value)}
+                  />
+                  <button
+                    type="submit"
+                    className="w-full p-2 bg-purple-600 rounded hover:bg-purple-700"
+                  >
+                    تأیید
+                  </button>
+                </form>
+                <button
+                  className="mt-2 text-gray-400"
+                  onClick={() => setShowVerification(false)}
+                >
+                  بستن
+                </button>
+              </div>
+            </div>
+          )}
+
+          {showDashboard && (
+            <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
+              <div className="bg-gray-800 p-6 rounded-lg w-full max-w-md">
+                <h2 className="text-xl mb-4">پنل کاربری</h2>
+                <p>خوش اومدی، {username}!</p>
+                <button
+                  className="mt-4 w-full p-2 bg-purple-600 rounded hover:bg-purple-700"
+                  onClick={() => setShowDashboard(false)}
+                >
+                  بستن
+                </button>
+              </div>
+            </div>
+          )}
+
+          <div className={`shop-content ${showLogin || showDashboard ? "blur" : ""}`}>
             <nav className="bg-gray-800 p-1 shadow-lg fixed w-full top-0 z-40">
               <div className="container mx-auto flex justify-between items-center">
                 <center>
                   <a href="NEMINO-APP" className="text-yellow-200 hover:text-red-500 transition">
-                   &nbsp; دریافت بازی نمینو &nbsp;<i className="fas fa-gamepad ml-1"></i>
+                    &nbsp; دریافت بازی نمینو &nbsp;<i className="fas fa-gamepad ml-1"></i>
                   </a>
                 </center>
                 <div className="flex items-center space-x-4">
@@ -714,7 +658,7 @@
                     {isAuthenticated ? `پنل کاربری (${username})` : "حساب کاربری"}
                   </a>
                   <div className="flex items-center space-x-1">
-                    <a href="Shop" className="text-red-200 hover:text-purple-400 transition">
+                    <a href="Shop" className="text-red-200 bg-purple-900 px-2 py-1 rounded hover:text-purple-400 transition">
                       <i className="fab fa-drupal ml-1"></i> محصولات&nbsp;&nbsp;&nbsp;
                     </a>
                     <a href="Order" className="text-green-500 hover:text-purple-400 transition">
@@ -735,7 +679,41 @@
                 </a>
               </div>
             </nav>
-              
+
+            <div className="pt-16">
+              <div className="relative h-120 bg-cover bg-center">
+                <div className="pt-10">
+                  <div className="flex justify-center gap-4">
+                    <a href="/CSGO">
+                      <img
+                        src="https://i.imgur.com/jNabMaS_d.webp?maxwidth=760&fidelity=grand"
+                        alt="فروش آیتم های کانتر استریک"
+                        className="w-[555px] h-[130px] object-cover neon-border-orange"
+                      />
+                    </a>
+                    <a href="/DOTA2">
+                      <img
+                        src="https://i.imgur.com/ySMzF0e_d.webp?maxwidth=760&fidelity=grand"
+                        alt="فروش آیتم های دوتا"
+                        className="w-[555px] h-[130px] object-cover neon-border-orange"
+                      />
+                    </a>
+                  </div>
+                </div>
+              </div>
+
+              <div className="pt-10">
+                <div className="flex justify-center gap-4">
+                  <a href="https://www.nemino.ir/inventory">
+                    <img
+                      src="https://i.imgur.com/oXFTH2J_d.webp?maxwidth=760&fidelity=grand"
+                      alt="اینونتوری استیم"
+                      className="w-[555px] h-[130px] object-cover neon-border-cyan"
+                    />
+                  </a>
+                </div>
+              </div>
+
               <div className="container mx-auto py-12">
                 {renderSlider(products, "پیشنهادی", "/products")}
                 {renderSlider(dota2Products, "آیتم‌های دوتا ۲", "/dota2")}
