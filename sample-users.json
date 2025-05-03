@@ -1,0 +1,9 @@
+[
+  {
+    "username": "ali_gamer",
+    "email": "ali@example.com",
+    "phone": "09121231234",
+    "verification_code": "123456",
+    "is_verified": false
+  }
+]
