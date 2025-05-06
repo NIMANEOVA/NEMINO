@@ -1,10 +1,7 @@
-// firebase.js
-// Import the functions you need from the SDKs you need
-import { initializeApp } from "firebase/app";
-import { getAnalytics } from "firebase/analytics";
+import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js';
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, sendEmailVerification } from 'https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js';
 
-// Your web app's Firebase configuration
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+// تنظیمات Firebase پروژه شما
 const firebaseConfig = {
   apiKey: "AIzaSyCatN7y_A5m43e51zVxMR4YgqhWEXG-a50",
   authDomain: "nemino-ir.firebaseapp.com",
@@ -15,6 +12,19 @@ const firebaseConfig = {
   measurementId: "G-QD1KPLYX45"
 };
 
-// Initialize Firebase
+// راه‌اندازی Firebase
 const app = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app);
+const auth = getAuth(app);
+
+// تنظیم زبان Authentication به فارسی
+auth.languageCode = 'fa';
+
+// قرار دادن سرویس‌های Firebase در window برای دسترسی در index.html
+window.firebaseServices = {
+  auth,
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  sendEmailVerification
+};
+
+console.log("Firebase initialized successfully");
