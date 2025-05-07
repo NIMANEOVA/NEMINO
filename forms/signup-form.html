@@ -1,0 +1,22 @@
+<script>
+  function sendFormData(data) {
+    window.parent.postMessage(
+      {
+        type: "signupData",
+        username: data.username,
+        email: data.email,
+        phone: data.phone,
+      },
+      "https://nemino.ir"
+    );
+  }
+
+  // فرض کنید این تابع پس از ارسال موفق فرم فراخوانی می‌شود
+  document.addEventListener("formSubmitted", function (event) {
+    sendFormData({
+      username: event.detail.username,
+      email: event.detail.email,
+      phone: event.detail.phone,
+    });
+  });
+</script>
