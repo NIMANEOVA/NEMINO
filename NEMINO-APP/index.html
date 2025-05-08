@@ -151,11 +151,12 @@
         }
         .buttons {
             text-align: center;
-            margin-top: 20px;
+            margin-top: 40px;
         }
         .buttons a {
             display: inline-block;
-            padding: 12px 24px;
+            padding: 16px 32px;
+            width: 250px;
             background: #000dff;
             color: white;
             text-decoration: none;
@@ -164,6 +165,7 @@
             box-shadow: 0 0 15px #fff;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
             text-align: center;
+            font-size: 18px;
         }
         .buttons a:hover {
             transform: scale(1.1);
@@ -175,7 +177,7 @@
         .os-items {
             display: flex;
             flex-wrap: wrap;
-            justify-content: center;
+            justify-content: space-between;
             gap: 20px;
             max-width: 1200px;
             margin: 0 auto;
@@ -213,7 +215,7 @@
             color: white;
             padding: 20px;
             border-radius: 10px;
-            width: 350px;
+            width: 300px;
             text-align: center;
             transition: transform 0.3s ease;
             backdrop-filter: blur(10px);
@@ -394,15 +396,16 @@
                 width: 200px;
             }
             .windows, .android, .ios {
-                width: 300px;
+                width: 260px;
             }
             .abs {
                 width: 100%;
                 max-width: 280px;
             }
             .buttons a {
-                padding: 10px 20px;
-                font-size: 14px;
+                padding: 12px 24px;
+                width: 200px;
+                font-size: 16px;
             }
             .windl, .andl, .iosdl {
                 width: 180px;
@@ -430,6 +433,9 @@
             }
             .windows .name, .android .name, .ios .name {
                 font-size: 20px;
+            }
+            .os-items {
+                gap: 10px;
             }
         }
         @media (max-width: 480px) {
@@ -502,7 +508,7 @@
     </nav>
     <div class="middle-content aos-init aos-animate" data-aos="fade-right" data-aos-duration="1500" data-aos-once="true">
         <div class="col1">
-            <div class="fp">با <span style="color: #000dff">«نمینو»</span> تجربه‌ای متفاوت داشته باش!</div>
+            <div class="fp">NEMINO GAME APP</div>
             <div class="desc">نمینو با هدف ارائه تجربه‌ای نوین در بازی‌ها و نرم‌افزارهای ایرانی طراحی شده است تا کاربران بتوانند از امکانات پیشرفته و سرگرمی‌های جذاب لذت ببرند.</div>
             <div class="buttons">
                 <a class="download-pc" onclick="smoothScroll(document.getElementById('dls'))">دانلود نمینو</a>
