@@ -26,12 +26,20 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.7.0/vanilla-tilt.min.js"></script>
     <style>
         body {
-            background: rgb(40, 40, 40);
             font-family: Arial, sans-serif;
             color: white;
             direction: rtl;
             text-align: right;
             margin: 0;
+            animation: rgbBackground 10s infinite ease-in-out;
+        }
+        @keyframes rgbBackground {
+            0% { background-color: rgb(40, 40, 40); }
+            20% { background-color: rgb(60, 20, 60); }
+            40% { background-color: rgb(20, 60, 60); }
+            60% { background-color: rgb(60, 60, 20); }
+            80% { background-color: rgb(20, 40, 60); }
+            100% { background-color: rgb(40, 40, 40); }
         }
         .Header {
             position: relative;
@@ -42,6 +50,15 @@
             align-items: center;
             background-attachment: fixed;
             background-size: cover;
+            animation: rgbGradient 10s infinite ease-in-out;
+        }
+        @keyframes rgbGradient {
+            0% { background-image: radial-gradient(circle at 10% 20%, rgba(12, 12, 12, 0.8) 0.1%, rgb(44, 0, 58) 99.8%), url('img/bg.jpg'); }
+            20% { background-image: radial-gradient(circle at 10% 20%, rgba(12, 12, 12, 0.8) 0.1%, rgb(58, 0, 44) 99.8%), url('img/bg.jpg'); }
+            40% { background-image: radial-gradient(circle at 10% 20%, rgba(12, 12, 12, 0.8) 0.1%, rgb(0, 44, 58) 99.8%), url('img/bg.jpg'); }
+            60% { background-image: radial-gradient(circle at 10% 20%, rgba(12, 12, 12, 0.8) 0.1%, rgb(44, 58, 0) 99.8%), url('img/bg.jpg'); }
+            80% { background-image: radial-gradient(circle at 10% 20%, rgba(12, 12, 12, 0.8) 0.1%, rgb(0, 58, 44) 99.8%), url('img/bg.jpg'); }
+            100% { background-image: radial-gradient(circle at 10% 20%, rgba(12, 12, 12, 0.8) 0.1%, rgb(44, 0, 58) 99.8%), url('img/bg.jpg'); }
         }
         .sidenav {
             position: fixed;
@@ -52,9 +69,20 @@
             background: rgb(21, 21, 21);
             transition: right 0.3s ease;
             z-index: 1000;
+            text-align: center;
+            padding-top: 20px;
         }
         .sidenav.open {
             right: 0;
+        }
+        .sidenav .logo {
+            font-size: 1.5em;
+            font-weight: bold;
+            background: linear-gradient(45deg, #00f, #f0f);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 10px rgba(0, 255, 255, 0.7);
+            margin-bottom: 20px;
         }
         .menu-btn {
             position: fixed;
@@ -76,24 +104,35 @@
         }
         .middle-content {
             display: flex;
-            justify-content: space-between;
+            flex-direction: row;
+            flex-wrap: wrap;
+            justify-content: center;
             align-items: center;
             max-width: 1200px;
             margin: 0 auto;
             padding: 20px;
+            gap: 20px;
         }
         .col1 {
             flex: 1;
+            min-width: 300px;
             padding-right: 20px;
+            text-align: center;
         }
         .col2 img {
             max-width: 100%;
+            width: 600px;
             height: auto;
             border-radius: 10px;
         }
         .fp {
-            font-size: 2.5em;
+            font-size: 3.5em;
             font-weight: bold;
+            text-align: center;
+            background: linear-gradient(45deg, #00f, #f0f);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 10px rgba(0, 255, 255, 0.7);
         }
         .desc {
             font-size: 1.2em;
@@ -115,23 +154,38 @@
         }
         .os-items {
             display: flex;
+            flex-wrap: wrap;
             justify-content: center;
             gap: 20px;
-            flex-wrap: wrap;
             max-width: 1200px;
             margin: 0 auto;
             padding: 20px;
         }
-        .windows, .android {
-            background: rgb(21, 21, 21);
+        .windows, .android, .ios {
             color: white;
             padding: 20px;
             border-radius: 10px;
             width: 300px;
             text-align: center;
             transition: transform 0.3s ease;
+            backdrop-filter: blur(10px);
         }
-        .windows:hover, .android:hover {
+        .windows {
+            background: rgba(0, 102, 204, 0.3);
+            border: 2px solid #00f;
+            box-shadow: 0 0 15px #00f;
+        }
+        .ios {
+            background: rgba(255, 255, 255, 0.3);
+            border: 2px solid #fff;
+            box-shadow: 0 0 15px #fff;
+        }
+        .android {
+            background: rgba(0, 200, 83, 0.3);
+            border: 2px solid #00ff00;
+            box-shadow: 0 0 15px #00ff00;
+        }
+        .windows:hover, .android:hover, .ios:hover {
             transform: translateY(-10px);
         }
         .icon img {
@@ -140,69 +194,168 @@
         }
         .about {
             display: flex;
+            flex-wrap: wrap;
             justify-content: center;
             gap: 20px;
-            flex-wrap: wrap;
             max-width: 1200px;
             margin: 0 auto;
             padding: 20px;
         }
         .abs {
-            background: rgb(21, 21, 21);
             padding: 20px;
             border-radius: 10px;
             width: 300px;
             text-align: center;
             transition: transform 0.3s ease;
+            animation: rgbBackground 10s infinite ease-in-out;
         }
         .abs:hover {
             transform: rotate(5deg);
         }
-        .accr {
+        .footer {
+            padding: 32px 0;
+            margin-top: 48px;
+            animation: rgbGradient 10s infinite ease-in-out;
+        }
+        .container {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 20px;
+            text-align: center;
         }
-        .tabs {
-            background: rgb(21, 21, 21);
+        .text-sm {
+            font-size: 0.875rem;
+        }
+        .flex {
+            display: flex;
+        }
+        .justify-center {
+            justify-content: center;
+        }
+        .space-x-4 > * + * {
+            margin-right: 1rem;
+        }
+        .mt-4 {
+            margin-top: 1rem;
+        }
+        .ml-1 {
+            margin-left: 0.25rem;
+        }
+        .text-white {
             color: white;
-            padding: 20px;
-            border-radius: 10px;
         }
-        .tab-label {
-            cursor: pointer;
-            padding: 10px;
-            display: block;
-            transition: background 0.3s ease;
+        .hover\:text-purple-400:hover {
+            color: #c084fc;
         }
-        .tab-label:hover {
-            background: rgba(255, 255, 255, 0.1);
+        .windl, .andl, .iosdl {
+            display: inline-block;
+            width: 200px;
+            padding: 12px 0;
+            background: white;
+            color: black;
+            text-decoration: none;
+            border-radius: 50px;
+            font-size: 18px;
+            font-weight: bold;
+            transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+            text-align: center;
         }
-        .tab-content {
-            display: none;
-            padding: 10px;
-            text-align: right;
-        }
-        .tab input:checked + .tab-label + .tab-content {
-            display: block;
+        .windl:hover, .andl:hover, .iosdl:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 20px rgba(128, 0, 128, 0.7);
+            background: #800080;
+            color: white;
         }
         .social {
-            text-align: center;
-            padding: 20px;
+            position: fixed;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 20px 10px;
+            border-radius: 0 10px 10px 0;
+            border: 2px solid #00ff00;
+            box-shadow: 0 0 15px #00ff00;
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
         }
         .social a {
+            display: flex;
+            align-items: center;
             color: white;
-            margin: 0 10px;
             text-decoration: none;
-            transition: color 0.3s ease;
+            transition: transform 0.3s ease;
         }
         .social a:hover {
-            color: #000dff;
+            transform: scale(1.2);
         }
-        .footer {
-            text-align: center;
-            padding: 20px;
-            background: radial-gradient(circle at 10% 20%, rgba(12, 12, 12, 0.98) 0.1%, rgb(44, 0, 58) 99.8%);
+        .social a span {
+            margin-left: 10px;
+            font-size: 14px;
+        }
+        .social a i {
+            font-size: 20px;
+        }
+        .sobr {
+            display: none;
+        }
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .fp {
+                font-size: 2em;
+            }
+            .desc {
+                font-size: 1em;
+            }
+            .col2 img {
+                width: 100%;
+                max-width: 400px;
+            }
+            .windows, .android, .ios {
+                width: 100%;
+                max-width: 280px;
+            }
+            .abs {
+                width: 100%;
+                max-width: 280px;
+            }
+            .buttons a {
+                padding: 10px 20px;
+                font-size: 14px;
+            }
+            .windl, .andl, .iosdl {
+                width: 180px;
+                font-size: 16px;
+            }
+            .social {
+                padding: 10px 5px;
+            }
+            .social a span {
+                font-size: 12px;
+            }
+            .social a i {
+                font-size: 16px;
+            }
+        }
+        @media (max-width: 480px) {
+            .fp {
+                font-size: 1.5em;
+            }
+            .site-logo img {
+                width: 120px;
+            }
+            .middle-content {
+                padding: 10px;
+            }
+            .col2 img {
+                max-width: 300px;
+            }
+            .social {
+                padding: 5px;
+            }
         }
     </style>
 </head>
@@ -224,18 +377,26 @@
 
 <div id="sidenav" class="sidenav">
     <a href="javascript:void(0)" class="closebtn" onclick="closeNav()"><i class="fa fa-times"></i></a>
+    <a href="https://www.nemino.ir" class="logo">NEMINO</a>
     <a href="">صفحه اصلی</a>
     <a href="https://www.nemino.ir/support">حمایت مالی</a>
     <a href="https://www.nemino.ir/status">وضعیت</a>
     <button style="padding: 0 8px;font-size: 20px" onclick="changeStatus()" id="lite" href=""><i class="fa fa-adjust"></i></button>
 </div>
 
-<div id="head" class="Header" style="background-image: radial-gradient(circle at 10% 20%, rgba(12, 12, 12, 0.8) 0.1%, rgb(44, 0, 58) 99.8%), url('img/bg.jpg');">
+<div class="social">
+    <a href="https://www.nemino.ir"><span>وبسایت</span><i class="fas fa-globe"></i></a>
+    <a href="https://discord.gg/nimaneova"><span>دیسکورد</span><i class="fab fa-discord"></i></a>
+    <a href="t.me/NEOVA"><span>تلگرام</span><i class="fab fa-telegram-plane"></i></a>
+    <a href="https://www.instagram.com/Nemino/"><span>اینستاگرام</span><i class="fab fa-instagram"></i></a>
+</div>
+
+<div id="head" class="Header">
     <div id="particles-js"></div>
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <script src="js/P1/app.js"></script>
     <div class="site-logo">
-        <img src="img/android-chrome-512x512.png" alt="لوگوی نمینو">
+        <img src="https://i.imgur.com/XTaZBQw.png" alt="لوگوی نمینو">
     </div>
     <span class="menu-btn" onclick="openNav()"><i class="fa fa-bars"></i></span>
     <nav class="sidenav aos-init aos-animate" data-aos="zoom-out-down" data-aos-duration="1500" data-aos-once="true">
@@ -255,7 +416,7 @@
             </div>
         </div>
         <div class="col2">
-            <img src="https://via.placeholder.com/400x300?text=Nemino+App" alt="نمینو Nemino">
+            <img src="https://www.pngall.com/wp-content/uploads/5/Terraria-Character-PNG.png" alt="کاراکتر تراریا">
         </div>
     </div>
 </div>
@@ -267,7 +428,7 @@
         <div id="svgos" class="svg-in-os2 aos-init aos-animate" data-aos="zoom-in-up" data-aos-duration="1500" data-aos-once="true" style="opacity: 0.4;"></div>
         <div id="svgos2" class="svg-in-os aos-init aos-animate" data-aos="zoom-in-up" data-aos-duration="1500" data-aos-once="true" style="opacity: 0.4;"></div>
         <div id="windows" class="windows aos-init aos-animate" data-aos="flip-left" data-aos-duration="1500" data-aos-delay="200" data-tilt>
-            <div class="icon"><img src="https://upload.wikimedia.org/wikipedia/commons/0/0a/Windows_logo_-_2021.svg" alt="لوگوی ویندوز 11"></div>
+            <div class="icon"><img src="https://upload.wikimedia.org/wikipedia/commons/5/5f/Windows_logo_-_2012.svg" alt="لوگوی ویندوز 11"></div>
             <div class="name">ویندوز</div>
             <div class="ara"></div>
             <div class="item-desc">نسخه برنامه نمینو برای ویندوز، با امکانات پیشرفته و رابط کاربری جذاب.</div>
@@ -279,8 +440,21 @@
             <div class="dl-button"><a href="https://www.nemino.ir/dl/windows" class="windl">دانلود برای ویندوز</a></div>
         </div>
         <div class="os-item-cards-ara"></div>
+        <div id="ios" class="ios aos-init aos-animate" data-aos="flip-up" data-aos-duration="1500" data-aos-delay="300" data-tilt>
+            <div class="icon"><img src="https://upload.wikimedia.org/wikipedia/commons/f/fa/Apple_logo_black.svg" alt="لوگوی iOS"></div>
+            <div class="name">iOS</div>
+            <div class="ara"></div>
+            <div class="item-desc">بازی و برنامه نمینو برای آیفون و آیپد، با تجربه‌ای سرگرم‌کننده و کاربرپسند.</div>
+            <div class="acceptable">
+                <div class="r1"><i class="fa fa-check"></i> پرسرعت</div>
+                <div class="r1"><i class="fa fa-check"></i> طراحی زیبا</div>
+                <div class="r1"><i class="fa fa-check"></i> امکانات متنوع</div>
+            </div>
+            <div class="dl-button"><a href="https://www.nemino.ir/dl/ios" class="iosdl">دانلود برای آیفون و آیپد</a></div>
+        </div>
+        <div class="os-item-cards-ara"></div>
         <div id="android" class="android aos-init aos-animate" data-aos="flip-right" data-aos-duration="1500" data-aos-delay="400" data-tilt>
-            <div class="icon"><img src="https://www.android.com/static/images/fav/android-favicon.png" alt="لوگوی اندروید"></div>
+            <div class="icon"><img src="https://upload.wikimedia.org/wikipedia/commons/d/d7/Android_robot.svg" alt="لوگوی اندروید"></div>
             <div class="name">اندروید</div>
             <div class="ara"></div>
             <div class="item-desc">بازی و برنامه نمینو برای اندروید، با تجربه‌ای سرگرم‌کننده و کاربرپسند.</div>
@@ -312,137 +486,73 @@
         <div class="ab-desc">رابط کاربری نمینو به‌گونه‌ای طراحی شده که استفاده از آن برای همه آسان و لذت‌بخش باشد.</div>
     </div>
 </div>
-
 <br>
-
-<div class="accr">
-    <img class="askmotion2" src="https://via.placeholder.com/150?text=Nemino" alt="نمینو">
-    <div id="acorbg" data-aos="fade-up-left" data-aos-duration="1500" class="acorbg aos-init">
-        <div class="col">
-            <div id="tabs" class="tabs">
-                <div class="tab">
-                    <input type="radio" id="rd1" name="rd">
-                    <label class="tab-label" for="rd1">آموزش نصب و استفاده از برنامه نمینو</label>
-                    <div class="tab-content">
-                        <div>برای نصب و استفاده از نسخه ویندوز نمینو، از آموزش زیر استفاده کنید.</div>
-                        <br><a href="https://www.aparat.com/v/mMO69">آموزش</a>
-                    </div>
-                </div>
-                <div class="tab">
-                    <input type="radio" id="rd2" name="rd">
-                    <label class="tab-label" for="rd2">رفع مشکل کرش کردن برنامه نمینو</label>
-                    <div class="tab-content">
-                        <div>اگر برنامه نمینو کرش می‌کند، فایل‌های میزبان ویندوز را بررسی کنید و از آموزش زیر استفاده کنید.</div>
-                        <br><a href="https://support.microsoft.com/en-us/help/972034/how-to-reset-the-hosts-file-back-to-the-default">آموزش</a>
-                    </div>
-                </div>
-                <div class="tab">
-                    <input type="radio" id="rd3" name="rd">
-                    <label class="tab-label" for="rd3">آموزش استفاده از بازی نمینو در اندروید</label>
-                    <div class="tab-content">
-                        <div>برای استفاده از بازی نمینو در اندروید، از آموزش زیر استفاده کنید.<br>نسخه اندروید:</div>
-                        <br><a href="https://www.youtube.com/watch?v=q-82dAsmXLs">آموزش</a>
-                        <br><br><a href="https://www.nemino.ir/dl/android">دانلود</a>
-                    </div>
-                </div>
-                <div class="tab">
-                    <input type="radio" id="rd4" name="rd">
-                    <label class="tab-label" for="rd4">رفع مشکل کار نکردن برنامه در ویندوز</label>
-                    <div class="tab-content">
-                        <div>اگر برنامه نمینو در ویندوز کار نمی‌کند، از آموزش زیر استفاده کنید.</div>
-                        <br><a href="https://www.youtube.com/watch?v=q-82dAsmXLs">آموزش</a>
-                    </div>
-                </div>
-                <div class="tab">
-                    <input type="radio" id="rd5" name="rd">
-                    <label class="tab-label" for="rd5">رفع مشکل «به اینترنت متصل نیستید» در برنامه نمینو</label>
-                    <div class="tab-content">
-                        <div>ابتدا مطمئن شوید که نسخه .NET Framework شما 4 یا بالاتر است.<br>
-                            بررسی کنید که تنظیمات شبکه شما درست باشد.<br>
-                            مودم را برای 2 دقیقه خاموش و دوباره روشن کنید تا IP تغییر کند.<br>
-                            اگر مشکل حل نشد، ممکن است مشکل از اینترنت شما باشد.</div>
-                        <br><a href="https://www.aparat.com/v/mMO69">آموزش</a>
-                    </div>
-                </div>
-                <div class="tab">
-                    <input type="radio" id="rdc" name="rd" style="color: black;">
-                    <label for="rdc" class="tab-close">بستن همه ×</label>
-                </div>
-            </div>
+<footer class="footer">
+    <div class="container mx-auto text-center">
+        <p class="text-sm">همه حقوق برای سایت نمینو محفوظ است <a>© 1404</a><i class="fas fa-circle"></i></p>
+        <i class="fab fa-neos ml-1">EMINO</i> - نمینو
+        <div class="flex justify-center space-x-4 mt-4">
+            <a href="https://www.instagram.com/nemino.ir/" class="text-white hover:text-purple-400"><i class="fab fa-instagram"></i></a>
+            <a href="tg://resolve?domain=nemino_ir" class="text-white hover:text-purple-400"><i class="fab fa-telegram"></i></a>
+            <a href="https://x.com/nemino_ir" class="text-white hover:text-purple-400"><i class="fab fa-twitter"></i></a>
         </div>
     </div>
-    <div data-aos="zoom-in-down" data-aos-duration="1500" class="aos-init">
-        <img class="askmotion" src="https://via.placeholder.com/150?text=Nemino" alt="نمینو">
-    </div>
-</div>
-<br>
-<div class="social">
-    <a href="https://www.nemino.ir"><span>وبسایت</span><i class="fa fa-globe"></i></a><br class="sobr">
-    <a href="https://discord.gg/vD7jA5Mz7H"><span>دیسکورد</span><i class="fab fa-discord"></i></a><br class="sobr">
-    <a href="tg://resolve?domain=nemino_ir"><span>تلگرام</span><i class="fab fa-telegram-plane"></i></a><br class="sobr">
-    <a href="https://www.instagram.com/nemino.ir/"><span>اینستاگرام</span><i class="fab fa-instagram"></i></a><br class="sobr">
-</div>
-<br>
-<div id="footer" class="footer">
-    © Copyright 2025 Nemino Team - All Rights Reserved <br>
-    <span>طراحی شده با <i class="fa fa-heart"></i> و <i class="fa fa-mug-hot"></i> :) | <a style="color: pink" href="https://www.nemino.ir">V 1.0.1</a></span>
-</div>
+</footer>
 
 <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
 <script>
-    AOS.init();
-</script>
-<script src="js/darkmode.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script>
-    function openNav() {
-        document.getElementById("sidenav").style.width = "200px";
-    }
-    function closeNav() {
-        document.getElementById("sidenav").style.width = "0";
-    }
-    var acc = document.getElementsByClassName("accordion");
-    var i;
-    for (i = 0; i < acc.length; i++) {
-        acc[i].addEventListener("click", function() {
-            this.classList.toggle("active");
-            var panel = this.nextElementSibling;
-            if (panel.style.maxHeight) {
-                panel.style.maxHeight = null;
+    document.addEventListener('DOMContentLoaded', function() {
+        AOS.init();
+
+        // Simple dark mode toggle
+        function changeStatus() {
+            const body = document.body;
+            body.classList.toggle('dark-mode');
+            if (body.classList.contains('dark-mode')) {
+                body.style.background = '#111';
             } else {
-                panel.style.maxHeight = panel.scrollHeight + "px";
+                body.style.background = '';
             }
-        });
-    }
-</script>
-<script>
-    window.smoothScroll = function(target) {
-        var scrollContainer = target;
-        do {
-            scrollContainer = scrollContainer.parentNode;
-            if (!scrollContainer) return;
-            scrollContainer.scrollTop += 1;
-        } while (scrollContainer.scrollTop == 0);
-        var targetY = 0;
-        do {
-            if (target == scrollContainer) break;
-            targetY += target.offsetTop;
-        } while (target = target.offsetParent);
-        scroll = function(c, a, b, i) {
-            i++; if (i > 30) return;
-            c.scrollTop = a + (b - a) / 30 * i;
-            setTimeout(function(){ scroll(c, a, b, i); }, 20);
         }
-        scroll(scrollContainer, scrollContainer.scrollTop, targetY, 0);
-        element.scrollIntoView({behavior: "smooth"});
-    }
-</script>
-<script>
-    VanillaTilt.init(document.querySelectorAll("[data-tilt]"), {
-        max: 15,
-        speed: 400,
-        glare: true,
-        "max-glare": 0.5
+
+        // Menu functions
+        function openNav() {
+            document.getElementById("sidenav").style.right = "0";
+        }
+
+        function closeNav() {
+            document.getElementById("sidenav").style.right = "-250px";
+        }
+
+        // Smooth scroll
+        window.smoothScroll = function(target) {
+            var scrollContainer = target;
+            do {
+                scrollContainer = scrollContainer.parentNode;
+                if (!scrollContainer) return;
+                scrollContainer.scrollTop += 1;
+            } while (scrollContainer.scrollTop == 0);
+            var targetY = 0;
+            do {
+                if (target == scrollContainer) break;
+                targetY += target.offsetTop;
+            } while (target = target.offsetParent);
+            scroll = function(c, a, b, i) {
+                i++; if (i > 30) return;
+                c.scrollTop = a + (b - a) / 30 * i;
+                setTimeout(function(){ scroll(c, a, b, i); }, 20);
+            }
+            scroll(scrollContainer, scrollContainer.scrollTop, targetY, 0);
+            target.scrollIntoView({behavior: "smooth"});
+        }
+
+        // Initialize Vanilla Tilt
+        VanillaTilt.init(document.querySelectorAll("[data-tilt]"), {
+            max: 15,
+            speed: 400,
+            glare: true,
+            "max-glare": 0.5
+        });
     });
 </script>
 </body>
