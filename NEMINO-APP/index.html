@@ -20,13 +20,15 @@
     <link rel="icon" href="img/favicon.ico">
     <!--FONT AWESOME-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@400;700&family=Orbitron:wght@700&display=swap" rel="stylesheet">
     <!-- jQuery -->
     <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
     <!-- Vanilla Tilt -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.7.0/vanilla-tilt.min.js"></script>
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Exo 2', sans-serif;
             color: white;
             direction: rtl;
             text-align: right;
@@ -106,7 +108,7 @@
             display: flex;
             flex-direction: row;
             flex-wrap: wrap;
-            justify-content: center;
+            justify-content: space-between;
             align-items: center;
             max-width: 1200px;
             margin: 0 auto;
@@ -116,12 +118,16 @@
         .col1 {
             flex: 1;
             min-width: 300px;
-            padding-right: 20px;
-            text-align: center;
+            text-align: right;
+        }
+        .col2 {
+            flex: 0 0 auto;
+            text-align: left;
+            margin-top: 20px;
         }
         .col2 img {
             max-width: 100%;
-            width: 600px;
+            width: 300px;
             height: auto;
             border-radius: 10px;
         }
@@ -133,24 +139,38 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             text-shadow: 0 0 10px rgba(0, 255, 255, 0.7);
+            margin: 0 auto;
+            max-width: 800px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
         .desc {
             font-size: 1.2em;
             margin: 20px 0;
         }
+        .buttons {
+            text-align: center;
+            margin-top: 20px;
+        }
         .buttons a {
             display: inline-block;
             padding: 12px 24px;
-            margin-right: 10px;
             background: #000dff;
             color: white;
             text-decoration: none;
             border-radius: 5px;
+            border: 2px solid #fff;
+            box-shadow: 0 0 15px #fff;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
+            text-align: center;
         }
         .buttons a:hover {
             transform: scale(1.1);
-            box-shadow: 0 0 15px rgba(0, 13, 255, 0.5);
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.7);
+        }
+        .os {
+            position: relative;
         }
         .os-items {
             display: flex;
@@ -160,30 +180,68 @@
             max-width: 1200px;
             margin: 0 auto;
             padding: 20px;
+            position: relative;
         }
+        .bubble {
+            position: absolute;
+            bottom: 0;
+            z-index: 0;
+            opacity: 0.7;
+            animation: bubble 8s linear infinite;
+        }
+        .bubble img {
+            width: 100%;
+            height: auto;
+        }
+        @keyframes bubble {
+            0% { transform: translateY(0); opacity: 0.7; }
+            100% { transform: translateY(-100vh); opacity: 0; }
+        }
+        .bubble:nth-child(1) { left: 5%; width: 30px; animation-duration: 6s; animation-delay: 0s; }
+        .bubble:nth-child(2) { left: 15%; width: 40px; animation-duration: 7s; animation-delay: 1s; }
+        .bubble:nth-child(3) { left: 25%; width: 20px; animation-duration: 5s; animation-delay: 2s; }
+        .bubble:nth-child(4) { left: 35%; width: 50px; animation-duration: 8s; animation-delay: 3s; }
+        .bubble:nth-child(5) { left: 45%; width: 25px; animation-duration: 6s; animation-delay: 4s; }
+        .bubble:nth-child(6) { left: 55%; width: 35px; animation-duration: 7s; animation-delay: 5s; }
+        .bubble:nth-child(7) { left: 65%; width: 30px; animation-duration: 5s; animation-delay: 6s; }
+        .bubble:nth-child(8) { left: 75%; width: 45px; animation-duration: 8s; animation-delay: 7s; }
+        .bubble:nth-child(9) { left: 85%; width: 20px; animation-duration: 6s; animation-delay: 8s; }
+        .bubble:nth-child(10) { left: 95%; width: 40px; animation-duration: 7s; animation-delay: 9s; }
+        .bubble:nth-child(11) { left: 10%; width: 35px; animation-duration: 5s; animation-delay: 10s; }
+        .bubble:nth-child(12) { left: 20%; width: 30px; animation-duration: 6s; animation-delay: 11s; }
         .windows, .android, .ios {
             color: white;
             padding: 20px;
             border-radius: 10px;
-            width: 300px;
+            width: 350px;
             text-align: center;
             transition: transform 0.3s ease;
             backdrop-filter: blur(10px);
-        }
-        .windows {
-            background: rgba(0, 102, 204, 0.3);
-            border: 2px solid #00f;
-            box-shadow: 0 0 15px #00f;
-        }
-        .ios {
-            background: rgba(255, 255, 255, 0.3);
+            position: relative;
+            z-index: 1;
             border: 2px solid #fff;
             box-shadow: 0 0 15px #fff;
         }
+        .windows .name, .android .name, .ios .name {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 24px;
+            color: #FFD700;
+            text-shadow: 0 0 5px #FFD700, 0 0 10px #FFD700, 0 0 15px #FFD700;
+            margin: 10px 0;
+        }
+        .windows .item-desc, .android .item-desc, .ios .item-desc,
+        .windows .acceptable .r1, .android .acceptable .r1, .ios .acceptable .r1 {
+            color: #fff;
+            text-shadow: 0 0 10px #fff;
+        }
+        .windows {
+            background: rgba(0, 102, 204, 0.3);
+        }
+        .ios {
+            background: rgba(255, 255, 255, 0.3);
+        }
         .android {
             background: rgba(0, 200, 83, 0.3);
-            border: 2px solid #00ff00;
-            box-shadow: 0 0 15px #00ff00;
         }
         .windows:hover, .android:hover, .ios:hover {
             transform: translateY(-10px);
@@ -268,36 +326,58 @@
         .social {
             position: fixed;
             left: 0;
-            top: 50%;
+            top: 70%;
             transform: translateY(-50%);
-            background: rgba(255, 255, 255, 0.1);
+            background: linear-gradient(135deg, #222, #ddd);
             backdrop-filter: blur(10px);
-            padding: 20px 10px;
+            padding: 25px 15px;
+            width: 60px;
             border-radius: 0 10px 10px 0;
-            border: 2px solid #00ff00;
-            box-shadow: 0 0 15px #00ff00;
             z-index: 1000;
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 10px;
+            gap: 20px;
+            box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5);
         }
         .social a {
             display: flex;
             align-items: center;
             color: white;
             text-decoration: none;
-            transition: transform 0.3s ease;
-        }
-        .social a:hover {
-            transform: scale(1.2);
         }
         .social a span {
+            display: none;
             margin-left: 10px;
-            font-size: 14px;
+            font-size: 16px;
+            color: white;
+            transition: opacity 0.3s ease;
+        }
+        .social a:hover span {
+            display: inline;
+            opacity: 1;
+        }
+        .social a img {
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            object-fit: contain;
+            aspect-ratio: 1/1;
+            vertical-align: middle;
         }
         .social a i {
-            font-size: 20px;
+            font-size: 30px;
+        }
+        .social a:nth-child(2) i {
+            color: #7289da;
+        }
+        .social a:nth-child(3) i {
+            color: #0088cc;
+        }
+        .social a:nth-child(4) i {
+            background: linear-gradient(45deg, #feda75, #d62976);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
         .sobr {
             display: none;
@@ -311,12 +391,10 @@
                 font-size: 1em;
             }
             .col2 img {
-                width: 100%;
-                max-width: 400px;
+                width: 200px;
             }
             .windows, .android, .ios {
-                width: 100%;
-                max-width: 280px;
+                width: 300px;
             }
             .abs {
                 width: 100%;
@@ -331,13 +409,27 @@
                 font-size: 16px;
             }
             .social {
-                padding: 10px 5px;
+                padding: 15px 10px;
+                width: 50px;
             }
             .social a span {
-                font-size: 12px;
+                font-size: 14px;
+            }
+            .social a img {
+                width: 34px;
+                height: 34px;
             }
             .social a i {
-                font-size: 16px;
+                font-size: 22px;
+            }
+            .bubble:nth-child(n+9) {
+                display: none;
+            }
+            .bubble {
+                width: 80%;
+            }
+            .windows .name, .android .name, .ios .name {
+                font-size: 20px;
             }
         }
         @media (max-width: 480px) {
@@ -351,10 +443,11 @@
                 padding: 10px;
             }
             .col2 img {
-                max-width: 300px;
+                width: 150px;
             }
             .social {
-                padding: 5px;
+                padding: 10px 5px;
+                width: 40px;
             }
         }
     </style>
@@ -385,10 +478,10 @@
 </div>
 
 <div class="social">
-    <a href="https://www.nemino.ir"><span>وبسایت</span><i class="fas fa-globe"></i></a>
+    <a href="https://www.nemino.ir"><span>وبسایت</span><img src="https://i.imgur.com/XTaZBQw.png" alt="لوگوی نمینو"></a>
     <a href="https://discord.gg/nimaneova"><span>دیسکورد</span><i class="fab fa-discord"></i></a>
     <a href="t.me/NEOVA"><span>تلگرام</span><i class="fab fa-telegram-plane"></i></a>
-    <a href="https://www.instagram.com/Nemino/"><span>اینستاگرام</span><i class="fab fa-instagram"></i></a>
+    <a href="https://www.instagram.com/NEMINO/"><span>اینستاگرام</span><i class="fab fa-instagram"></i></a>
 </div>
 
 <div id="head" class="Header">
@@ -416,7 +509,7 @@
             </div>
         </div>
         <div class="col2">
-            <img src="https://www.pngall.com/wp-content/uploads/5/Terraria-Character-PNG.png" alt="کاراکتر تراریا">
+            <img src="https://forums.terraria.org/index.php?attachments/5getsuu-png.235052/" alt="کاراکتر تراریا">
         </div>
     </div>
 </div>
@@ -425,11 +518,23 @@
 
 <div class="os">
     <div class="os-items">
+        <div class="bubble"><img src="https://i.imgur.com/XTaZBQw.png" alt="حباب نمینو"></div>
+        <div class="bubble"><img src="https://i.imgur.com/XTaZBQw.png" alt="حباب نمینو"></div>
+        <div class="bubble"><img src="https://i.imgur.com/XTaZBQw.png" alt="حباب نمینو"></div>
+        <div class="bubble"><img src="https://i.imgur.com/XTaZBQw.png" alt="حباب نمینو"></div>
+        <div class="bubble"><img src="https://i.imgur.com/XTaZBQw.png" alt="حباب نمینو"></div>
+        <div class="bubble"><img src="https://i.imgur.com/XTaZBQw.png" alt="حباب نمینو"></div>
+        <div class="bubble"><img src="https://i.imgur.com/XTaZBQw.png" alt="حباب نمینو"></div>
+        <div class="bubble"><img src="https://i.imgur.com/XTaZBQw.png" alt="حباب نمینو"></div>
+        <div class="bubble"><img src="https://i.imgur.com/XTaZBQw.png" alt="حباب نمینو"></div>
+        <div class="bubble"><img src="https://i.imgur.com/XTaZBQw.png" alt="حباب نمینو"></div>
+        <div class="bubble"><img src="https://i.imgur.com/XTaZBQw.png" alt="حباب نمینو"></div>
+        <div class="bubble"><img src="https://i.imgur.com/XTaZBQw.png" alt="حباب نمینو"></div>
         <div id="svgos" class="svg-in-os2 aos-init aos-animate" data-aos="zoom-in-up" data-aos-duration="1500" data-aos-once="true" style="opacity: 0.4;"></div>
         <div id="svgos2" class="svg-in-os aos-init aos-animate" data-aos="zoom-in-up" data-aos-duration="1500" data-aos-once="true" style="opacity: 0.4;"></div>
         <div id="windows" class="windows aos-init aos-animate" data-aos="flip-left" data-aos-duration="1500" data-aos-delay="200" data-tilt>
             <div class="icon"><img src="https://upload.wikimedia.org/wikipedia/commons/5/5f/Windows_logo_-_2012.svg" alt="لوگوی ویندوز 11"></div>
-            <div class="name">ویندوز</div>
+            <div class="name">Windows</div>
             <div class="ara"></div>
             <div class="item-desc">نسخه برنامه نمینو برای ویندوز، با امکانات پیشرفته و رابط کاربری جذاب.</div>
             <div class="acceptable">
@@ -441,7 +546,7 @@
         </div>
         <div class="os-item-cards-ara"></div>
         <div id="ios" class="ios aos-init aos-animate" data-aos="flip-up" data-aos-duration="1500" data-aos-delay="300" data-tilt>
-            <div class="icon"><img src="https://upload.wikimedia.org/wikipedia/commons/f/fa/Apple_logo_black.svg" alt="لوگوی iOS"></div>
+            <div class="icon"><img src="https://upload.wikimedia.org/wikipedia/commons/3/31/Apple_logo_white.svg" alt="لوگوی iOS"></div>
             <div class="name">iOS</div>
             <div class="ara"></div>
             <div class="item-desc">بازی و برنامه نمینو برای آیفون و آیپد، با تجربه‌ای سرگرم‌کننده و کاربرپسند.</div>
@@ -455,7 +560,7 @@
         <div class="os-item-cards-ara"></div>
         <div id="android" class="android aos-init aos-animate" data-aos="flip-right" data-aos-duration="1500" data-aos-delay="400" data-tilt>
             <div class="icon"><img src="https://upload.wikimedia.org/wikipedia/commons/d/d7/Android_robot.svg" alt="لوگوی اندروید"></div>
-            <div class="name">اندروید</div>
+            <div class="name">Android</div>
             <div class="ara"></div>
             <div class="item-desc">بازی و برنامه نمینو برای اندروید، با تجربه‌ای سرگرم‌کننده و کاربرپسند.</div>
             <div class="acceptable">
