@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="fa">
+<head>
+    <meta charset="UTF-8">
+    <meta name="keywords" content="نمینو, بازی نمینو, برنامه نمینو, گیمینگ, نرم‌افزار ایرانی">
+    <meta name="description" content="با نمینو تجربه‌ای متفاوت داشته باش!">
+    <meta property="og:title" content="Nemino | نمینو">
+    <meta property="og:description" content="با نمینو تجربه‌ای متفاوت داشته باش!">
+    <meta property="og:image" content="https://www.nemino.ir/images/UI.jpg">
+    <meta property="og:url" content="https://www.nemino.ir">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Nemino | نمینو</title>
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/respons.css">
+    <link rel="stylesheet" href="css/mobile.css">
+    <link rel="stylesheet" href="css/mobile-menu.css">
+    <link rel="stylesheet" href="css/loader.css">
+    <link rel="icon" href="img/favicon.ico">
+    <!--FONT AWESOME-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
+    <!-- Vanilla Tilt -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.7.0/vanilla-tilt.min.js"></script>
+    <style>
+        body {
+            background: rgb(40, 40, 40);
+            font-family: Arial, sans-serif;
+            color: white;
+            direction: rtl;
+            text-align: right;
+            margin: 0;
+        }
+        .Header {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background-attachment: fixed;
+            background-size: cover;
+        }
+        .sidenav {
+            position: fixed;
+            top: 0;
+            right: -250px;
+            width: 250px;
+            height: 100%;
+            background: rgb(21, 21, 21);
+            transition: right 0.3s ease;
+            z-index: 1000;
+        }
+        .sidenav.open {
+            right: 0;
+        }
+        .menu-btn {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            cursor: pointer;
+            z-index: 1001;
+        }
+        .site-logo {
+            position: absolute;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 1002;
+        }
+        .site-logo img {
+            width: 150px;
+            height: auto;
+        }
+        .middle-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .col1 {
+            flex: 1;
+            padding-right: 20px;
+        }
+        .col2 img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+        }
+        .fp {
+            font-size: 2.5em;
+            font-weight: bold;
+        }
+        .desc {
+            font-size: 1.2em;
+            margin: 20px 0;
+        }
+        .buttons a {
+            display: inline-block;
+            padding: 12px 24px;
+            margin-right: 10px;
+            background: #000dff;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .buttons a:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 15px rgba(0, 13, 255, 0.5);
+        }
+        .os-items {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .windows, .android {
+            background: rgb(21, 21, 21);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            width: 300px;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+        .windows:hover, .android:hover {
+            transform: translateY(-10px);
+        }
+        .icon img {
+            width: 100px;
+            height: 100px;
+        }
+        .about {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .abs {
+            background: rgb(21, 21, 21);
+            padding: 20px;
+            border-radius: 10px;
+            width: 300px;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+        .abs:hover {
+            transform: rotate(5deg);
+        }
+        .accr {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .tabs {
+            background: rgb(21, 21, 21);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+        }
+        .tab-label {
+            cursor: pointer;
+            padding: 10px;
+            display: block;
+            transition: background 0.3s ease;
+        }
+        .tab-label:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+        .tab-content {
+            display: none;
+            padding: 10px;
+            text-align: right;
+        }
+        .tab input:checked + .tab-label + .tab-content {
+            display: block;
+        }
+        .social {
+            text-align: center;
+            padding: 20px;
+        }
+        .social a {
+            color: white;
+            margin: 0 10px;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        .social a:hover {
+            color: #000dff;
+        }
+        .footer {
+            text-align: center;
+            padding: 20px;
+            background: radial-gradient(circle at 10% 20%, rgba(12, 12, 12, 0.98) 0.1%, rgb(44, 0, 58) 99.8%);
+        }
+    </style>
+</head>
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-67TX6LYD03"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-67TX6LYD03');
+</script>
+
+<body data-aos-easing="ease" data-aos-duration="400" data-aos-delay="0">
+
+<div class="backtotop"><a onclick="smoothScroll(document.getElementById('head'))">
+    <i id="btt1" class="fas fa-chevron-up"></i>
+</a></div>
+
+<div id="sidenav" class="sidenav">
+    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()"><i class="fa fa-times"></i></a>
+    <a href="">صفحه اصلی</a>
+    <a href="https://www.nemino.ir/support">حمایت مالی</a>
+    <a href="https://www.nemino.ir/status">وضعیت</a>
+    <button style="padding: 0 8px;font-size: 20px" onclick="changeStatus()" id="lite" href=""><i class="fa fa-adjust"></i></button>
+</div>
+
+<div id="head" class="Header" style="background-image: radial-gradient(circle at 10% 20%, rgba(12, 12, 12, 0.8) 0.1%, rgb(44, 0, 58) 99.8%), url('img/bg.jpg');">
+    <div id="particles-js"></div>
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script src="js/P1/app.js"></script>
+    <div class="site-logo">
+        <img src="img/android-chrome-512x512.png" alt="لوگوی نمینو">
+    </div>
+    <span class="menu-btn" onclick="openNav()"><i class="fa fa-bars"></i></span>
+    <nav class="sidenav aos-init aos-animate" data-aos="zoom-out-down" data-aos-duration="1500" data-aos-once="true">
+        <ul>
+            <li><a href="">صفحه اصلی</a></li>
+            <li><a href="https://www.nemino.ir/support">حمایت مالی</a></li>
+            <li><a href="https://www.nemino.ir/status">وضعیت</a></li>
+            <li><button onclick="changeStatus()" id="lite" href=""><i class="fa fa-adjust" title="Dark Mode"></i></button></li>
+        </ul>
+    </nav>
+    <div class="middle-content aos-init aos-animate" data-aos="fade-right" data-aos-duration="1500" data-aos-once="true">
+        <div class="col1">
+            <div class="fp">با <span style="color: #000dff">«نمینو»</span> تجربه‌ای متفاوت داشته باش!</div>
+            <div class="desc">نمینو با هدف ارائه تجربه‌ای نوین در بازی‌ها و نرم‌افزارهای ایرانی طراحی شده است تا کاربران بتوانند از امکانات پیشرفته و سرگرمی‌های جذاب لذت ببرند.</div>
+            <div class="buttons">
+                <a class="download-pc" onclick="smoothScroll(document.getElementById('dls'))">دانلود نمینو</a>
+            </div>
+        </div>
+        <div class="col2">
+            <img src="https://via.placeholder.com/400x300?text=Nemino+App" alt="نمینو Nemino">
+        </div>
+    </div>
+</div>
+<div id="dls"></div>
+<br><br><br><br>
+
+<div class="os">
+    <div class="os-items">
+        <div id="svgos" class="svg-in-os2 aos-init aos-animate" data-aos="zoom-in-up" data-aos-duration="1500" data-aos-once="true" style="opacity: 0.4;"></div>
+        <div id="svgos2" class="svg-in-os aos-init aos-animate" data-aos="zoom-in-up" data-aos-duration="1500" data-aos-once="true" style="opacity: 0.4;"></div>
+        <div id="windows" class="windows aos-init aos-animate" data-aos="flip-left" data-aos-duration="1500" data-aos-delay="200" data-tilt>
+            <div class="icon"><img src="https://upload.wikimedia.org/wikipedia/commons/0/0a/Windows_logo_-_2021.svg" alt="لوگوی ویندوز 11"></div>
+            <div class="name">ویندوز</div>
+            <div class="ara"></div>
+            <div class="item-desc">نسخه برنامه نمینو برای ویندوز، با امکانات پیشرفته و رابط کاربری جذاب.</div>
+            <div class="acceptable">
+                <div class="r1"><i class="fa fa-check"></i> پرسرعت</div>
+                <div class="r1"><i class="fa fa-check"></i> طراحی زیبا</div>
+                <div class="r1"><i class="fa fa-check"></i> امکانات متنوع</div>
+            </div>
+            <div class="dl-button"><a href="https://www.nemino.ir/dl/windows" class="windl">دانلود برای ویندوز</a></div>
+        </div>
+        <div class="os-item-cards-ara"></div>
+        <div id="android" class="android aos-init aos-animate" data-aos="flip-right" data-aos-duration="1500" data-aos-delay="400" data-tilt>
+            <div class="icon"><img src="https://www.android.com/static/images/fav/android-favicon.png" alt="لوگوی اندروید"></div>
+            <div class="name">اندروید</div>
+            <div class="ara"></div>
+            <div class="item-desc">بازی و برنامه نمینو برای اندروید، با تجربه‌ای سرگرم‌کننده و کاربرپسند.</div>
+            <div class="acceptable">
+                <div class="r1"><i class="fa fa-check"></i> پرسرعت</div>
+                <div class="r1"><i class="fa fa-check"></i> طراحی زیبا</div>
+                <div class="r1"><i class="fa fa-check"></i> امکانات متنوع</div>
+            </div>
+            <div class="dl-button"><a href="https://www.nemino.ir/dl/android" class="andl">دانلود برای اندروید</a></div>
+        </div>
+    </div>
+</div>
+<br><br><br><br>
+
+<div id="about" class="about">
+    <div data-aos="fade-down" data-aos-duration="1500" data-aos-delay="200" class="abs aos-init" id="ab1" data-tilt>
+        <div class="ab-icon"><i class="fa fa-tachometer-alt"></i></div>
+        <div class="ab-name">سرعت بالا</div>
+        <div class="ab-desc">نمینو با عملکرد بهینه، تجربه‌ای سریع و بدون تأخیر برای بازی و برنامه ارائه می‌دهد.</div>
+    </div>
+    <div data-aos="fade-up" data-aos-duration="1500" data-aos-delay="400" class="abs aos-init" id="ab2" data-tilt>
+        <div class="ab-icon"><i class="fa fa-gamepad"></i></div>
+        <div class="ab-name">تجربه گیمینگ</div>
+        <div class="ab-desc">بازی‌های نمینو با گرافیک جذاب و گیم‌پلی روان، ساعت‌ها سرگرمی به شما هدیه می‌دهند.</div>
+    </div>
+    <div data-aos="fade-down" data-aos-duration="1500" data-aos-delay="600" class="abs aos-init" id="ab3" data-tilt>
+        <div class="ab-icon"><i class="fa fa-check"></i></div>
+        <div class="ab-name">رابط کاربری ساده</div>
+        <div class="ab-desc">رابط کاربری نمینو به‌گونه‌ای طراحی شده که استفاده از آن برای همه آسان و لذت‌بخش باشد.</div>
+    </div>
+</div>
+
+<br>
+
+<div class="accr">
+    <img class="askmotion2" src="https://via.placeholder.com/150?text=Nemino" alt="نمینو">
+    <div id="acorbg" data-aos="fade-up-left" data-aos-duration="1500" class="acorbg aos-init">
+        <div class="col">
+            <div id="tabs" class="tabs">
+                <div class="tab">
+                    <input type="radio" id="rd1" name="rd">
+                    <label class="tab-label" for="rd1">آموزش نصب و استفاده از برنامه نمینو</label>
+                    <div class="tab-content">
+                        <div>برای نصب و استفاده از نسخه ویندوز نمینو، از آموزش زیر استفاده کنید.</div>
+                        <br><a href="https://www.aparat.com/v/mMO69">آموزش</a>
+                    </div>
+                </div>
+                <div class="tab">
+                    <input type="radio" id="rd2" name="rd">
+                    <label class="tab-label" for="rd2">رفع مشکل کرش کردن برنامه نمینو</label>
+                    <div class="tab-content">
+                        <div>اگر برنامه نمینو کرش می‌کند، فایل‌های میزبان ویندوز را بررسی کنید و از آموزش زیر استفاده کنید.</div>
+                        <br><a href="https://support.microsoft.com/en-us/help/972034/how-to-reset-the-hosts-file-back-to-the-default">آموزش</a>
+                    </div>
+                </div>
+                <div class="tab">
+                    <input type="radio" id="rd3" name="rd">
+                    <label class="tab-label" for="rd3">آموزش استفاده از بازی نمینو در اندروید</label>
+                    <div class="tab-content">
+                        <div>برای استفاده از بازی نمینو در اندروید، از آموزش زیر استفاده کنید.<br>نسخه اندروید:</div>
+                        <br><a href="https://www.youtube.com/watch?v=q-82dAsmXLs">آموزش</a>
+                        <br><br><a href="https://www.nemino.ir/dl/android">دانلود</a>
+                    </div>
+                </div>
+                <div class="tab">
+                    <input type="radio" id="rd4" name="rd">
+                    <label class="tab-label" for="rd4">رفع مشکل کار نکردن برنامه در ویندوز</label>
+                    <div class="tab-content">
+                        <div>اگر برنامه نمینو در ویندوز کار نمی‌کند، از آموزش زیر استفاده کنید.</div>
+                        <br><a href="https://www.youtube.com/watch?v=q-82dAsmXLs">آموزش</a>
+                    </div>
+                </div>
+                <div class="tab">
+                    <input type="radio" id="rd5" name="rd">
+                    <label class="tab-label" for="rd5">رفع مشکل «به اینترنت متصل نیستید» در برنامه نمینو</label>
+                    <div class="tab-content">
+                        <div>ابتدا مطمئن شوید که نسخه .NET Framework شما 4 یا بالاتر است.<br>
+                            بررسی کنید که تنظیمات شبکه شما درست باشد.<br>
+                            مودم را برای 2 دقیقه خاموش و دوباره روشن کنید تا IP تغییر کند.<br>
+                            اگر مشکل حل نشد، ممکن است مشکل از اینترنت شما باشد.</div>
+                        <br><a href="https://www.aparat.com/v/mMO69">آموزش</a>
+                    </div>
+                </div>
+                <div class="tab">
+                    <input type="radio" id="rdc" name="rd" style="color: black;">
+                    <label for="rdc" class="tab-close">بستن همه ×</label>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div data-aos="zoom-in-down" data-aos-duration="1500" class="aos-init">
+        <img class="askmotion" src="https://via.placeholder.com/150?text=Nemino" alt="نمینو">
+    </div>
+</div>
+<br>
+<div class="social">
+    <a href="https://www.nemino.ir"><span>وبسایت</span><i class="fa fa-globe"></i></a><br class="sobr">
+    <a href="https://discord.gg/vD7jA5Mz7H"><span>دیسکورد</span><i class="fab fa-discord"></i></a><br class="sobr">
+    <a href="tg://resolve?domain=nemino_ir"><span>تلگرام</span><i class="fab fa-telegram-plane"></i></a><br class="sobr">
+    <a href="https://www.instagram.com/nemino.ir/"><span>اینستاگرام</span><i class="fab fa-instagram"></i></a><br class="sobr">
+</div>
+<br>
+<div id="footer" class="footer">
+    © Copyright 2025 Nemino Team - All Rights Reserved <br>
+    <span>طراحی شده با <i class="fa fa-heart"></i> و <i class="fa fa-mug-hot"></i> :) | <a style="color: pink" href="https://www.nemino.ir">V 1.0.1</a></span>
+</div>
+
+<script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+<script>
+    AOS.init();
+</script>
+<script src="js/darkmode.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>
+    function openNav() {
+        document.getElementById("sidenav").style.width = "200px";
+    }
+    function closeNav() {
+        document.getElementById("sidenav").style.width = "0";
+    }
+    var acc = document.getElementsByClassName("accordion");
+    var i;
+    for (i = 0; i < acc.length; i++) {
+        acc[i].addEventListener("click", function() {
+            this.classList.toggle("active");
+            var panel = this.nextElementSibling;
+            if (panel.style.maxHeight) {
+                panel.style.maxHeight = null;
+            } else {
+                panel.style.maxHeight = panel.scrollHeight + "px";
+            }
+        });
+    }
+</script>
+<script>
+    window.smoothScroll = function(target) {
+        var scrollContainer = target;
+        do {
+            scrollContainer = scrollContainer.parentNode;
+            if (!scrollContainer) return;
+            scrollContainer.scrollTop += 1;
+        } while (scrollContainer.scrollTop == 0);
+        var targetY = 0;
+        do {
+            if (target == scrollContainer) break;
+            targetY += target.offsetTop;
+        } while (target = target.offsetParent);
+        scroll = function(c, a, b, i) {
+            i++; if (i > 30) return;
+            c.scrollTop = a + (b - a) / 30 * i;
+            setTimeout(function(){ scroll(c, a, b, i); }, 20);
+        }
+        scroll(scrollContainer, scrollContainer.scrollTop, targetY, 0);
+        element.scrollIntoView({behavior: "smooth"});
+    }
+</script>
+<script>
+    VanillaTilt.init(document.querySelectorAll("[data-tilt]"), {
+        max: 15,
+        speed: 400,
+        glare: true,
+        "max-glare": 0.5
+    });
+</script>
+</body>
+</html>
