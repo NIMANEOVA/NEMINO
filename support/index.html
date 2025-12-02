@@ -1,263 +1,257 @@
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
 <head>
-<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-<link rel="manifest" href="/site.webmanifest">
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>NEMINO - خرید و فروش بازی‌های دیجیتال</title>
-  <script src="https://cdn.jsdelivr.net/npm/react@18.2.0/umd/react.production.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/react-dom@18.2.0/umd/react-dom.production.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/@babel/standalone@7.24.0/babel.min.js"></script>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.21.5/dist/css/uikit.min.css" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>NEMINO SUPPORT</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+  <!-- کتابخانه شماره با پرچم -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/intl-tel-input@23.8.0/build/css/intlTelInput.css">
+  <script src="https://cdn.jsdelivr.net/npm/intl-tel-input@23.8.0/build/js/intlTelInput.min.js"></script>
+
   <style>
-    body{background-image:url('https://i.imgur.com/sD2WbZM.webp');background-size:cover;background-position:center;background-attachment:fixed;min-height:100vh;cursor:url('cursor.cur'),auto}
-    @keyframes slideInOut{0%{transform:translateY(100px) translateX(-100%);opacity:0}20%{transform:translateY(0) translateX(0);opacity:0.7}80%{transform:translateY(0) translateX(100%);opacity:0.7}100%{transform:translateY(0) translateX(100%);opacity:0}}
-    .notification{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);animation:slideInOut 4s ease-in-out forwards;background:rgba(75,85,99,0.9);color:white;padding:12px 50px;border-radius:12px;z-index:1000;font-weight:bold;box-shadow:0 0 20px rgba(168,85,247,0.6);white-space:nowrap}
-    .backdrop-blur{filter:blur(10px);pointer-events:none;transition:filter .4s}
+    @import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@500;700&display=swap');
+    * { margin:0; padding:0; box-sizing:border-box; }
+    html, body { height:100%; font-family:'Vazirmatn',sans-serif; color:#fff; overflow-x:hidden; }
+    body {
+      background: #000;
+      min-height: 100vh;
+      position: relative;
+    }
+    body::before {
+      content:'';
+      position: fixed;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background: url('https://nemino.ir/support/background.webp') center/cover no-repeat fixed;
+      z-index: -1;
+    }
+    .wrapper {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      text-align: center;
+    }
+    .logo-link { margin-bottom: 15px; }
+    .logo {
+      height: 90px;
+      transition: all 0.7s ease;
+      filter: drop-shadow(0 0 15px #fff);
+    }
+    .logo:hover {
+      transform: scale(1.15) rotate(360deg);
+      filter: drop-shadow(0 0 50px #ffffff) drop-shadow(0 0 90px #ffffff);
+    }
+    .neon-text {
+      font-size: 3.2rem;
+      font-weight: 700;
+      color: #fff;
+      text-shadow: 0 0 20px #ff0040, 0 0 40px #ff0040, 0 0 70px #ff0040;
+      margin-bottom: 40px;
+      animation: pulse 3s infinite;
+    }
+    @keyframes pulse {
+      0%,100% { text-shadow: 0 0 20px #ff0040, 0 0 40px #ff0040; }
+      50% { text-shadow: 0 0 30px #ff0040, 0 0 60px #ff0040, 0 0 100px #ff0040; }
+    }
+    .form-box {
+      width: 90%;
+      max-width: 420px;
+      background: rgba(0, 0, 0, 0.5);
+      backdrop-filter: blur(18px);
+      border-radius: 20px;
+      padding: 30px 25px;
+      box-shadow: 0 0 40px rgba(255, 0, 255, 0.5);
+      border: 1px solid rgba(255,255,255,0.15);
+    }
+    input, textarea {
+      width: 100%;
+      padding: 14px;
+      margin: 10px 0;
+      border: 1px solid rgba(255,255,255,0.3);
+      border-radius: 10px;
+      background: rgba(255,255,255,0.08);
+      color: #fff;
+      font-size: 1rem;
+    }
+    input::placeholder, textarea::placeholder { color: #ccc; }
 
-    .banner-hover{transition:all .6s;overflow:hidden;border-radius:18px;position:relative}
-    .banner-hover img{transition:transform .8s}
-    .banner-hover:hover img{transform:scale(1.08)}
-    .banner-hover:hover{transform:translateY(-6px)}
+    /* فقط این قسمت تغییر کرد – پرچم و پیش‌شماره راست‌چین شدن */
+    .iti { width:100% !important; position:relative; }
+    .iti__flag-container { right:0 !important; left:auto !important; } /* راست‌چین */
+    .iti__selected-flag {
+      background:rgba(255,255,255,0.15);
+      border-radius:0 10px 10px 0;
+      padding-right:12px;
+    }
+    .iti__selected-dial-code { color:#00ff88; font-weight:bold; }
+    .iti__arrow { border-top:7px solid #ff0040 !important; }
+    /* خط جداکننده بعد از شماره (قبل از پرچم) */
+    .iti::after {
+      content:"|";
+      position:absolute;
+      right:108px; /* چون حالا راست‌چینه */
+      top:50%;
+      transform:translateY(-50%);
+      color:rgba(255,255,255,0.6);
+      font-size:20px;
+      pointer-events:none;
+      z-index:9;
+    }
+    .iti__country-list {
+      background:#000 !important;
+      border:2px solid #ff0040 !important;
+      box-shadow:0 0 30px rgba(255,0,64,0.8) !important;
+    }
+    .iti__country { color:#fff !important; }
+    .iti__country:hover, .iti__highlight { background:#ff0040 !important; }
 
-    @keyframes pulseGlow{0%,100%{filter:drop-shadow(0 0 15px var(--glow))}50%{filter:drop-shadow(0 0 35px var(--glow)) drop-shadow(0 0 60px var(--glow))}}
-    .neon-pulse{animation:pulseGlow 4s ease-in-out infinite}
-    .neon-pulse:hover{animation-duration:1.5s}
+    #phone {
+      padding-right:130px !important;  /* فضای راست برای پرچم */
+      direction:ltr;
+      text-align:right;
+    }
+    #phone::placeholder {
+      color:#666 !important;
+    }
+    /* ======================================== */
 
-    /* موبایل لجندز - ذرات آبی و سفید */
-    .mlbb-container{position:relative;display:inline-block;overflow:visible}
-    .mlbb-container img{
-      filter:drop-shadow(0 0 30px #00f0ff) drop-shadow(0 0 60px #ffffff);
-      transition:all .6s;border-radius:18px;
+    button.send {
+      width: 100%;
+      padding: 16px;
+      font-size: 1.3rem;
+      font-weight: bold;
+      background: linear-gradient(45deg, #00ff88, #00cc77);
+      color: #000;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      margin-top: 15px;
+      box-shadow: 0 0 25px #00ff88;
+      transition: 0.3s;
     }
-    .mlbb-container:hover img{filter:drop-shadow(0 0 60px #00f0ff) drop-shadow(0 0 100px #ffffff)}
-    .mlbb-particle{
-      position:absolute;width:5px;height:5px;background:#00f0ff;border-radius:50%;
-      box-shadow:0 0 15px #00f0ff,0 0 25px #ffffff;opacity:0.9;
-      animation:mlbbFloat linear infinite;
+    button.send:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 0 40px #00ff88;
     }
-    @keyframes mlbbFloat{0%{transform:translate(0,0) rotate(0deg);opacity:0.9}100%{transform:translate(var(--x),var(--y)) rotate(360deg);opacity:0}}
+    .social-buttons {
+      margin-top: 30px;
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+    .social-btn {
+      padding: 12px 28px;
+      border-radius: 50px;
+      font-size: 1.1rem;
+      font-weight: bold;
+      text-decoration: none;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      transition: 0.3s;
+    }
+    .whatsapp { background:#25D366; box-shadow:0 0 20px #25D366; }
+    .telegram { background:#0088cc; box-shadow:0 0 20px #0088cc; }
+    .social-btn:hover { transform: scale(1.1); }
 
-    /* World of Warcraft - نئون قرمز + خون پراکنده */
-    .wow-container{position:relative;display:inline-block;overflow:visible}
-    .wow-container img{
-      filter:drop-shadow(0 0 25px #8B0000) drop-shadow(0 0 50px #DC143C);
-      transition:all .6s;border-radius:18px;
+    @media (max-width: 768px) {
+      .neon-text { font-size: 2.6rem; }
+      .logo { height: 75px; }
+      .form-box { padding: 25px 20px; max-width: 380px; }
+      .iti::after { right:100px; }
     }
-    .wow-container:hover img{filter:drop-shadow(0 0 50px #8B0000) drop-shadow(0 0 100px #DC143C)}
-    .wow-blood-drop{
-      position:absolute;width:4px;height:12px;background:#DC143C;
-      border-radius:50%;box-shadow:0 0 12px #FF0000;
-      animation:bloodFall linear infinite;opacity:0.75;
+    @media (max-width: 480px) {
+      .neon-text { font-size: 2.2rem; }
+      .logo { height: 65px; }
     }
-    @keyframes bloodFall{
-      0%{transform:translateY(-20px) translateX(0);opacity:0.9}
-      100%{transform:translateY(160px) translateX(var(--drift));opacity:0}
-    }
-
-    .neon-border{--glow:#a855f7;animation:pulseGlow 4s ease-in-out infinite}
-    .neon-border-orange{--glow:#FF6700;animation:pulseGlow 4s ease-in-out infinite}
-    .neon-border-gold{--glow:#ffd700;animation:pulseGlow 4s ease-in-out infinite}
-    .neon-border-cyan{--glow:#00FFFF;animation:pulseGlow 4s ease-in-out infinite}
-
-    .titrbakhat{margin-bottom:20px;text-align:center;background:rgba(75,85,99,0.3);padding:10px;border-radius:8px;border:1px solid rgba(168,85,247,0.3)}
-    .titrbakhat hr{border:0;height:1px;background:#a855f7;margin:10px 0}
-    .titrbakhat p{font-size:1.5rem;font-weight:bold;color:#fff}
-    .BoxItem{background:#1a202c;border-radius:8px;padding:10px;text-align:center;position:relative;height:340px;display:flex;flex-direction:column;justify-content:space-between}
-    .BoxItem img{max-height:120px;margin:0 auto;object-fit:contain}
-    .OffPercent{position:absolute;top:10px;right:10px;background:#e53e3e;color:#fff;padding:3px 6px;border-radius:4px;font-size:0.75rem;z-index:10}
-    .ExpandItem{position:absolute;top:10px;left:10px;color:#a855f7;font-size:1.2rem}
-    .addtocart{background:#a855f7;color:#fff;padding:10px;border-radius:8px;width:100%;border:none;cursor:pointer;transition:all .3s;font-weight:bold}
-    .addtocart:hover{background:#c084fc;transform:translateY(-2px)}
-    .TradeCDFori{background:#48bb78 !important}
-
-    /* فوتر خفن و حرفه‌ای - پشتیبانی چپ، آیکون‌ها وسط، رنگی */
-    footer{
-      background:linear-gradient(135deg,rgba(15,23,42,0.98),rgba(30,41,59,0.98));
-      backdrop-filter:blur(12px);
-      border-top:1px solid rgba(168,85,247,0.2);
-      padding:40px 20px;
-      margin-top:80px;
-      color:#e2e8f0;
-    }
-    .footer-container{
-      max-width:1200px;margin:0 auto;display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:20px;
-    }
-    .support-btn{
-      background:linear-gradient(45deg,#10b981,#34d399);
-      color:white;padding:14px 28px;border-radius:50px;
-      font-weight:bold;box-shadow:0 8px 25px rgba(16,185,129,0.4);
-      transition:all .4s;display:flex;align-items:center;gap:12px;font-size:1.1rem;
-    }
-    .support-btn:hover{transform:translateY(-4px);box-shadow:0 12px 35px rgba(16,185,129,0.6)}
-    .social-links a{
-      display:inline-flex;align-items:center;justify-content:center;width:50px;height:50px;
-      border-radius:50%;margin:0 10px;transition:all .4s;
-      box-shadow:0 4px 15px rgba(0,0,0,0.3);font-size:1.5rem;
-    }
-    .social-links a:hover{transform:translateY(-8px) scale(1.2)}
-    .telegram{color:#229ED9 !important;background:rgba(34,158,217,0.15)}
-    .whatsapp{color:#25D366 !important;background:rgba(37,211,102,0.15)}
-    .instagram{color:#E1306C !important;background:rgba(225,48,108,0.15)}
-    .twitter{color:#1DA1F2 !important;background:rgba(29,161,242,0.15)}
   </style>
 </head>
-<body class="text-white font-sans">
-  <div id="root"></div>
-  <script src="https://cdn.jsdelivr.net/npm/uikit@3.21.5/dist/js/uikit.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/uikit@3.21.5/dist/js/uikit-icons.min.js"></script>
+<body>
+  <div style="position:fixed;top:0;left:0;width:100%;height:100%;background:url('https://nemino.ir/support/background.webp') center/cover no-repeat fixed;z-index:-1;"></div>
 
-  <script type="text/babel">
-    const { useState, useEffect } = React;
+  <div class="wrapper">
+    <a href="https://nemino.ir/" target="_blank" class="logo-link">
+      <img src="https://i.imgur.com/XTaZBQw.png" class="logo" alt="Nemino">
+    </a>
+    <h1 class="neon-text">NEMINO SUPPORT</h1>
 
-    const products = [
-      { id: 1, name: "پک الماس فری فایر", price: "999,000 تومان", image: "https://i.imgur.com/QA7bUl7_d.webp?maxwidth=760&fidelity=grand", discount: "-10%", isInstant: true },
-      { id: 2, name: "اکانت پلاس 1 ماهه پلی استیشن", price: "1,400,000 تومان", image: "https://futgameplus.com/wp-content/uploads/2022/04/PlayStation-Plus-Premium-1-Month.png", oldPrice: "1,600,000 تومان", discount: "-12%", isInstant: true },
-      { id: 3, name: "اکانت قانونی کالاف دیوتی استیم", price: "799,000 تومان", image: "https://i.imgur.com/ExiwXSi_d.webp?maxwidth=760&fidelity=grand", isInstant: false },
-      { id: 4, name: "گیفت کارت استیم 5$", price: "750,000 تومان", image: "https://i.imgur.com/pdRwP8m_d.webp?maxwidth=760&fidelity=grand", isInstant: true },
-      { id: 5, name: "گیفت کارت استیم 10$", price: "1,300,000 تومان", image: "https://i.imgur.com/pdRwP8m_d.webp?maxwidth=760&fidelity=grand", isInstant: true },
-      { id: 6, name: "گیفت کارت استیم 20$", price: "2,450,000 تومان", image: "https://i.imgur.com/pdRwP8m_d.webp?maxwidth=760&fidelity=grand", isInstant: true },
-      { id: 7, name: "گیفت کارت استیم 50$", price: "5,500,000 تومان", image: "https://i.imgur.com/pdRwP8m_d.webp?maxwidth=760&fidelity=grand", isInstant: true },
-      { id: 8, name: "گیفت کارت استیم 100$", price: "10,850,000 تومان", image: "https://i.imgur.com/pdRwP8m_d.webp?maxwidth=760&fidelity=grand", isInstant: true },
-    ];
+    <div class="form-box">
+      <form id="supportForm">
+        <input type="text" id="name" placeholder="نام و نام خانوادگی" required />
+        
+        <!-- شماره تلفن با پرچم و پیش‌شماره راست‌چین -->
+        <input type="tel" id="phone" placeholder="مثلاً: 9123456789" required />
+        
+        <input type="email" id="email" placeholder="ایمیل (اختیاری)" />
+        <textarea id="message" rows="5" placeholder="پیام شما..." required></textarea>
+        <button type="submit" class="send">ارسال به واتساپ</button>
+      </form>
 
-    const dota2Products = [
-      { id: 9, name: "Inscribed Controlled Burn", shortName: "Timbersaw", price: "31,788 تومان", oldPrice: "40,180 تومان", image: "https://community.cloudflare.steamstatic.com/economy/image/-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KW1Zwwo4NUX4oFJZEHLbXK9QlSPcUhoQlYSEjVVauu2MHHQVJ4KQFTibiwOQkv3vbbeXJB49Kiho-Hm_LwDLnEhGVu5cp1j-WPpt330APsrUdoZGqlLNeWew9rY1HS_gO8kOnvhJHqu5qamHRm6CQnsWGdwUJ69ghDOw", discount: "-21%", isInstant: true, link: "https://fastitem.ir/?s=330473&Moreitem=yes" },
-      { id: 10, name: "Offhand Basher of Mage Skulls", shortName: "Anti-Mage", price: "105,079 تومان", image: "https://community.cloudflare.steamstatic.com/economy/image/-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KW1Zwwo4NUX4oFJZEHLbXK9QlSPcUzpw9UQU3XQqu-3NrfX191NgxSpIWqLQFo0v3MPi5J-dC6loGYn_LmDLTXkGNQ5sEgxL6T9tnz2QfjqEVsMGz6J4STdVVoYl_Ur1G2lbvm0J-96M7Nn3ZhuHE8pSGKFt3p4Ek", isInstant: true, link: "https://fastitem.ir/?s=38257823&Moreitem=yes" },
-      { id: 11, name: "Inscribed Malefic Drake's Hood", shortName: "Viper", price: "74,400 تومان", image: "https://community.cloudflare.steamstatic.com/economy/image/-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KW1Zwwo4NUX4oFJZEHLbXK9QlSPcUkoAtYXgPGTvSoxfDaXlB7NxBWuoWtLgZk7OfBJnJU5cyzhr-Cmvr7Ia_QmlRZ7cR1tf3IosKh2A3s_xdka2ylcYfEcFI9YQyBqAS8kOu-hcftv5zNnyZj6Ch27CncgVXp1gyja_Qn", isInstant: true, link: "https://fastitem.ir/?s=350441&Moreitem=yes" },
-      { id: 12, name: "Resistive Pinfold", shortName: "Disruptor", price: "87,360 تومان", image: "https://community.cloudflare.steamstatic.com/economy/image/-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KW1Zwwo4NUX4oFJZEHLbXK9QlSPcU2oAhPWVzESPbixcrAWk5gLBJSiaqsJQFv3_f3czxB55OkkZOChOP9Jb7uhmJf7sp9jtbD9I_-xlaw_EFlNWigdtPHdwVvaQ7Z8lG9kuzthZS9u87Jz3ZhuCIq4Crcy0epwUYbCxpprEM", isInstant: true, link: "https://fastitem.ir/?s=38252215&Moreitem=yes" },
-      { id: 14, name: "Mania's Mask", shortName: "Drow Ranger", price: "630,720 تومان", oldPrice: "707,660 تومان", image: "https://community.cloudflare.steamstatic.com/economy/image/-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KW1Zwwo4NUX4oFJZEHLbXK9QlSPcU2uxRKA0HRVO-S2MnsXlxwKwFEpfWoKhRr7PzOTjBD6NKzh5PFwq_3NbmJkm9SvJchiL3E8Inw31Lh_0ZtMDugJNfHJg9rMAvZrAW_kvCv28HA0HmWrQ", discount: "-11%", isInstant: true, link: "https://fastitem.ir/?s=331061&Moreitem=yes" },
-      { id: 15, name: "Autographed Soul Shredder", shortName: "Doom", price: "1,993,950 تومان", image: "https://community.cloudflare.steamstatic.com/economy/image/-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KW1Zwwo4NUX4oFJZEHLbXK9QlSPcU2phRQA0jfSOmShZ-BAmJ9KAlYpK6kJzh31vLYfjMN6NO5mb_Zx6WlDLLcm2RD_MR9tf7E9Jz6hmu4qgE7NnegIoHAcFBoZlDV_1fvxujq1p676pmfyCE26CUn43vYyxLh1R1FauY6m7XAHnqYS7NZ", isInstant: true, link: "https://fastitem.ir/?s=37962247&Moreitem=yes" },
-      { id: 16, name: "Inscribed Blastforge Exhaler", shortName: "Bristleback", price: "61,944 تومان", image: "https://community.cloudflare.steamstatic.com/economy/image/-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KW1Zwwo4NUX4oFJZEHLbXK9QlSPcUwuxJOWEDVReWu3IDRQVRnMQhStLumIDhp3v7HYylD4OO-kYyGkuO7ManYhX9d7cdwieL-_IH4h0agqh8DOzyvedPRbFA_Yg7T-VG2we3ph5e46Z-bynVk6Cgl7H3el0CxhklNa-xtgaGfSFmAR_sersX5OqU", isInstant: true, link: "https://fastitem.ir/?s=341451&Moreitem=yes" },
-      { id: 18, name: "Golden Mask of Metira", shortName: "Mirana", price: "53,460 تومان", image: "https://community.cloudflare.steamstatic.com/economy/image/-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KW1Zwwo4NUX4oFJZEHLbXK9QlSPcU_oAlcQk2fSu2_1sHSbA8kd1Vov7eoJBV00v-HfDRQ7dK3q9LbxabLOrbcmXlF6ckgxLjHoN2kjgLlrUprZ2j2coWReg5vMFnR_1W9xezp08Puuc6fnyAwsnI8pSGKOQ3aoR4", isInstant: true, link: "https://fastitem.ir/?s=38055091&Moreitem=yes" },
-      { id: 19, name: "The Order of Cyprin", shortName: "Naga Siren", price: "35,282 تومان", image: "https://community.cloudflare.steamstatic.com/economy/image/-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KW1Zwwo4NUX4oFJZEHLbXK9QlSPcUhoAlYQgPeRuOs6NvaC2J9KAlYpK6kJzh00vrEPjND692JgInTqP75PrTDgmpd19Fwg-WPooik0Vfh8xE_NW71ItPGJFM7M1mEqVS8wLzo05Lq7sufwXo1snR242GdwULfLlSlxA", isInstant: true, link: "https://fastitem.ir/?s=38244323&Moreitem=yes" },
-      { id: 21, name: "Desert Burn Crossbow", shortName: "Snapfire", price: "184,847 تومان", image: "https://community.cloudflare.steamstatic.com/economy/image/-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KW1Zwwo4NUX4oFJZEHLbXK9QlSPcUhpxpNSkXCQqu-2c7DVVRmIDtRt7apeVdf2v7Ffi9W7dD5h46Kh_H9Ib7ukGpd5JchteDM-IPnnFW4lAQ5MimsepiWdVA6ZV3X8wS-xOvphJfu7ZzNwXtnuCV24C2JyxXliUseOuY91P2eVxzAUPafWGf6", isInstant: true, link: "https://fastitem.ir/?s=38272506&Moreitem=yes" },
-      { id: 22, name: "Genuine Fluttering Staff", shortName: "Nature's Prophet", price: "89,880 تومان", oldPrice: "96,760 تومان", image: "https://community.cloudflare.steamstatic.com/economy/image/-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KW1Zwwo4NUX4oFJZEHLbXK9QlSPcU0vAlUQ0KfQei4w9vWQVR6IjtEorujLUhm3-bcZThQ5dKxq5OflvHyfb-JxzoEucYg0rGToo-h3QTj-0c4YT2iINKXdFU8Ml7T8we7xO3ug5Oi_MOeKwL85t8", discount: "-7%", isInstant: true, link: "https://fastitem.ir/?s=337907&Moreitem=yes" },
-      { id: 23, name: "Claws of Nuranu", shortName: "Lone Druid", price: "3,068 تومان", image: "https://community.cloudflare.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttydbPaERSR0Wqmu7LAocGIyi3kajH_rbzc-eMWmC7FI6-IPLuAm1ECL4k5vv7zZa472ibJs_cKLCMW6dzOFkpOBlAXzkwEp35mSAy92gIn2Tb1R1AppxQLECtEa5l9ayMOKz5VaKg9lNmSjgznQecDBCyto", isInstant: false, link: "https://fastitem.ir/?s=38316180&Moreitem=yes" },
-    ];
+      <div class="social-buttons">
+        <a href="https://wa.me/989379134101" target="_blank" class="social-btn whatsapp">واتساپ ادمین</a>
+        <a href="https://t.me/NEOVA" target="_blank" class="social-btn telegram">تلگرام ادمین</a>
+      </div>
+    </div>
+  </div>
 
-    const csgoProducts = [
-      { id: 24, name: "Gut Knife | Ultraviolet (Field-Tested)", price: "12,881,201 تومان", image: "https://community.cloudflare.steamstatic.com/economy/image/-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXH5ApeO4YmlhxYQknCRvCo04DEVlxkKgpovbSsLQJf1ObcTi5N08yjhpCHksj5Nr_Yg2Yf65wgjOqWrI_w3wXsqkM9MmHycIGWdg9tZF3Q-lDtwufqgcPuvpnJwWwj5HcAuPAj0A", isInstant: true },
-      { id: 25, name: "StatTrak™ Shadow Daggers | Night (Minimal Wear)", price: "16,274,979 تومان", image: "https://community.cloudflare.steamstatic.com/economy/image/-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXH5ApeO4YmlhxYQknCRvCo04DEVlxkKgpovbSsLQJfw-bbeQJR4-O4nYeDg8j4OrzZgiUH6sMlierHpY6hiwTh_xI4YmChcdSRJgVqMFDY_gLvlOu515Ttv53L1zI97dYQ1AOA", isInstant: true },
-      { id: 26, name: "Ursus Knife | Boreal Forest (Field-Tested)", price: "12,915,000 تومان", image: "https://community.cloudflare.steamstatic.com/economy/image/-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXH5ApeO4YmlhxYQknCRvCo04DEVlxkKgpovbSsLQJfxuHbZC595MWJko-ZkuTgDLnehG5Q5Pp8j-3I4IG72wbjqkA9ZTz6cNPGJFQ8ZQuB81LtkLjt1JLvu5nAwSA37CcisS3Umgv3308FYdw2eg", isInstant: true },
-      { id: 27, name: "Skeleton Knife | Boreal Forest (Well-Worn)", price: "20,191,563 تومان", image: "https://community.cloudflare.steamstatic.com/economy/image/-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXH5ApeO4YmlhxYQknCRvCo04DEVlxkKgpovbSsLQJfwPjNfThW49KJnJm0kfjmNqjFqWle-sBwhtbM8Ij8nVn6-EFqazjwcYCVcgJrYQmF8lPtlO6-jZC7vMjIyXdl7iNz4HvbnhWwn1gSOdWpLqAg", isInstant: true },
-      { id: 28, name: "M9 Bayonet", price: "147,931,644 تومان", image: "https://community.cloudflare.steamstatic.com/economy/image/-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXU5A1PIYQh5hlcX0nvUOGsx8DdQBJjIAVHubSaIAlp1fb3fGR97t2vm46Og7mlMu6ExzsI7ZVy0rGWrN7w3VDh_RY9Y22nd4fDdAE4NFzUrFjqlL3tm9bi6x2aUKuH", isInstant: true },
-      { id: 29, name: "Falchion Knife | Boreal Forest (Minimal Wear)", price: "15,546,174 تومان", image: "https://community.cloudflare.steamstatic.com/economy/image/-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXH5ApeO4YmlhxYQknCRvCo04DEVlxkKgpovbSsLQJf1fLEcjVL49KJnJm0kfjmNqjFqWle-sBwhtbN_Iv9nBrtqRVoMjunI4XBJ1NrYQmF8lPtlO6-jZC7vMjIyXdl7iNz4HvbnhWwn1gSOdWpLqAg", isInstant: true },
-      { id: 30, name: "StatTrak™ M9 Bayonet | Doppler (Factory New)", price: "195,299,895 تومان", image: "https://community.cloudflare.steamstatic.com/economy/image/-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXH5ApeO4YmlhxYQknCRvCo04DEVlxkKgpovbSsLQJf3qr3czxb49KzgL-KmsjwPKvBmm5D19V5i_rEprP5gVO8v11lZj-gIYbDclRqMA7Zq1S7lOm-0Za6753KmHoxvnQh5y7ZyhWxiRwecKUx0iL1oy6z", isInstant: true },
-      { id: 31, name: "Nomad Knife | Blue Steel (Minimal Wear)", price: "37,944,354 تومان", image: "https://community.cloudflare.steamstatic.com/economy/image/-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXH5ApeO4YmlhxYQknCRvCo04DEVlxkKgpovbSsLQJf3ObcdTJN_uO3hb-Jm-LxN4Tdn2xZ_Ityj7rDp4qjjFC3-xJuMGz3IIWUcA5oZFvVrlnokO-90JfttJ2dziQypGB8soIAQfsS", isInstant: true },
-      { id: 32, name: "Ursus Knife | Tiger Tooth (Factory New)", price: "30,450,000 تومان", image: "https://community.cloudflare.steamstatic.com/economy/image/-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXH5ApeO4YmlhxYQknCRvCo04DEVlxkKgpovbSsLQJfxuHbZC597dKJgImMkuXLPKnQmGxU18l4jeHVu9-hilHi_EU9amqlINKTJAQ5ZA3Q_Fi-lejr1JXvup3InHNluyJ2tnbD30vgXxwVgbk", discount: "-5%", oldPrice: "31,979,180 تومان", isInstant: true },
-      { id: 33, name: "Shadow Daggers | Stained (Factory New)", price: "14,759,997 تومان", image: "https://community.cloudflare.steamstatic.com/economy/image/-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXH5ApeO4YmlhxYQknCRvCo04DEVlxkKgpovbSsLQJfw-bbeQJD_eOwm5KIkvPLP7LWnn8fusZ0i-_E992l3FWyrhFoYz_6dteRIQFvZguD_gW7yO691pW6756dnWwj5He74Aez4A", isInstant: true },
-      { id: 34, name: "Karambit | Slaughter (Field-Tested)", price: "147,053,802 تومان", image: "https://community.cloudflare.steamstatic.com/economy/image/-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXH5ApeO4YmlhxYQknCRvCo04DEVlxkKgpovbSsLQJf2PLacDBA5ciJlY20jfL2Ibrum25V4dB8xLiY84n23gzgqBJoMDrwd4fEcAE3NwyB_AO4wee5gMDttZvAyXBhsiI8pSGKK5hjFus", isInstant: true },
-      { id: 35, name: "StatTrak™ Shadow Daggers | Night (Field-Tested)", price: "12,448,139 تومان", image: "https://community.cloudflare.steamstatic.com/economy/image/-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXH5ApeO4YmlhxYQknCRvCo04DEVlxkKgpovbSsLQJfw-bbeQJR4-O4nYeDg8j5Nr_Yg2Yfv8Ah3L3E8dujjga3qRU9amH0I9OVelM-MlqCqQK3wOi70ZHo6MydwWwj5HfVytjphg", isInstant: true },
-      { id: 36, name: "Karambit | Black Laminate (Well-Worn)", price: "152,385,219 تومان", image: "https://community.cloudflare.steamstatic.com/economy/image/-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXH5ApeO4YmlhxYQknCRvCo04DEVlxkKgpovbSsLQJf2PLacDBA5ciJl5W0nPbmMrbuhX9e5sBmi_rJyoHwjF2hpl1kYmn3JdOTJA9oYwuB_la2wLy7gMS46pufm3Bm6SZz4CuLy0CzhklPcKUx0vZTIi6Z", isInstant: true },
-      { id: 37, name: "StatTrak™ Karambit | Stained (Minimal Wear)", price: "116,567,042 تومان", image: "https://community.cloudflare.steamstatic.com/economy/image/-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXH5ApeO4YmlhxYQknCRvCo04DEVlxkKgpovbSsLQJf2PLacDBA5ciJlZG0kfjmML7VqWdY781lxLyVrYqk2VLs8xA4MmCnI9LBcA8_ZAqE_1LqwOm6hpe16J_BmHRj73Q8pSGKRAQrg_M", isInstant: true },
-      { id: 38, name: "Stiletto Knife | Fade (Factory New)", price: "87,150,000 تومان", image: "https://community.cloudflare.steamstatic.com/economy/image/-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXH5ApeO4YmlhxYQknCRvCo04DEVlxkKgpovbSsLQJfwOfBfThW-NOJlYG0kfbwNoTdn2xZ_Ityj7rDp4qjjFC3-xJuMGz3IIWUcA5oZFvVrlnokO-90JfttJ2dziQypGB8soIAQfsS", isInstant: true },
-    ];
+  <script>
+    const phoneInput = document.querySelector("#phone");
+    const iti = window.intlTelInput(phoneInput, {
+      initialCountry: "ir",
+      separateDialCode: true,
+      nationalMode: false,
+      utilsScript: "https://cdn.jsdelivr.net/npm/intl-tel-input@23.8.0/build/js/utils.js",
+    });
 
-    function App() {
-      const [notification, setNotification] = useState("");
-      const [showLogin, setShowLogin] = useState(false);
-      const [showDashboard, setShowDashboard] = useState(false);
-      const [isAuthenticated, setIsAuthenticated] = useState(false);
-      const [username, setUsername] = useState("");
+    document.getElementById('supportForm').addEventListener('submit', function(e) {
+      e.preventDefault();
 
-      useEffect(() => { setNotification("خوش اومدی به نمینو!"); setTimeout(() => setNotification(""), 4000); }, []);
+      const name = document.getElementById('name').value.trim();
+      const fullNumber = iti.getNumber();
+      const countryData = iti.getSelectedCountryData();
+      const countryName = (countryData.name || "IRAN").toUpperCase();
 
-      const handleAccountClick = e => { e.preventDefault(); isAuthenticated ? setShowDashboard(true) : setShowLogin(true); };
-      const addToCart = name => { setNotification(`"${name}" به سبد خرید اضافه شد`); setTimeout(() => setNotification(""), 3000); };
+      const email = document.getElementById('email').value.trim();
+      const message = document.getElementById('message').value.trim();
+      const time = new Date().toLocaleString('fa-IR');
 
-      const renderSlider = (list, title, link) => (
-        <div className="my-12">
-          <div className="titrbakhat"><hr/><p>{title} <a href={link}>نمایش همه</a></p></div>
-          <div className="uk-position-relative uk-visible-toggle" uk-slider="autoplay:true;autoplay-interval:3000;pause-on-hover:true">
-            <ul className="uk-slider-items uk-child-width-1-2@s uk-child-width-1-3@m uk-child-width-1-4@l uk-grid">
-              {list.map(p => (
-                <li key={p.id}>
-                  <div className="BoxItem">
-                    <div className="product-image-container"><img src={p.image} alt={p.name} className="w-full object-contain"/></div>
-                    {p.discount && <span className="OffPercent">{p.discount}</span>}
-                    <a href={p.link || "#"} className="ExpandItem" uk-tooltip="title: جزئیات"><i className="fas fa-expand-alt"></i></a>
-                    <p>{p.shortName || p.name.split(" ")[0]}</p>
-                    <h4>{p.name}</h4>
-                    <div className="PriceBox">
-                      <div className="price">{p.oldPrice && <del>{p.oldPrice}</del>} <b>{p.price}</b></div>
-                      <div className={`TradeCD ${p.isInstant?"TradeCDFori":""}`}>
-                        <i className={p.isInstant?"fas fa-bolt":"fas fa-clock"}></i> {p.isInstant?"فوری":"۱ روز"}
-                      </div>
-                    </div>
-                    <button className="addtocart" onClick={()=>addToCart(p.name)}>
-                      {p.isInstant ? "خرید فوری" : "افزودن به سبد خرید"}
-                    </button>
-                  </div>
-                </li>
-              ))}
-            </ul>
-            <a className="uk-position-center-left uk-position-small uk-hidden-hover" href="#" uk-slidenav-previous uk-slider-item="previous"></a>
-            <a className="uk-position-center-right uk-position-small uk-hidden-hover" href="#" uk-slidenav-next uk-slider-item="next"></a>
-          </div>
-        </div>
+      const text = encodeURIComponent(
+`*پیام جدید پشتیبانی*\n\n` +
+`نام: ${name}\n` +
+`شماره: ${countryName} (${fullNumber})\n` +
+`${email ? `ایمیل: ${email}\n` : ''}` +
+`پیام:\n${message}\n\n` +
+`زمان: ${time}`
       );
 
-      return (
-        <div>
-          {notification && <div className="notification">{notification}</div>}
+      Swal.fire({
+        background: 'rgba(0,0,0,0.95)',
+        html: '<div style="border:8px solid #333;border-top:8px solid #00ff88;border-radius:50%;width:80px;height:80px;animation:spin 1s linear infinite;margin:20px auto"></div>' +
+              '<h2 style="color:#00ff88;text-shadow:0 0 30px #00ff88;">در حال ارسال...</h2>',
+        showConfirmButton: false,
+        allowOutsideClick: false
+      });
 
-          {(showLogin || showDashboard) && (
-            <div className="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-50 backdrop-blur-sm">
-              <div className="bg-gray-800 p-10 rounded-2xl shadow-2xl max-w-md w-full relative">
-                <button onClick={()=>{setShowLogin(false);setShowDashboard(false);}} className="absolute top-4 left-4 text-3xl text-gray-400 hover:text-white">×</button>
-                <div className="text-center text-2xl font-bold text-purple-400">ورود / ثبت‌نام</div>
-              </div>
-            </div>
-          )}
-
-          <div className={(showLogin||showDashboard)?"backdrop-blur":""}>
-            <nav className="bg-gray-800 p-1 shadow-lg fixed w-full top-0 z-40">
-              <div className="container mx-auto flex justify-between items-center">
-                <center><a href="NEMINO-APP" className="text-yellow-200 hover:text-red-500 transition">&nbsp; دریافت بازی نمینو <i className="fas fa-gamepad ml-1"></i></a></center>
-                <div className="flex items-center space-x-4">
-                  <a href="https://www.nemino.ir" className="text-red-700 hover:text-purple-400 transition"><i className="fas fa-home ml-1"></i> خانه &nbsp;&nbsp;&nbsp;&nbsp;</a>
-                  <a href="#" onClick={handleAccountClick} className="text-gray-100 hover:text-purple-400 transition"><i className="fas fa-user ml-1"></i> {isAuthenticated?`پنل کاربری (${username})`:"حساب کاربری"}</a>
-                  <div className="flex items-center space-x-1">
-                    <a href="Shop" className="text-red-200 hover:text-purple-400 transition"><i className="fab fa-drupal ml-1"></i> محصولات&nbsp;&nbsp;&nbsp;</a>
-                    <a href="Order" className="text-green-500 hover:text-purple-400 transition"><i className="fas fa-shopping-cart ml-1"></i> سبد خرید&nbsp;&nbsp;&nbsp;</a>
-                    <a href="search" className="text-pink-600 hover:text-purple-400 transition"><i className="fab fa-sistrix ml-1"></i> جستجو&nbsp;</a>
-                  </div>
-                </div>
-                <a href="https://www.nemino.ir" className="flex items-center space-x-2">
-                  <div className="text-2xl font-bold text-purple-400">NEMINO</div>
-                  <img src="https://i.imgur.com/XTaZBQw.png" alt="NEMINO" className="h-12 w-auto"/>
-                </a>
-              </div>
-            </nav>
-            
-              {/* فوتر نهایی - پشتیبانی چپ، آیکون‌ها وسط، رنگی */}
-              <footer>
-                <div className="footer-container">
-                  <a href="https://nemino.ir/support" className="support-btn">
-                    <i className="fas fa-headset"></i> پشتیبانی 24 ساعته
-                  </a>
-                  <div className="social-links">
-                    <a href="https://t.me/NEOVA" target="_blank" className="telegram"><i className="fab fa-telegram"></i></a>
-                    <a href="https://wa.me/989379134101" target="_blank" className="whatsapp"><i className="fab fa-whatsapp"></i></a>
-                    <a href="#" className="instagram"><i className="fab fa-instagram"></i></a>
-                    <a href="#" className="twitter"><i className="fab fa-twitter"></i></a>
-                  </div>
-                </div>
-                <p className="text-center text-gray-400 mt-6 text-sm">© ۱۴۰۴ NEMINO - همه حقوق محفوظ است</p>
-              </footer>
-            </div>
-          </div>
-        </div>
-      );
-    }
-
-    ReactDOM.render(<App />, document.getElementById('root'));
+      setTimeout(() => {
+        window.open(`https://wa.me/989379134101?text=${text}`, '_blank');
+        Swal.fire({
+          icon: 'success',
+          title: '<div style="color:#00ff88;font-size:4.5rem;text-shadow:0 0 40px #00ff88;animation:flash 1s infinite;">ارسال شد!</div>',
+          background: '#000',
+          backdrop: 'rgba(0,255,100,0.4)',
+          showConfirmButton: false,
+          timer: 3000
+        });
+        setTimeout(() => location.href = "https://nemino.ir", 3000);
+      }, 2200);
+    });
   </script>
 </body>
 </html>
