@@ -1,1 +1,233 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>پیش خرید Mid Night</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body, html {
+      height: 100%;
+      font-family: 'Tahoma', Arial, sans-serif;
+      background: url('https://nemino.ir/WOW/MidNight/MidNightBG.png') no-repeat center center fixed;
+      background-size: cover;
+      color: #fff;
+      overflow: hidden;
+    }
+    .container {
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 20px;
+    }
+    /* هدر */
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 10;
+    }
+    .back-btn {
+      background: rgba(0,0,0,0.6);
+      padding: 12px 20px;
+      border-radius: 50px;
+      color: #fff;
+      text-decoration: none;
+      font-size: 14px;
+      transition: 0.3s;
+    }
+    .back-btn:hover { background: rgba(255,255,255,0.2); }
+    .logo-container img.logo {
+      height: 70px;
+      transition: 0.3s;
+    }
+    .logo-container img.logo:hover { transform: scale(1.1); }
 
+    /* باکس مرکزی */
+    .main-box {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 30px;
+    }
+    .sword-box {
+      position: relative;
+      background: rgba(0, 0, 0, 0.65);
+      border: 3px solid #8a2be2;
+      border-radius: 20px;
+      padding: 50px 40px;
+      max-width: 500px;
+      width: 90%;
+      box-shadow: 
+        0 0 30px rgba(138, 43, 226, 0.8),
+        inset 0 0 20px rgba(138, 43, 226, 0.4);
+      animation: glow 4s infinite alternate;
+    }
+    @keyframes glow {
+      from { box-shadow: 0 0 30px rgba(138, 43, 226, 0.8), inset 0 0 20px rgba(138, 43, 226, 0.4); }
+      to { box-shadow: 0 0 50px rgba(138, 43, 226, 1), inset 0 0 30px rgba(138, 43, 226, 0.6); }
+    }
+    /* شمشیرهای تزئینی */
+    .sword-left, .sword-right {
+      position: absolute;
+      font-size: 100px;
+      color: #8a2be2;
+      top: -60px;
+      opacity: 0.9;
+      animation: float 6s infinite ease-in-out;
+    }
+    .sword-left { left: -40px; transform: rotate(-30deg); }
+    .sword-right { right: -40px; transform: rotate(30deg); }
+    @keyframes float {
+      0%, 100% { transform: translateY(0) rotate(-30deg); }
+      50% { transform: translateY(-20px) rotate(-30deg); }
+    }
+    .sword-right { animation-delay: 1s; transform: rotate(30deg); }
+
+    h1 {
+      font-size: 42px;
+      margin-bottom: 10px;
+      text-shadow: 0 0 15px #8a2be2;
+    }
+    .persian {
+      font-size: 28px;
+      margin: 15px 0;
+      color: #e0b0ff;
+    }
+    .release {
+      font-size: 20px;
+      margin: 20px 0;
+      color: #bbb;
+    }
+    #countdown {
+      font-size: 36px;
+      font-weight: bold;
+      letter-spacing: 3px;
+      color: #fff;
+      text-shadow: 0 0 10px #8a2be2;
+      margin: 25px 0;
+    }
+    /* دکمه پیش خرید */
+    .preorder-btn {
+      margin-top: 30px;
+      padding: 18px 50px;
+      background: linear-gradient(45deg, #8a2be2, #4b0082);
+      border: none;
+      border-radius: 50px;
+      color: white;
+      font-size: 22px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      margin-left: auto;
+      margin-right: auto;
+      box-shadow: 0 0 20px rgba(138, 43, 226, 0.8);
+      transition: all 0.3s;
+      position: relative;
+      overflow: hidden;
+    }
+    .preorder-btn i {
+      font-size: 28px;
+      animation: flash 2s infinite;
+    }
+    .preorder-btn:hover {
+      transform: scale(1.1);
+      box-shadow: 0 0 40px rgba(138, 43, 226, 1);
+    }
+    @keyframes flash {
+      0%, 100% { text-shadow: 0 0 10px #fff; }
+      50% { text-shadow: 0 0 30px #fff, 0 0 50px #fff; }
+    }
+    .preorder-btn::before {
+      content: '';
+      position: absolute;
+      top: 0; left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+      transition: 0.7s;
+    }
+    .preorder-btn:hover::before {
+      left: 100%;
+    }
+
+    @media (max-width: 600px) {
+      h1 { font-size: 32px; }
+      .persian { font-size: 22px; }
+      #countdown { font-size: 28px; }
+      .sword-left, .sword-right { font-size: 70px; top: -45px; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <!-- هدر -->
+  <header>
+    <a href="javascript:history.back()" class="back-btn">
+      <i class="fas fa-arrow-right"></i> بازگشت
+    </a>
+    <div class="logo-container">
+      <a href="https://nemino.ir/" target="_blank">
+        <img src="https://i.imgur.com/XTaZBQw.png" class="logo" alt="Nemino">
+      </a>
+    </div>
+  </header>
+
+  <!-- باکس اصلی -->
+  <div class="main-box">
+    <div class="sword-box">
+      <i class="fas fa-sword sword-left"></i>
+      <i class="fas fa-sword sword-right"></i>
+
+      <h1>Pre-Purchase Mid Night</h1>
+      <div class="persian">پیش خرید مید نایت</div>
+      <div class="release">زمان انتشار: ۲ March ۲۰۲۶</div>
+
+      <div id="countdown">در حال بارگذاری...</div>
+
+      <button class="preorder-btn" onclick="openWhatsApp()">
+        <i class="fas fa-sword"></i>
+        پیش‌خرید همین حالا
+        <i class="fab fa-whatsapp"></i>
+      </button>
+    </div>
+  </div>
+</div>
+
+<script>
+  // تاریخ هدف: 2 March 2026 00:00:00
+  const releaseDate = new Date("2026-03-02T00:00:00").getTime();
+
+  const countdown = setInterval(() => {
+    const now = new Date().getTime();
+    const distance = releaseDate - now;
+
+    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+    document.getElementById("countdown").innerHTML = 
+      `${days} روز : ${hours.toString().padStart(2,'0')} : ${minutes.toString().padStart(2,'0')} : ${seconds.toString().padStart(2,'0')}`;
+
+    if (distance < 0) {
+      clearInterval(countdown);
+      document.getElementById("countdown").innerHTML = "منتشر شد!";
+    }
+  }, 1000);
+
+  function openWhatsApp() {
+    const phone = "+989379134101";
+    const text = "سلام وقت بخیر 👋%0aقیمت پیش خرید Mid Night چقدر هست و چجوری میتونم تهیه کنم؟";
+    window.open(`https://wa.me/${phone}?text=${text}`, "_blank");
+  }
+</script>
+</body>
+</html>
