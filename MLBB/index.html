@@ -1,1 +1,387 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>نمينو | خرید جم موبایل لجند - تحویل آنی</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Rajdhani:wght@600;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            margin: 0;
+            font-family: 'Rajdhani', sans-serif;
+            background: url('https://nemino.ir/MLBB/MLBB.jpg') no-repeat center center fixed;
+            background-size: cover;
+            color: #fff;
+            min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
+        }
+        .overlay {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: linear-gradient(135deg, rgba(0,0,30,0.92), rgba(10,0,60,0.88));
+            z-index: 1;
+        }
+        .container {
+            position: relative;
+            z-index: 2;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
 
+        /* عنوان اصلی خفن */
+        .main-title {
+            text-align: center;
+            padding: 60px 20px 40px;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 4.5em;
+            font-weight: 900;
+            letter-spacing: 8px;
+            background: linear-gradient(90deg, #00ffff, #ff00ff, #00ffff, #ffff00);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 
+                0 0 20px #00ffff,
+                0 0 40px #ff00ff,
+                0 0 60px #00ffff,
+                0 0 80px #ff00ff;
+            animation: neonGlow 2s ease-in-out infinite alternate, float 6s ease-in-out infinite;
+            margin-bottom: 10px;
+        }
+        .main-title span {
+            display: block;
+            font-size: 0.45em;
+            letter-spacing: 15px;
+            margin-top: 15px;
+            background: linear-gradient(90deg, #00ff88, #00ffff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 20px #00ff88;
+        }
+
+        @keyframes neonGlow {
+            from { filter: hue-rotate(0deg) brightness(1); }
+            to { filter: hue-rotate(60deg) brightness(1.4); }
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+
+        .price-box {
+            margin: 30px auto;
+            padding: 25px;
+            max-width: 800px;
+            background: rgba(0,0,0,0.85);
+            border-radius: 20px;
+            text-align: center;
+            font-size: 2.2em;
+            font-weight: bold;
+            color: #00ff88;
+            border: 3px solid #00ff88;
+            box-shadow: 0 0 50px rgba(0, 255, 136, 0.7);
+            text-shadow: 0 0 20px #00ff88;
+        }
+
+        .products {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(310px, 1fr));
+            gap: 28px;
+            padding: 30px 15px;
+        }
+        .product {
+            background: linear-gradient(135deg, rgba(20,0,60,0.9), rgba(0,20,40,0.95));
+            border-radius: 22px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            border: 2px solid transparent;
+            position: relative;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+        }
+        .product:hover {
+            transform: translateY(-15px) scale(1.05);
+            box-shadow: 0 0 60px rgba(0, 255, 255, 0.8);
+        }
+        .product.selected {
+            border: 3px solid #00ffff;
+            box-shadow: 0 0 70px #00ffff, inset 0 0 40px rgba(0,255,255,0.4);
+        }
+        .product-img {
+            height: 150px;
+            background: linear-gradient(45deg, #00ffff22, #ff00ff22), 
+                        url('https://play-lh.googleusercontent.com/jvLjFrIFk8PZCl1EB0qXTTuMglj66-FtciiWmBOrh3vSYFJlnez4oeRSRP99toHzV24=w600-h300-pc0xffffff-pd') center/cover;
+            border-bottom: 3px dashed rgba(0,255,255,0.4);
+        }
+        .product.weekly .product-img {
+            background: linear-gradient(45deg, #ff00ff33, #00ffff33), 
+                        url('https://kaleoz-media.seagmcdn.com/kaleoz-store/202507/oss-998d08cc86eb0f0ffcae51348148a9ce.png') center/cover;
+        }
+        .product-content {
+            padding: 20px;
+            text-align: center;
+        }
+        .product h3 {
+            font-size: 1.4em;
+            margin: 12px 0;
+            color: #00ffff;
+            text-shadow: 0 0 15px #00ffff;
+        }
+        .rating {
+            color: #ffff00;
+            font-weight: bold;
+            margin: 8px 0;
+        }
+        .discount {
+            position: absolute;
+            top: 12px;
+            left: 12px;
+            background: #ff0066;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-weight: bold;
+            box-shadow: 0 0 20px #ff0066;
+        }
+        .old-price {
+            text-decoration: line-through;
+            color: #666;
+            font-size: 0.95em;
+        }
+        .new-price {
+            font-size: 1.8em;
+            font-weight: bold;
+            color: #00ff88;
+            text-shadow: 0 0 20px #00ff88;
+            margin-top: 8px;
+        }
+        .outstock {
+            opacity: 0.6;
+            pointer-events: none;
+        }
+        .outstock::after {
+            content: "ناموجود";
+            position: absolute;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%) rotate(-25deg);
+            font-size: 2.5em;
+            color: #ff0033;
+            font-weight: bold;
+            text-shadow: 0 0 15px red;
+        }
+
+        /* فرم */
+        .form-section {
+            display: none;
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 35px;
+            background: linear-gradient(135deg, rgba(0,20,60,0.95), rgba(10,0,40,0.98));
+            border-radius: 25px;
+            border: 3px solid #00ffff;
+            box-shadow: 0 0 60px rgba(0,255,255,0.6);
+        }
+        .form-section h2 {
+            text-align: center;
+            font-family: 'Orbitron', sans-serif;
+            color: #00ffff;
+            font-size: 2em;
+            margin-bottom: 30px;
+            text-shadow: 0 0 20px #00ffff;
+        }
+        input {
+            width: 100%;
+            padding: 16px;
+            margin: 12px 0;
+            background: rgba(0,255,255,0.15);
+            border: 2px solid #00ffff;
+            border-radius: 15px;
+            color: white;
+            font-size: 1.1em;
+        }
+        input:focus {
+            outline: none;
+            background: rgba(0,255,255,0.3);
+            box-shadow: 0 0 25px #00ffff;
+        }
+        button {
+            width: 100%;
+            padding: 20px;
+            margin-top: 25px;
+            background: linear-gradient(45deg, #00ff88, #00ffff, #00ff88);
+            color: black;
+            font-weight: bold;
+            font-size: 1.5em;
+            border: none;
+            border-radius: 18px;
+            cursor: pointer;
+            box-shadow: 0 0 40px rgba(0,255,136,0.9);
+            transition: all 0.4s;
+        }
+        button:hover {
+            transform: scale(1.07);
+            box-shadow: 0 0 70px #00ff88;
+        }
+
+        /* لوگو نمینو */
+        .logo-container {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            z-index: 9999;
+        }
+        .logo {
+            width: 130px;
+            filter: drop-shadow(0 0 25px #00ffff);
+            animation: neonPulse 2.5s infinite alternate;
+        }
+        @keyframes neonPulse {
+            from { filter: drop-shadow(0 0 20px #00ffff) brightness(1); }
+            to { filter: drop-shadow(0 0 45px #00ffff) brightness(1.5); }
+        }
+    </style>
+</head>
+<body>
+
+<div class="overlay"></div>
+
+<div class="container">
+
+    <!-- عنوان اصلی خفن -->
+    <div class="main-title">
+        خرید جم موبایل لجند
+        <span>تحویل آنی • ارزان • 24 ساعته</span>
+    </div>
+
+    <div class="price-box" id="priceBox">
+        یکی از بسته‌ها را انتخاب کنید
+    </div>
+
+    <div class="products" id="products"></div>
+
+    <div class="form-section" id="formSection">
+        <h2>اطلاعات اکانت را وارد کنید</h2>
+        <input type="text" id="fullName" placeholder="نام و نام خانوادگی" required>
+        <input type="text" id="mobile" placeholder="شماره موبایل" required>
+        <input type="text" id="email" placeholder="ایمیل (اختیاری)">
+        <input type="text" id="userId" placeholder="User ID" required>
+        <input type="text" id="zoneId" placeholder="Zone ID" required>
+        <button onclick="sendToWhatsApp()">ارسال سفارش به واتساپ</button>
+    </div>
+</div>
+
+<!-- لوگوی نمینو -->
+<div class="logo-container">
+    <a href="https://nemino.ir/" target="_blank">
+        <img src="https://i.imgur.com/XTaZBQw.png" class="logo" alt="Nemino">
+    </a>
+</div>
+
+<script>
+const products = [
+    {type: "اشتراک هفتگی", diamonds: "Weekly Pass", price: 208900, old: 228900, rating: 4.93, weekly: true},
+    {type: "اشتراک توالایت", diamonds: "Twilight Pass", price: 1105900, old: 1215900, rating: 4.82, weekly: true},
+    {diamonds: 5, price: 14900, old: 15900, rating: 4.99},
+    {diamonds: 11, price: 23900, old: 25900, rating: 4.78},
+    {diamonds: 22, price: 45900, old: 49900, rating: 4.95},
+    {diamonds: 44, price: 91900, old: 99900, rating: 5.00},
+    {diamonds: 86, price: 172900, old: 187900, rating: 5.00},
+    {diamonds: 172, price: 343900, old: 373900, rating: 4.93},
+    {diamonds: 344, price: 719900, old: 782900, rating: 5.00},
+    {diamonds: 706, price: 1379900, old: 1501900, rating: 4.50},
+    {diamonds: 1050, price: 2098900, old: 2283900, rating: 4.92},
+    {diamonds: 1788, price: 3724900, old: 4051900, rating: 4.67},
+    {diamonds: 3606, price: 0, old: 0, rating: 5.00, outstock: true},
+    {diamonds: 4880, price: 9861900, old: 10728900, rating: 4.80},
+    {diamonds: 9288, price: 16738900, old: 18208900, rating: 5.00},
+];
+
+let selectedProduct = null;
+
+function selectProduct(i) {
+    if (products[i].outstock) return;
+    selectedProduct = products[i];
+    document.querySelectorAll('.product').forEach((el, idx) => {
+        el.classList.toggle('selected', idx === i);
+    });
+
+    const title = selectedProduct.type 
+        ? `${selectedProduct.type} موبایل لجند` 
+        : `${selectedProduct.diamonds} جم موبایل لجند`;
+
+    const priceText = selectedProduct.price === 0 ? "ناموجود" : `${selectedProduct.price.toLocaleString()} تومان`;
+
+    document.getElementById('priceBox').innerHTML = `
+        <div style="font-size:1.3em; margin-bottom:12px;">${title}</div>
+        <div style="font-size:2.5em;">${priceText}</div>
+    `;
+
+    document.getElementById('formSection').style.display = 'block';
+    document.getElementById('formSection').scrollIntoView({ behavior: 'smooth' });
+}
+
+function sendToWhatsApp() {
+    const name = document.getElementById('fullName').value.trim();
+    const mobile = document.getElementById('mobile').value.trim();
+    const email = document.getElementById('email').value.trim() || "ندارد";
+    const userId = document.getElementById('userId').value.trim();
+    const zoneId = document.getElementById('zoneId').value.trim();
+
+    if (!name || !mobile || !userId || !zoneId || !selectedProduct || selectedProduct.price === 0) {
+        alert("لطفاً همه فیلدها را کامل کنید");
+        return;
+    }
+
+    const now = new Date();
+    const date = now.toLocaleDateString('fa-IR');
+    const time = now.toLocaleTimeString('fa-IR');
+
+    const pkg = selectedProduct.type ? selectedProduct.type : `${selectedProduct.diamonds} جم`;
+
+    const msg = `سلام نمینو
+
+درخواست خرید جدید:
+
+بسته: ${pkg}
+قیمت: ${selectedProduct.price.toLocaleString()} تومان
+
+نام: ${name}
+موبایل: ${mobile}
+ایمیل: ${email}
+User ID: ${userId}
+Zone ID: ${zoneId}
+
+تاریخ: ${date} - ساعت: ${time}
+
+ممنون از اعتمادتون`;
+
+    window.open(`https://wa.me/989379134101?text=${encodeURIComponent(msg)}`, '_blank');
+}
+
+// ساخت محصولات
+const container = document.getElementById('products');
+products.forEach((p, i) => {
+    const div = document.createElement('div');
+    div.className = 'product' + (p.weekly ? ' weekly' : '') + (p.outstock ? ' outstock' : '');
+    div.onclick = () => selectProduct(i);
+
+    const title = p.type ? p.type : `${p.diamonds} جم`;
+
+    div.innerHTML = `
+        ${p.old ? `<div class="discount">-9%</div>` : ''}
+        <div class="product-img"></div>
+        <div class="product-content">
+            <h3>${title}</h3>
+            <div class="rating">★ ${p.rating} از 5</div>
+            ${p.old ? `<div class="old-price">${p.old.toLocaleString()} تومان</div>` : ''}
+            <div class="new-price">${p.price === 0 ? "ناموجود" : p.price.toLocaleString() + " تومان"}</div>
+        </div>
+    `;
+    container.appendChild(div);
+});
+</script>
+
+</body>
+</html>
