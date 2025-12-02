@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>N E M I N O</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Rajdhani:wght@600&display=swap');
+
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body, html {
+      height: 100%;
+      font-family: 'Rajdhani', sans-serif;
+      overflow: hidden;
+      background: #000;
+    }
+    .bg {
+      position: fixed;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background: url('https://scontent-ams2-1.cdninstagram.com/v/t51.29350-15/176447426_294384422240417_1188176811350257568_n.jpg?stp=dst-jpg_e35_tt6&efg=eyJ2ZW5jb2RlX3RhZyI6IkZFRUQuaW1hZ2VfdXJsZ2VuLjE0MzN4MTY1NC5zZHIuZjI5MzUwLmRlZmF1bHRfaW1hZ2UuYzIifQ&_nc_ht=scontent-ams2-1.cdninstagram.com&_nc_cat=105&_nc_oc=Q6cZ2QFPZRpstSpGx_Khv_X4TOAwm004C4KqV__VV-XUtdC27gjrpAN52l_t5XtUsxvlSxQ&_nc_ohc=W5OIlRCIMR8Q7kNvwEwZApk&_nc_gid=eiHgi_MTLSnWm61oxJs6dg&edm=APs17CUBAAAA&ccb=7-5&ig_cache_key=MjU1Nzg1OTYzNTU5NTg1Njc1NQ%3D%3D.3-ccb7-5&oh=00_AfmGVMwD1Us-msFP7McoLyglulkDeaF14gAzlWRpoz7_hg&oe=69343284&_nc_sid=10d13b') center center / cover no-repeat;
+      filter: brightness(0.7);
+      z-index: -2;
+    }
+    .overlay {
+      position: fixed;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background: rgba(0,0,0,0.45);
+      z-index: -1;
+    }
+    .container {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 18px;
+      z-index: 10;
+    }
+    .logo {
+      width: 140px;
+      filter: drop-shadow(0 0 20px #a100ff);
+      margin-bottom: 10px;
+      transition: all 0.4s;
+    }
+    .logo:hover { transform: scale(1.1); }
+    .name {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 4.5rem;
+      background: linear-gradient(45deg, #c00fff, #ff00c8, #7300ff);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-shadow: 0 0 40px rgba(180,0,255,0.8);
+      letter-spacing: 12px;
+      margin-bottom: 30px;
+      cursor: pointer;
+      transition: all 0.4s;
+    }
+    .name:hover { transform: translateY(-5px); text-shadow: 0 0 60px rgba(180,0,255,1); }
+
+    .link-box {
+      width: 340px;
+      max-width: 90vw;
+      padding: 16px 28px;
+      border-radius: 50px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      color: white;
+      font-weight: 600;
+      font-size: 1.25rem;
+      text-decoration: none;
+      position: relative;
+      overflow: hidden;
+      transition: all 0.4s ease;
+      box-shadow: 0 0 30px rgba(0,0,0,0.6);
+    }
+    .link-box:hover {
+      transform: translateY(-6px) scale(1.03);
+    }
+    .link-box::before {
+      content: '';
+      position: absolute;
+      top: 0; left: -100%;
+      width: 100%; height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+      transition: 0.7s;
+    }
+    .link-box:hover::before { left: 100%; }
+
+    /* SoundCloud - Orange */
+    .sc { background: rgba(255,90,0,0.25); border: 1px solid #ff8800; box-shadow: 0 0 25px #ff550066; }
+    .sc:hover { box-shadow: 0 0 40px #ff5500aa; }
+    .sc svg { fill: #ff8800; filter: drop-shadow(0 0 10px #ff5500); }
+
+    /* YouTube - Red */
+    .yt { background: rgba(255,0,0,0.25); border: 1px solid #ff0000; box-shadow: 0 0 25px #ff000066; }
+    .yt:hover { box-shadow: 0 0 40px #ff0000aa; }
+    .yt svg { fill: #ff0000; filter: drop-shadow(0 0 10px #ff0000); }
+
+    /* Spotify - Green */
+    .sp { background: rgba(30,215,96,0.25); border: 1px solid #1ed760; box-shadow: 0 0 25px #1ed76066; }
+    .sp:hover { box-shadow: 0 0 40px #1ed760aa; }
+    .sp svg { fill: #1ed760; filter: drop-shadow(0 0 10px #1ed760); }
+
+    /* Apple Music - White */
+    .am { background: rgba(255,255,255,0.15); border: 1px solid #fafafa; box-shadow: 0 0 25px #ffffff66; }
+    .am:hover { box-shadow: 0 0 40px #ffffffaa; }
+    .am svg { fill: #fafafa; filter: drop-shadow(0 0 10px #fff); }
+
+    /* Google - White/Multi */
+    .gg { background: rgba(255,255,255,0.15); border: 1px solid #fff; box-shadow: 0 0 25px #ffffff66; }
+    .gg:hover { box-shadow: 0 0 40px #ffffffaa; }
+    .gg svg { fill: #fff; filter: drop-shadow(0 0 10px #fff); }
+
+    /* Telegram - Light Blue */
+    .tg { background: rgba(0,180,255,0.2); border: 1px solid #00aaff; box-shadow: 0 0 30px #00aaff66; }
+    .tg:hover { box-shadow: 0 0 50px #00aaffaa; }
+    .tg svg { fill: #00aaff; filter: drop-shadow(0 0 15px #00eeff); }
+
+    /* Neon particles background */
+    .particles {
+      position: absolute;
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      animation: float 8s infinite linear;
+      pointer-events: none;
+      z-index: 1;
+    }
+    @keyframes float {
+      0% { transform: translateY(0) translateX(0); opacity: 0; }
+      10% { opacity: 1; }
+      90% { opacity: 1; }
+      100% { transform: translateY(-1000px) translateX(100px); opacity: 0; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="bg"></div>
+<div class="overlay"></div>
+
+<div class="container">
+  <a href="https://nemino.ir/" target="_blank">
+    <img src="https://i.imgur.com/XTaZBQw.png" alt="NEMINO" class="logo">
+  </a>
+  <a href="https://nemino.ir/" target="_blank" class="name">N E M I N O</a>
+
+  <a href="https://soundcloud.com/neova_n" target="_blank" class="link-box sc">
+    <svg width="28" height="28" viewBox="0 0 24 24"><path d="M23.6 12c0-5.5-4.5-10-10-10-4.3 0-8.1 2.7-9.5 6.7C1.8 9.3 0 11.3 0 13.7 0 16.2 2.2 18 5 18h18.3c2.4 0 4.4-1.9 4.4-4.3 0-2.2-1.7-4-3.7-4.1z"/></svg>
+    <span>SOUNDCLOUD</span>
+  </a>
+
+  <a href="https://music.apple.com/artist/nemino/1593466881" target="_blank" class="link-box am">
+    <svg width="28" height="28" viewBox="0 0 24 24"><path d="M18.7 3.2c-1.7-2-4.5-2.2-5.5-2.2-2.3 0-4.4 1.4-5.3 3.5-.8-1.2-2.2-2-3.7-2-2.8 0-5.2 2.3-5.2 5.8 0 1.5.6 2.9 1.6 4 .9 1 2.3 1.7 3.8 1.7.8 0 1.6-.3 2.2-.7.6.4 1.3.7 2.1.7 2.4 0 4.3-1.9 4.3-4.3 0-.6-.1-1.2-.3-1.7.9-.8 1.5-2 1.5-3.3 0-2.4-1.9-4.3-4.3-4.3-.8 0-1.6.2-2.2.6-.2-.8-.8-1.5-1.6-1.9 1.1-1.2 2.7-1.9 4.4-1.9 1.8 0 3.5.9 4.5 2.3.8 1.2 1.2 2.7 1.2 4.3 0 1.6-.7 3-1.8 4-.4.4-.6 1-.6 1.6 0 1.7 1.4 3.1 3.1 3.1 1 0 1.9-.5 2.5-1.3.7-1 1.1-2.3 1.1-3.6 0-2.7-2-5-4.6-5.7z"/></svg>
+    <span>APPLE MUSIC</span>
+  </a>
+
+  <a href="https://open.spotify.com/artist/6BiDiKKbLGwcoCecY9AOzl" target="_blank" class="link-box sp">
+    <svg width="28" height="28" viewBox="0 0 24 24"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.6 0 12 0zm5.5 17.3c-.2.3-.5.4-.8.2-1.8-1.1-4-1.3-6.6-1-.4 0-.7-.3-.7-.7 0-.4.3-.7.7-.7 2.9.4 5.4.6 7.5 1.8.3.2.4.6.2.8zm1-3.1c-.2.4-.6.5-1 .3-2-1.3-5.1-1.6-7.6-1.4-.4 0-.8-.3-.8-.8 0-.4.3-.8.8-.8 3 .2 6.4.6 8.8 2.1.4.2.5.7.3 1.1zm1.1-3.3c-2.4-1.4-6.4-1.8-8.7-1.6-.5 0-1-.4-1-1 0-.5.4-1 1-1 2.7-.2 7.1.2 9.9 1.9.4.3.6.9.4 1.4-.3.4-.9.6-1.3.3z"/></svg>
+    <span>SPOTIFY</span>
+  </a>
+
+  <a href="https://share.google/92NrzrsvnvNHv4QS9" target="_blank" class="link-box gg">
+    <svg width="28" height="28" viewBox="0 0 24 24"><path d="M12.2 9.2v3.6h5.8c-.2 1.4-1.7 4.1-5.8 4.1-3.5 0-6.4-2.9-6.4-6.4s2.9-6.4 6.4-6.4c2 0 3.4.9 4.4 1.6l3-2.9C17.9 2.3 15.2 1 12.2 1 6.6 1 2 5.6 2 11.2s4.6 10.2 10.2 10.2c5.9 0 9.8-4.1 9.8-9.9 0-.7-.1-1.5-.2-2.1l-9.6-.2z" fill="#fff"/></svg>
+    <span>GOOGLE</span>
+  </a>
+
+  <a href="https://www.youtube.com/@nimaneova" target="_blank" class="link-box yt">
+    <svg width="32" height="32" viewBox="0 0 24 24"><path d="M23.5 6.2s-.2-1.6-1-2.3c-1.1-1.3-2.3-1.3-2.8-1.4-4-.3-10-.3-10-.3s-6 0-10 .3c-.5.1-1.7.1-2.8 1.4C-.1 4.6 0 6.2.1 6.2S0 8 0 9.8v2.4c0 1.8.1 3.6.1 3.6s.2 1.6 1 2.3c1.1 1.3 2.5 1.2 3.2 1.4 2.3.2 9.7.3 9.7.3s6 0 10-.3c.5-.1 1.7-.1 2.8-1.4.8-.7 1-2.3 1-2.3s.1-1.8.1-3.6v-2.4c-.1-1.8-.2-3.6-.2-3.6zM9.5 15.5V8.2l7.3 3.7-7.3 3.6z"/></svg>
+    <span>YOUTUBE</span>
+  </a>
+
+  <a href="https://t.me/neminoofficial" target="_blank" class="link-box tg">
+    <svg width="28" height="28" viewBox="0 0 24 24"><path d="M23.9 4.6L20.2 20c-.3 1.4-1.1 1.7-2.3 1.1l-5.8-4.3-2.8 2.7c-.3.3-.6.6-1.2.6-.8 0-1.2-.4-1.4-.8l-2-6.5-5.8-1.8c-1.3-.4-1.3-1.3.3-1.9l23.2-8.9c1.1-.5 2.1.3 1.8 1.9z"/></svg>
+    <span>TELEGRAM</span>
+  </a>
+</div>
+
+<!-- Neon particles effect -->
+<div id="particles"></div>
+
+<script>
+  // Random neon particles
+  const colors = ['#ff5500', '#ff0000', '#1ed760', '#ffffff', '#00aaff', '#c00fff'];
+  const container = document.getElementById('particles');
+
+  setInterval(() => {
+    const p = document.createElement('div');
+    p.classList.add('particles');
+    p.style.left = Math.random() * window.innerWidth + 'px';
+    p.style.background = colors[Math.floor(Math.random() * colors.length)];
+    p.style.boxShadow = `0 0 15px ${p.style.background}`;
+    p.style.animationDuration = (Math.random() * 6 + 6) + 's';
+    container.appendChild(p);
+    setTimeout(() => p.remove(), 12000);
+  }, 300);
+</script>
+</body>
+</html>
