@@ -20,25 +20,25 @@
     .notification{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);animation:slideInOut 4s ease-in-out forwards;background:rgba(75,85,99,0.9);color:white;padding:12px 50px;border-radius:12px;z-index:1000;font-weight:bold;box-shadow:0 0 20px rgba(168,85,247,0.6);white-space:nowrap}
     .backdrop-blur{filter:blur(10px);pointer-events:none;transition:filter .4s}
 
-    .banner-hover{transition:all .6s;overflow:hidden;border-radius:18px;position:relative}
+    .banner-hover{transition:all .6s;overflow:hidden;border-radius:20px;position:relative}
     .banner-hover img{transition:transform .8s}
-    .banner-hover:hover img{transform:scale(1.08)}
-    .banner-hover:hover{transform:translateY(-6px)}
+    .banner-hover:hover img{transform:scale(1.1)}
+    .banner-hover:hover{transform:translateY(-8px)}
 
-    @keyframes pulseGlow{0%,100%{filter:drop-shadow(0 0 15px var(--glow))}50%{filter:drop-shadow(0 0 35px var(--glow)) drop-shadow(0 0 60px var(--glow))}}
+    @keyframes pulseGlow{0%,100%{filter:drop-shadow(0 0 15px var(--glow))}50%{filter:drop-shadow(0 0 40px var(--glow)) drop-shadow(0 0 70px var(--glow))}}
     .neon-pulse{animation:pulseGlow 4s ease-in-out infinite}
     .neon-pulse:hover{animation-duration:1.5s}
 
     /* موبایل لجندز - ذرات آبی و سفید */
     .mlbb-container{position:relative;display:inline-block;overflow:visible}
     .mlbb-container img{
-      filter:drop-shadow(0 0 30px #00f0ff) drop-shadow(0 0 60px #ffffff);
-      transition:all .6s;border-radius:18px;
+      filter:drop-shadow(0 0 35px #00f0ff) drop-shadow(0 0 70px #ffffff);
+      transition:all .6s;border-radius:20px;
     }
-    .mlbb-container:hover img{filter:drop-shadow(0 0 60px #00f0ff) drop-shadow(0 0 100px #ffffff)}
+    .mlbb-container:hover img{filter:drop-shadow(0 0 70px #00f0ff) drop-shadow(0 0 120px #ffffff)}
     .mlbb-particle{
-      position:absolute;width:5px;height:5px;background:#00f0ff;border-radius:50%;
-      box-shadow:0 0 15px #00f0ff,0 0 25px #ffffff;opacity:0.9;
+      position:absolute;width:6px;height:6px;background:#00f0ff;border-radius:50%;
+      box-shadow:0 0 18px #00f0ff,0 0 30px #ffffff;opacity:0.9;
       animation:mlbbFloat linear infinite;
     }
     @keyframes mlbbFloat{0%{transform:translate(0,0) rotate(0deg);opacity:0.9}100%{transform:translate(var(--x),var(--y)) rotate(360deg);opacity:0}}
@@ -46,18 +46,18 @@
     /* World of Warcraft - نئون قرمز + خون پراکنده */
     .wow-container{position:relative;display:inline-block;overflow:visible}
     .wow-container img{
-      filter:drop-shadow(0 0 25px #8B0000) drop-shadow(0 0 50px #DC143C);
-      transition:all .6s;border-radius:18px;
+      filter:drop-shadow(0 0 28px #8B0000) drop-shadow(0 0 55px #DC143C);
+      transition:all .6s;border-radius:20px;
     }
-    .wow-container:hover img{filter:drop-shadow(0 0 50px #8B0000) drop-shadow(0 0 100px #DC143C)}
+    .wow-container:hover img{filter:drop-shadow(0 0 55px #8B0000) drop-shadow(0 0 110px #DC143C)}
     .wow-blood-drop{
-      position:absolute;width:4px;height:12px;background:#DC143C;
-      border-radius:50%;box-shadow:0 0 12px #FF0000;
-      animation:bloodFall linear infinite;opacity:0.75;
+      position:absolute;width:5px;height:15px;background:#DC143C;
+      border-radius:50%;box-shadow:0 0 14px #FF0000;
+      animation:bloodFall linear infinite;opacity:0.8;
     }
     @keyframes bloodFall{
       0%{transform:translateY(-20px) translateX(0);opacity:0.9}
-      100%{transform:translateY(160px) translateX(var(--drift));opacity:0}
+      100%{transform:translateY(180px) translateX(var(--drift));opacity:0}
     }
 
     .neon-border{--glow:#a855f7;animation:pulseGlow 4s ease-in-out infinite}
@@ -68,43 +68,32 @@
     .titrbakhat{margin-bottom:20px;text-align:center;background:rgba(75,85,99,0.3);padding:10px;border-radius:8px;border:1px solid rgba(168,85,247,0.3)}
     .titrbakhat hr{border:0;height:1px;background:#a855f7;margin:10px 0}
     .titrbakhat p{font-size:1.5rem;font-weight:bold;color:#fff}
-    .BoxItem{background:#1a202c;border-radius:8px;padding:10px;text-align:center;position:relative;height:340px;display:flex;flex-direction:column;justify-content:space-between}
+    .BoxItem{background:#1a202c;border-radius:8px;padding:10px;text-align:center;position:relative;height:340px;display:flex;flex-direction:column;justify-content:space-between;box-shadow:0 4px 20px rgba(0,0,0,0.4)}
     .BoxItem img{max-height:120px;margin:0 auto;object-fit:contain}
-    .OffPercent{position:absolute;top:10px;right:10px;background:#e53e3e;color:#fff;padding:3px 6px;border-radius:4px;font-size:0.75rem;z-index:10}
-    .ExpandItem{position:absolute;top:10px;left:10px;color:#a855f7;font-size:1.2rem}
-    .addtocart{background:#a855f7;color:#fff;padding:10px;border-radius:8px;width:100%;border:none;cursor:pointer;transition:all .3s;font-weight:bold}
-    .addtocart:hover{background:#c084fc;transform:translateY(-2px)}
+    .OffPercent{position:absolute;top:10px;right:10px;background:#e53e3e;color:#fff;padding:4px 8px;border-radius:6px;font-size:0.8rem;z-index:10}
+    .ExpandItem{position:absolute;top:10px;left:10px;color:#a855f7;font-size:1.3rem}
+    .addtocart{background:#a855f7;color:#fff;padding:12px;border-radius:10px;width:100%;border:none;cursor:pointer;transition:all .3s;font-weight:bold}
+    .addtocart:hover{background:#c084fc;transform:translateY(-3px)}
     .TradeCDFori{background:#48bb78 !important}
 
-    /* فوتر خفن و حرفه‌ای - پشتیبانی چپ، آیکون‌ها وسط، رنگی */
-    footer{
-      background:linear-gradient(135deg,rgba(15,23,42,0.98),rgba(30,41,59,0.98));
-      backdrop-filter:blur(12px);
-      border-top:1px solid rgba(168,85,247,0.2);
-      padding:40px 20px;
-      margin-top:80px;
-      color:#e2e8f0;
-    }
-    .footer-container{
-      max-width:1200px;margin:0 auto;display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:20px;
-    }
+    /* فوتر حرفه‌ای با پشتیبانی سبز */
+    footer{background:rgba(15,23,42,0.98);backdrop-filter:blur(12px);border-top:1px solid rgba(168,85,247,0.2);padding:50px 20px;margin-top:100px;color:#e2e8f0}
+    .footer-content{display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:40px}
     .support-btn{
-      background:linear-gradient(45deg,#10b981,#34d399);
-      color:white;padding:14px 28px;border-radius:50px;
-      font-weight:bold;box-shadow:0 8px 25px rgba(16,185,129,0.4);
-      transition:all .4s;display:flex;align-items:center;gap:12px;font-size:1.1rem;
+      background:linear-gradient(45deg,#10b981,#34d399);color:white;padding:16px 32px;border-radius:50px;
+      font-weight:bold;box-shadow:0 10px 30px rgba(16,185,129,0.5);
+      transition:all .4s;display:flex;align-items:center;gap:14px;font-size:1.2rem;
     }
-    .support-btn:hover{transform:translateY(-4px);box-shadow:0 12px 35px rgba(16,185,129,0.6)}
+    .support-btn:hover{transform:translateY(-6px);box-shadow:0 15px 40px rgba(16,185,129,0.7)}
     .social-links a{
-      display:inline-flex;align-items:center;justify-content:center;width:50px;height:50px;
-      border-radius:50%;margin:0 10px;transition:all .4s;
-      box-shadow:0 4px 15px rgba(0,0,0,0.3);font-size:1.5rem;
+      display:inline-flex;align-items:center;justify-content:center;width:56px;height:56px;
+      border-radius:50%;transition:all .4s;box-shadow:0 6px 20px rgba(0,0,0,0.4);font-size:1.8rem;
     }
-    .social-links a:hover{transform:translateY(-8px) scale(1.2)}
-    .telegram{color:#229ED9 !important;background:rgba(34,158,217,0.15)}
-    .whatsapp{color:#25D366 !important;background:rgba(37,211,102,0.15)}
-    .instagram{color:#E1306C !important;background:rgba(225,48,108,0.15)}
-    .twitter{color:#1DA1F2 !important;background:rgba(29,161,242,0.15)}
+    .social-links a:hover{transform:translateY(-10px) scale(1.2)}
+    .telegram{color:#229ED9 !important;background:rgba(34,158,217,0.2)}
+    .whatsapp{color:#25D366 !important;background:rgba(37,211,102,0.2)}
+    .instagram{color:#E1306C !important;background:rgba(225,48,108,0.2)}
+    .twitter{color:#1DA1F2 !important;background:rgba(29,161,242,0.2)}
   </style>
 </head>
 <body class="text-white font-sans">
@@ -217,6 +206,7 @@
           )}
 
           <div className={(showLogin||showDashboard)?"backdrop-blur":""}>
+            {/* نوار بالا - هدفون با فاصله کنار لوگو */}
             <nav className="bg-gray-800 p-1 shadow-lg fixed w-full top-0 z-40">
               <div className="container mx-auto flex justify-between items-center">
                 <center><a href="NEMINO-APP" className="text-yellow-200 hover:text-red-500 transition">&nbsp; دریافت بازی نمینو <i className="fas fa-gamepad ml-1"></i></a></center>
@@ -229,67 +219,72 @@
                     <a href="search" className="text-pink-600 hover:text-purple-400 transition"><i className="fab fa-sistrix ml-1"></i> جستجو&nbsp;</a>
                   </div>
                 </div>
-                <a href="https://www.nemino.ir" className="flex items-center space-x-2">
-                  <div className="text-2xl font-bold text-purple-400">NEMINO</div>
-                  <img src="https://i.imgur.com/XTaZBQw.png" alt="NEMINO" className="h-12 w-auto"/>
-                </a>
+                <div className="flex items-center gap-4">
+                  <a href="https://nemino.ir/support" className="text-green-400 hover:text-green-300 text-2xl">
+                    <i className="fas fa-headset"></i>
+                  </a>
+                  <a href="https://www.nemino.ir" className="flex items-center space-x-2">
+                    <div className="text-2xl font-bold text-purple-400">NEMINO</div>
+                    <img src="https://i.imgur.com/XTaZBQw.png" alt="NEMINO" className="h-12 w-auto"/>
+                  </a>
+                </div>
               </div>
             </nav>
 
             <div className="pt-24 container mx-auto px-4">
-              {/* موبایل لجندز */}
-              <div className="flex justify-center my-16">
-                <a href="#" className="mlbb-container banner-hover">
-                  <img src="https://nemino.ir/img/Gem%20Mobile%20Legends.jpg" alt="موبایل لجندز" className="w-full h-32 object-cover rounded-2xl" style={{maxWidth:"555px"}}/>
-                  <div className="absolute top-3 right-3 bg-white text-black px-3 py-1 rounded-full text-sm font-bold animate-ping">جدید</div>
-                  <div style={{position:"absolute",top:"-60px",left:"-60px",right:"-60px",bottom:"-60px",pointerEvents:"none"}}>
-                    {[...Array(20)].map((_,i)=><div key={i} className="mlbb-particle" style={{
-                      top:`${10+i*4}%`,left:`${10+i*5}%`,
-                      '--x':`${(Math.random()-0.5)*200}px`,'--y':`${(Math.random()-0.5)*200}px`,
-                      animationDuration:`${5+Math.random()*5}s`
+              {/* موبایل لجندز - بزرگ‌تر */}
+              <div className="flex justify-center my-20">
+                <a href="https://nemino.ir/MLBB" className="mlbb-container banner-hover">
+                  <img src="https://nemino.ir/img/Gem%20Mobile%20Legends.jpg" alt="موبایل لجندز" className="w-full h-44 object-cover rounded-3xl shadow-2xl" style={{maxWidth:"650px"}}/>
+                  <div className="absolute top-4 right-4 bg-white text-black px-4 py-2 rounded-full text-base font-bold animate-ping shadow-lg">جدید</div>
+                  <div style={{position:"absolute",top:"-90px",left:"-90px",right:"-90px",bottom:"-90px",pointerEvents:"none"}}>
+                    {[...Array(28)].map((_,i)=><div key={i} className="mlbb-particle" style={{
+                      top:`${5+i*3.5}%`,left:`${5+i*4}%`,
+                      '--x':`${(Math.random()-0.5)*280}px`,'--y':`${(Math.random()-0.5)*280}px`,
+                      animationDuration:`${4+Math.random()*6}s`
                     }}></div>)}
                   </div>
                 </a>
               </div>
 
               {/* فاصله */}
-              <div className="my-24"></div>
+              <div className="my-28"></div>
 
-              {/* World of Warcraft */}
+              {/* World of Warcraft - بزرگ‌تر */}
               <div className="flex justify-center">
-                <a href="https://nemino.ir/wow" className="wow-container banner-hover">
-                  <img src="https://nemino.ir/img/WoWlogo.png" alt="World of Warcraft" className="w-full h-32 object-contain rounded-2xl" style={{maxWidth:"555px", background:"transparent"}}/>
-                  <div className="absolute top-3 left-1/2 transform -translate-x-1/2 bg-red-900/70 text-white px-6 py-2 rounded-full text-lg font-bold animate-pulse shadow-xl border-2 border-red-700/60">
+                <a href="https://nemino.ir/WOW" className="wow-container banner-hover">
+                  <img src="https://nemino.ir/img/WoWlogo.png" alt="World of Warcraft" className="w-full h-44 object-contain rounded-3xl shadow-2xl" style={{maxWidth:"650px", background:"transparent"}}/>
+                  <div className="absolute top-4 left-1/2 transform -translate-x-1/2 bg-red-900/80 text-white px-8 py-3 rounded-full text-xl font-bold animate-pulse shadow-2xl border-4 border-red-700">
                     جدید
                   </div>
-                  <div style={{position:"absolute",top:"100%",left:0,right:0,height:"160px",pointerEvents:"none"}}>
-                    {[...Array(16)].map((_,i)=><div key={i} className="wow-blood-drop" style={{
-                      left:`${5+i*5.8}%`,
-                      animationDuration:`${3.5+Math.random()*2}s`,
-                      animationDelay:`${i*0.15}s`,
-                      '--drift':`${(Math.random()-0.5)*60}px`
+                  <div style={{position:"absolute",top:"100%",left:0,right:0,height:"200px",pointerEvents:"none"}}>
+                    {[...Array(20)].map((_,i)=><div key={i} className="wow-blood-drop" style={{
+                      left:`${2+i*5}%`,
+                      animationDuration:`${3+Math.random()*3}s`,
+                      animationDelay:`${i*0.18}s`,
+                      '--drift':`${(Math.random()-0.5)*100}px`
                     }}></div>)}
                   </div>
                 </a>
               </div>
 
               {/* ۶ تا بنر اصلی */}
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 my-24 max-w-6xl mx-auto">
-                <a href="#" className="banner-hover neon-pulse neon-border-orange"><img src="https://i.imgur.com/jNabMaS_d.webp?maxwidth=760&fidelity=grand" className="w-full h-32 object-cover rounded-2xl"/></a>
-                <a href="#" className="banner-hover neon-pulse neon-border-orange"><img src="https://i.imgur.com/ySMzF0e_d.webp?maxwidth=760&fidelity=grand" className="w-full h-32 object-cover rounded-2xl"/></a>
-                <a href="#" className="banner-hover neon-pulse neon-border-gold"><img src="https://i.imgur.com/IXM1QNZ_d.webp?maxwidth=760&fidelity=grand" className="w-full h-32 object-cover rounded-2xl"/></a>
-                <a href="#" className="banner-hover neon-pulse neon-border-gold"><img src="https://i.imgur.com/xU7n8SV_d.webp?maxwidth=760&fidelity=grand" className="w-full h-32 object-cover rounded-2xl"/></a>
-                <a href="#" className="banner-hover neon-pulse neon-border-cyan"><img src="https://i.imgur.com/svlXWrj_d.webp?maxwidth=760&fidelity=grand" className="w-full h-32 object-cover rounded-2xl"/></a>
-                <a href="#" className="banner-hover neon-pulse neon-border-cyan"><img src="https://i.imgur.com/oXFTH2J_d.webp?maxwidth=760&fidelity=grand" className="w-full h-32 object-cover rounded-2xl"/></a>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8 my-28 max-w-6xl mx-auto">
+                <a href="https://nemino.ir/CSGO" className="banner-hover neon-pulse neon-border-orange"><img src="https://i.imgur.com/jNabMaS_d.webp?maxwidth=760&fidelity=grand" className="w-full h-36 object-cover rounded-3xl"/></a>
+                <a href="https://nemino.ir/DOTA2" className="banner-hover neon-pulse neon-border-orange"><img src="https://i.imgur.com/ySMzF0e_d.webp?maxwidth=760&fidelity=grand" className="w-full h-36 object-cover rounded-3xl"/></a>
+                <a href="#" className="banner-hover neon-pulse neon-border-gold"><img src="https://i.imgur.com/IXM1QNZ_d.webp?maxwidth=760&fidelity=grand" className="w-full h-36 object-cover rounded-3xl"/></a>
+                <a href="#" className="banner-hover neon-pulse neon-border-gold"><img src="https://i.imgur.com/xU7n8SV_d.webp?maxwidth=760&fidelity=grand" className="w-full h-36 object-cover rounded-3xl"/></a>
+                <a href="#" className="banner-hover neon-pulse neon-border-cyan"><img src="https://i.imgur.com/svlXWrj_d.webp?maxwidth=760&fidelity=grand" className="w-full h-36 object-cover rounded-3xl"/></a>
+                <a href="#" className="banner-hover neon-pulse neon-border-cyan"><img src="https://i.imgur.com/oXFTH2J_d.webp?maxwidth=760&fidelity=grand" className="w-full h-36 object-cover rounded-3xl"/></a>
               </div>
 
               {renderSlider(products, "محصولات پیشنهادی", "/products")}
               {renderSlider(dota2Products, "آیتم‌های دوتا ۲", "/dota2")}
               {renderSlider(csgoProducts, "آیتم‌های کانتر استرایک", "/csgo")}
 
-              {/* فوتر نهایی - پشتیبانی چپ، آیکون‌ها وسط، رنگی */}
+              {/* فوتر با پشتیبانی سبز و شیک */}
               <footer>
-                <div className="footer-container">
+                <div className="footer-content">
                   <a href="https://nemino.ir/support" className="support-btn">
                     <i className="fas fa-headset"></i> پشتیبانی 24 ساعته
                   </a>
@@ -300,7 +295,7 @@
                     <a href="#" className="twitter"><i className="fab fa-twitter"></i></a>
                   </div>
                 </div>
-                <p className="text-center text-gray-400 mt-6 text-sm">© ۱۴۰۴ NEMINO - همه حقوق محفوظ است</p>
+                <p className="text-center text-gray-400 mt-8 text-sm">© ۱۴۰۴ NEMINO - همه حقوق محفوظ است</p>
               </footer>
             </div>
           </div>
